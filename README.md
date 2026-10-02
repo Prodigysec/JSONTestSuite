@@ -49,6 +49,17 @@ versions, absolute executable paths, or platform-specific binaries. Check the
 `programs` dictionary in [run_tests.py](run_tests.py) and the relevant files in
 `parsers/` before running an adapter.
 
+Three checked-in C adapters can be rebuilt with `make c-parsers` using make and
+a C99 compiler. The executables go into ignored `parsers/.build/`; the
+historical binaries and registry entries are unchanged because their wrappers
+still need input-contract review. See the
+[build and distribution review](docs/review-batch-140-87-81.md).
+
+To use the fixtures without parser binaries, run `make corpus-archive` for a
+small archive of the committed fixture trees and `LICENSE`, or use a partial
+clone with sparse checkout. The [corpus-only instructions](docs/corpus-only.md)
+give both commands and their limits.
+
 ## Run the corpus and generate reports
 
 Run these commands from the repository root. **CLI runs overwrite the tracked
