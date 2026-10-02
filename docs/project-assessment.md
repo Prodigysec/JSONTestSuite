@@ -535,3 +535,16 @@ reasoning, jq 1.7 stream observations, and limits. A temporary Perl JSON::PP
 run recorded all 327 fixtures without discrepancies or missing rows. The 66
 repository tests completed with 47 passes and 19 optional-runtime skips. The
 three upstream issues remain open; local review does not close them.
+
+### 2026-10-03: issues #77, #76, and #71
+
+Commit `3a56771` corrects the article's RFC 8259 encoding and BOM claims and
+its stale UTF-16 fixture reference (#77). It adds four transformation inputs
+for signed zero (#76) and case-distinct object names (#71), with direct Python
+and Perl value probes documented in the [batch review](review-batch-77-76-71.md).
+The 327-case parsing corpus and historical reports are unchanged. The 66
+repository tests completed with 47 passes and 19 optional-runtime skips; after
+the commit, the corpus archive test also verified committed fixture bytes and
+archive reproducibility. Transformation inputs still lack a general runner, so
+cross-parser value assertions remain pending. All three upstream issues remain
+open; this is a local review and integration disposition.
