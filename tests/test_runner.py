@@ -263,6 +263,64 @@ class RunnerTests(unittest.TestCase):
         self.assertNotIn('unselected', html)
         self.assertNotIn('y_one.json', html)
 
+    def test_path_selector_targets_one_nested_fixture_but_basename_keeps_both(self):
+        self.fixture('y_case.json')
+        nested = self.corpus / 'nested'
+        nested.mkdir()
+        (nested / 'y_case.json').write_bytes(b'null')
+        self.adapter('parser')
+
+        for selector in ('nested/y_case.json', 'test_parsing/nested/y_case.json',
+                         str(nested / 'y_case.json')):
+            with self.subTest(selector=selector):
+                with contextlib.redirect_stdout(self.output):
+                    run_tests.run_tests(selector, ['parser'])
+                self.assertEqual(self.log.read_text().splitlines(), [
+                    'parser\tEXPECTED_RESULT\tnested/y_case.json',
+                ])
+
+        with contextlib.redirect_stdout(self.output):
+            run_tests.run_tests('y_case.json', ['parser'])
+        self.assertEqual(self.log.read_text().splitlines(), [
+            'parser\tEXPECTED_RESULT\ty_case.json',
+            'parser\tEXPECTED_RESULT\tnested/y_case.json',
+        ])
+
+    def test_external_path_with_matching_basename_preserves_log(self):
+        self.fixture('y_case.json')
+        outside = self.root / 'outside'
+        outside.mkdir()
+        external = outside / 'y_case.json'
+        external.write_bytes(b'not JSON')
+        self.adapter('parser')
+        self.log.write_bytes(b'previous\x00\xff')
+        with patch.object(run_tests.subprocess, 'call') as call:
+            for selector in (str(external), 'test_parsing/../outside/y_case.json'):
+                with self.subTest(selector=selector):
+                    with self.assertRaisesRegex(run_tests.SelectionError, 'outside test_parsing'):
+                        run_tests.run_tests(selector, ['parser'])
+        call.assert_not_called()
+        self.assertEqual(self.log.read_bytes(), b'previous\x00\xff')
+
+    def test_cli_runs_one_selected_fixture_and_reports_expected_result(self):
+        self.fixture('y_one.json')
+        self.fixture('y_two.json')
+        self.adapter('parser')
+        reports = self.root / 'results'
+        reports.mkdir()
+        filter_path = self.root / 'filter.json'
+        filter_path.write_text('["parser"]')
+        with patch.object(run_tests, 'BASE_DIR', str(self.root)), \
+                patch.object(run_tests.os, 'system'), \
+                contextlib.redirect_stdout(self.output):
+            run_tests.main(['test_parsing/y_two.json', '--filter', str(filter_path)])
+        self.assertEqual(self.log.read_text(),
+                         'parser\tEXPECTED_RESULT\ty_two.json\n')
+        full = (reports / 'parsing.html').read_text()
+        self.assertIn('y_two.json', full)
+        self.assertNotIn('y_one.json', full)
+        self.assertIn('class="EXPECTED_RESULT" title="expected result"', full)
+
     def test_invalid_cli_selection_preserves_outputs_and_never_starts_setup(self):
         self.fixture('y_case.json')
         self.adapter('selected')

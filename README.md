@@ -114,10 +114,11 @@ starts. Logs and reports retain parser-name order. The default is `--jobs 1`.
 
 Current CLI details:
 
-- The optional positional argument selects existing corpus files **by
-  basename**. It does not load an arbitrary external JSON file. An unmatched
-  selector is an error; matching basenames in multiple subdirectories select
-  all of those fixtures.
+- The optional positional argument selects fixtures in `test_parsing/`. A bare
+  filename matches every fixture with that basename; a relative path such as
+  `test_parsing/subdir/case.json` or `subdir/case.json`, or an absolute path
+  inside the corpus, selects exactly one fixture. External paths and unmatched
+  selectors are errors; this option does not parse an arbitrary external file.
 - `--filter` requires a non-empty JSON array of exact registry names. Invalid
   JSON, other value types, non-string entries, and unknown names are errors.
   Repeated names select a parser once. Omit `--filter` to select all parsers.

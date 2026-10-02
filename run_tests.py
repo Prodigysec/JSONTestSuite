@@ -609,6 +609,36 @@ def run_tests(restrict_to_path=None, restrict_to_program=None, jobs=1):
     if not prog_names:
         raise SelectionError("No parsers selected")
 
+    selected_basename = None
+    selected_path = None
+    if restrict_to_path is not None:
+        selector = os.fspath(restrict_to_path)
+        if not os.path.isabs(selector) and not os.path.dirname(selector):
+            # Retain the historic shorthand, including nested name matches.
+            selected_basename = selector
+        else:
+            corpus_root = os.path.realpath(TEST_CASES_DIR_PATH)
+            if os.path.isabs(selector):
+                candidate = os.path.realpath(selector)
+            else:
+                relative = selector
+                while relative.startswith("." + os.sep):
+                    relative = relative[2:]
+                if ".." in relative.split(os.sep):
+                    raise SelectionError("Fixture selector is outside test_parsing: %r" % selector)
+                if relative == "test_parsing":
+                    relative = "."
+                elif relative.startswith("test_parsing" + os.sep):
+                    relative = relative[len("test_parsing") + 1:]
+                candidate = os.path.realpath(os.path.join(corpus_root, relative))
+            try:
+                inside_corpus = os.path.commonpath((corpus_root, candidate)) == corpus_root
+            except ValueError:
+                inside_corpus = False
+            if not inside_corpus:
+                raise SelectionError("Fixture selector is outside test_parsing: %r" % selector)
+            selected_path = os.path.relpath(candidate, corpus_root)
+
     # Snapshot the selected corpus so each selected pair gets one outcome.
     cases = []
     for root, dirs, files in os.walk(TEST_CASES_DIR_PATH):
@@ -616,10 +646,13 @@ def run_tests(restrict_to_path=None, restrict_to_program=None, jobs=1):
         for filename in sorted(files):
             if not filename.endswith(".json"):
                 continue
-            if restrict_to_path is not None and filename != os.path.basename(restrict_to_path):
-                continue
             file_path = os.path.join(root, filename)
-            cases.append((os.path.relpath(file_path, TEST_CASES_DIR_PATH), file_path))
+            relative_path = os.path.relpath(file_path, TEST_CASES_DIR_PATH)
+            if selected_basename is not None and filename != selected_basename:
+                continue
+            if selected_path is not None and relative_path != selected_path:
+                continue
+            cases.append((relative_path, file_path))
 
     if not cases:
         if restrict_to_path is not None:
