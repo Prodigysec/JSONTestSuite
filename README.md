@@ -126,7 +126,9 @@ their registry entry sets `use_stdin: True`. The runner interprets outcomes as:
 | Exceeds five seconds | `TIMEOUT`. |
 
 Parser stdout/stderr are discarded during normal runner execution. Invoke an
-adapter directly to see its diagnostics. A missing executable may be skipped;
+adapter directly to see its diagnostics. A missing or unstartable executable
+causes its remaining selected cases to be recorded as skipped. A setup command
+that fails causes all selected cases for that parser to be recorded as skipped;
 a missing dependency reported by a launched interpreter can instead appear as
 rejection or a crash, so inspect the environment before drawing conclusions.
 
@@ -134,17 +136,35 @@ rejection or a crash, so inspect the environment before drawing conclusions.
 
 | Logged status | Interpretation |
 | --- | --- |
+| `EXPECTED_RESULT` | A `y_` input was accepted or an `n_` input was rejected. |
 | `SHOULD_HAVE_PASSED` | A `y_` input was rejected. |
 | `SHOULD_HAVE_FAILED` | An `n_` input was accepted. |
 | `IMPLEMENTATION_PASS` / `IMPLEMENTATION_FAIL` | An `i_` input was accepted / rejected. |
 | `CRASH` / `TIMEOUT` | Execution failed or exceeded the time limit. |
+| `SKIPPED_UNAVAILABLE` | The parser process could not start; this case was not executed. |
+| `SKIPPED_SETUP_FAILED` | Parser setup failed; this case was not executed. |
 
-Expected `y_` and `n_` outcomes are **not logged**. Report generation reads all
-`.txt` files in `results/`, so unrelated text files or old logs can affect the
-report. `parsing.html` shows the logged cases; `parsing_pruned.html` keeps one
-representative from each group with the same logged outcomes. Cases with no
-logged outcomes disappear, and an empty cell marked as an expected result is
-inferred from absence of a log entry. It does not independently prove execution.
+Completed runs record one row per selected parser/fixture pair, including
+expected results and skips. Fixture identifiers are paths relative to
+`test_parsing/` (the existing root fixtures keep their original names).
+Report generation reads **only `results/logs.txt`**, avoiding accidental mixing
+with other `.txt` files. To report on an archived log using the Python report
+functions, put it in a separate results directory as `logs.txt` and point
+`LOGS_DIR_PATH` at that directory; do not invoke the CLI, which starts a new run.
+
+`parsing.html` shows every recorded case; `parsing_pruned.html` keeps one
+representative from each group with identical outcomes in its comparison table.
+Both reports include the same per-parser counts of recorded executions, skips,
+and missing records. Crashes and timeouts count as executions, not successes.
+Parser detail tables retain all recorded cases even in the pruned report.
+
+Historical three-column logs remain readable. They omitted successful `y_`/`n_`
+outcomes and skips, so absent entries now appear as **`NOT_RECORDED` (`?`)**,
+never inferred success. Missing-record counts cover only cases appearing
+somewhere in that log; completely omitted cases or parsers cannot be recovered.
+Counts from old or interrupted runs are therefore recorded counts, not proof of
+complete execution. New statuses extend the format; external log consumers that
+validate status names must recognize them. Invalid records raise an error.
 The runner's exit status is not an aggregate pass/fail status suitable for CI.
 
 The checked-in reports are historical examples, not measurements of your
@@ -177,7 +197,8 @@ python3 -B -m unittest discover -s tests -v
 ```
 
 These tests use temporary fixtures and controlled adapters to exercise exit
-codes, timeouts, raw stdin bytes, and resource cleanup. They do not overwrite
+codes, timeouts, skips, raw stdin bytes, resource cleanup, and report accounting
+for both current and historical logs. They do not overwrite
 the checked-in reports. For runner changes, also check a known available parser
 against the full corpus in a disposable copy.
 

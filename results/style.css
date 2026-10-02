@@ -58,6 +58,16 @@ th.space > div {
 	background-color: #CCFFCC;
 }
 
+.SKIPPED_UNAVAILABLE, .SKIPPED_SETUP_FAILED {
+	border: 1px solid black;
+	background-color: #DDDDDD;
+}
+
+.NOT_RECORDED {
+	border: 1px dashed #777777;
+	background-color: #FFFFFF;
+}
+
 .SHOULD_HAVE_FAILED {
 	border: 1px solid black;
 	background-color: #FFCC33;

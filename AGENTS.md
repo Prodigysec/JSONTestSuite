@@ -91,9 +91,11 @@ baseline and review queue, not a permanently current inventory.
 - For adapters, check acceptance, rejection, scalar input, trailing garbage,
   malformed bytes, and relevant implementation-dependent cases. Exercise stdin
   handling when used. Bound execution time for pathological fixtures.
-- The existing runner logs discrepancies and `i_` outcomes, not every execution.
-  Missing log rows and a zero runner exit status do not prove that all tests ran
-  or passed. Inspect executed commands, skips, and report behavior.
+- Completed runs log each selected parser/fixture outcome, including expected
+  results and explicit skips. Historical logs omit successes and skips; render
+  absent records as unknown, never as inferred success. Report generation reads
+  only `logs.txt`. Missing rows and a zero runner exit status do not prove that
+  all tests ran or passed. Inspect executed commands, skips, and report behavior.
 - Do not silently regenerate historical reports as part of unrelated work. When
   publishing fresh results, record OS, architecture, runtime/parser versions,
   modes, corpus revision, and skipped/unavailable adapters.

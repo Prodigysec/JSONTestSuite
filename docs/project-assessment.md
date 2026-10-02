@@ -223,3 +223,48 @@ Next runner work: explicit outcome accounting and report correctness (#131),
 selection validation, setup-failure handling, HTML escaping, and a documented
 CI exit policy. The existing discrepancy-only log format, selection semantics,
 and five-second parser timeout remain in effect.
+
+### 2026-10-02: explicit outcomes and issue #131
+
+Reviewed [upstream issue #131](https://github.com/nst/JSONTestSuite/issues/131)
+and its comments on 2026-10-02 (no comments). Implementation began from local
+commit `57b3d49`. This is a local fix for the issue, not an upstream PR import;
+the upstream issue remains open.
+
+- Every selected parser/fixture pair in a completed run now has a three-column
+  log record. `EXPECTED_RESULT` records successful `y_`/`n_` cases;
+  `SKIPPED_UNAVAILABLE` records cases a parser could not start; and
+  `SKIPPED_SETUP_FAILED` records cases omitted after unsuccessful setup.
+- A failed setup command is checked before executing the parser. Missing,
+  incompatible, or non-executable programs cause their remaining cases to be
+  recorded as skipped without repeated launch attempts. Already executed cases
+  retain their original results.
+- Both reports show explicit expected outcomes, skips, and per-parser recorded
+  execution/skip counts. Pruning does not reduce these summary counts. Missing
+  historical records appear as `NOT_RECORDED`, not inferred successes.
+- The reader accepts historical three-column logs but only reads `logs.txt`,
+  rather than merging every text file in the results directory. Parser names
+  absent from today's registry and records for removed fixtures remain visible.
+- Report text is HTML-escaped, including fixture previews and parser labels.
+  Nested fixtures retain distinct relative paths in the log.
+
+Validation: 17 regression tests pass, including successful-case visibility,
+missing executables, setup failures, partially executed parsers, filtered runs,
+legacy unknown outcomes, full/pruned counts, and raw-byte stdin. The actual
+checked-in historical log was also rendered successfully in a temporary output
+file, without inferring any expected results.
+
+A fresh temporary run with Perl 5.38.2 / JSON::PP 4.16 recorded **318** outcomes:
+**283** expected results, **15** implementation-dependent acceptances, and **20**
+implementation-dependent rejections. The full comparison table contains all
+318 fixtures; both reports show 318 recorded executions and zero skips or
+missing records. Fixture bytes and historical log/HTML artifacts were preserved;
+the report stylesheet gained skip and unknown-state styles.
+
+Compatibility limits: old logs cannot reveal completely omitted cases, and new
+status values require updates to strict external consumers. Invalid log records
+now raise an error. Runtime-launched wrappers can still report dependency errors
+as rejection/crash; unavailable dependencies inside a running wrapper cannot be
+identified from its exit code alone. Filter validation and an aggregate CI exit
+policy remain future work. Interrupted runs are not represented as complete
+execution merely because a report can be generated.

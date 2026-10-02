@@ -7,7 +7,7 @@ import subprocess
 import sys
 import json
 
-from os import listdir
+from html import escape
 from time import strftime
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -521,225 +521,153 @@ programs = {
        }
 }
 
+STATUS_LABELS = {
+    "EXPECTED_RESULT": "expected result",
+    "SHOULD_HAVE_PASSED": "parsing should have succeeded but failed",
+    "SHOULD_HAVE_FAILED": "parsing should have failed but succeeded",
+    "IMPLEMENTATION_PASS": "implementation-dependent, parsing succeeded",
+    "IMPLEMENTATION_FAIL": "implementation-dependent, parsing failed",
+    "CRASH": "parser crashed",
+    "TIMEOUT": "timeout",
+    "SKIPPED_UNAVAILABLE": "skipped: parser could not be started",
+    "SKIPPED_SETUP_FAILED": "skipped: parser setup failed",
+    "NOT_RECORDED": "not recorded (execution unknown)",
+}
+SKIPPED_STATUSES = {"SKIPPED_UNAVAILABLE", "SKIPPED_SETUP_FAILED"}
+
+
 def run_tests(restrict_to_path=None, restrict_to_program=None):
+    if isinstance(restrict_to_program, io.TextIOBase):
+        restrict_to_program = json.load(restrict_to_program)
+    prog_names = sorted(programs)
+    if restrict_to_program:
+        prog_names = [name for name in prog_names if name in restrict_to_program]
+
+    # Snapshot the selected corpus so each selected pair gets one outcome.
+    cases = []
+    for root, dirs, files in os.walk(TEST_CASES_DIR_PATH):
+        dirs.sort()
+        for filename in sorted(files):
+            if not filename.endswith(".json"):
+                continue
+            if restrict_to_path and filename != os.path.basename(restrict_to_path):
+                continue
+            file_path = os.path.join(root, filename)
+            cases.append((os.path.relpath(file_path, TEST_CASES_DIR_PATH), file_path))
 
     with open(os.devnull, 'w') as FNULL, open(LOG_FILE_PATH, 'w') as log_file:
-        prog_names = list(programs.keys())
-        prog_names.sort()
-
-        if isinstance(restrict_to_program, io.TextIOBase):
-            restrict_to_program = json.load(restrict_to_program)
-
-        if restrict_to_program:
-            prog_names = filter(lambda x: x in restrict_to_program, prog_names)
+        def record(prog_name, status, filename):
+            row = "%s\t%s\t%s" % (prog_name, status, filename)
+            print(row)
+            log_file.write(row + "\n")
 
         for prog_name in prog_names:
             d = programs[prog_name]
-
-            url = d["url"]
             commands = d["commands"]
             setup = d.get("setup")
-            if setup != None:
+            if setup is not None:
                 print("--", " ".join(setup))
                 try:
-                    subprocess.call(setup)
-                except Exception as e:
-                    print("-- skip", e)
+                    setup_failed = subprocess.call(setup) != 0
+                except (OSError, subprocess.SubprocessError) as error:
+                    print("-- skip setup", error)
+                    setup_failed = True
+                if setup_failed:
+                    for filename, _ in cases:
+                        record(prog_name, "SKIPPED_SETUP_FAILED", filename)
                     continue
 
-            for root, dirs, files in os.walk(TEST_CASES_DIR_PATH):
-                json_files = (f for f in files if f.endswith(".json"))
-                for filename in json_files:
-
-                    if restrict_to_path:
-                        restrict_to_filename = os.path.basename(restrict_to_path)
-                        if filename != restrict_to_filename:
-                            continue
-
-                    file_path = os.path.join(root, filename)
-
-                    my_stdin = FNULL
-
-                    use_stdin = "use_stdin" in d and d["use_stdin"]
+            for index, (filename, file_path) in enumerate(cases):
+                use_stdin = d.get("use_stdin", False)
+                my_stdin = open(file_path, "rb") if use_stdin else FNULL
+                command = commands if use_stdin else commands + [file_path]
+                print("--", " ".join(command))
+                try:
+                    status = subprocess.call(command, stdin=my_stdin, stdout=FNULL,
+                                             stderr=subprocess.STDOUT, timeout=5)
+                except subprocess.TimeoutExpired:
+                    record(prog_name, "TIMEOUT", filename)
+                    print("RESULT:", "TIMEOUT")
+                    continue
+                except OSError as error:
+                    # A process that never starts has no JSON parsing verdict.
+                    print("-- skip unavailable", error)
+                    for skipped_filename, _ in cases[index:]:
+                        record(prog_name, "SKIPPED_UNAVAILABLE", skipped_filename)
+                    break
+                finally:
                     if use_stdin:
-                        my_stdin = open(file_path, "rb")
-                        a = commands
-                    else:
-                        a = commands + [file_path]
+                        my_stdin.close()
 
-                    #print("->", a)
-                    print("--", " ".join(a))
-
-                    try:
-                        status = subprocess.call(
-                            a,
-                            stdin=my_stdin,
-                            stdout=FNULL,
-                            stderr=subprocess.STDOUT,
-                            timeout=5
-                        )
-                        #print("-->", status)
-                    except subprocess.TimeoutExpired:
-                        print("timeout expired")
-                        s = "%s\tTIMEOUT\t%s" % (prog_name, filename)
-                        log_file.write("%s\n" % s)
-                        print("RESULT:", "TIMEOUT")
-                        continue
-                    except FileNotFoundError as e:
-                        print("-- skip non-existing", e.filename)
-                        break
-                    except OSError as e:
-                        if e.errno == INVALID_BINARY_FORMAT or e.errno == BAD_CPU_TYPE:
-                            print("-- skip invalid-binary", commands[0])
-                            break
-                        raise e
-                    finally:
-                        if use_stdin:
-                            my_stdin.close()
-
-                    result = None
-                    if status == 0:
-                        result = "PASS"
-                    elif status == 1:
-                        result = "FAIL"
-                    else:
-                        result = "CRASH"
-
-                    s = None
-                    if result == "CRASH":
-                        s = "%s\tCRASH\t%s" % (prog_name, filename)
-                    elif filename.startswith("y_") and result != "PASS":
-                        s = "%s\tSHOULD_HAVE_PASSED\t%s" % (prog_name, filename)
-                    elif filename.startswith("n_") and result == "PASS":
-                        s = "%s\tSHOULD_HAVE_FAILED\t%s" % (prog_name, filename)
-                    elif filename.startswith("i_") and result == "PASS":
-                        s = "%s\tIMPLEMENTATION_PASS\t%s" % (prog_name, filename)
-                    elif filename.startswith("i_") and result != "PASS":
-                        s = "%s\tIMPLEMENTATION_FAIL\t%s" % (prog_name, filename)
-
-                    if s != None:
-                        print(s)
-                        log_file.write("%s\n" % s)
+                prefix = os.path.basename(filename)[:2]
+                if status not in (0, 1):
+                    result = "CRASH"
+                elif prefix == "i_":
+                    result = "IMPLEMENTATION_PASS" if status == 0 else "IMPLEMENTATION_FAIL"
+                elif prefix == "y_":
+                    result = "EXPECTED_RESULT" if status == 0 else "SHOULD_HAVE_PASSED"
+                elif prefix == "n_":
+                    result = "EXPECTED_RESULT" if status == 1 else "SHOULD_HAVE_FAILED"
+                else:
+                    raise ValueError("Unknown fixture prefix: " + filename)
+                record(prog_name, result, filename)
 
 
-def f_underline_non_printable_bytes(bytes):
+def f_underline_non_printable_bytes(data):
+    # Truncate bytes before escaping, never in the middle of an HTML entity/tag.
+    preview = data[:36]
+    rendered = "".join("<U>%02X</U>" % b if b < 0x20 or b > 0x7E
+                       else escape(chr(b)) for b in preview)
+    if any(b < 0x20 or b > 0x7E for b in preview):
+        rendered += " &lt;=&gt; " + escape(preview.decode("utf-8", errors="replace"))
+    if len(data) > 36:
+        rendered += "(...)"
+    return rendered
 
-    html = ""
-
-    has_non_printable_characters = False
-
-    for b in bytes:
-
-        is_not_printable = b < 0x20 or b > 0x7E
-
-        has_non_printable_characters |= is_not_printable
-
-        if is_not_printable:
-            html += "<U>%02X</U>" % b
-        else:
-            html += "%c" % b
-
-    if has_non_printable_characters:
-        try:
-            html += " <=> %s" % bytes.decode("utf-8", errors='ignore')
-        except:
-            pass
-
-    if len(bytes) > 36:
-        return "%s(...)" % html[:36]
-
-    return html
 
 def f_status_for_lib_for_file(json_dir, results_dir):
-
-    txt_filenames = [f for f in listdir(results_dir) if f.endswith(".txt")]
-
-    # comment to ignore some tests
-    statuses = [
-        "SHOULD_HAVE_FAILED",
-
-        "SHOULD_HAVE_PASSED",
-        "CRASH",
-
-        "IMPLEMENTATION_FAIL",
-        "IMPLEMENTATION_PASS",
-
-        "TIMEOUT"
-    ]
-
-    d = {}
+    """Read new or historical three-column logs, without inferring successes."""
+    by_file = {}
     libs = []
+    with open(os.path.join(results_dir, LOG_FILENAME)) as log_file:
+        for line_number, line in enumerate(log_file, 1):
+            fields = line.rstrip("\r\n").split("\t")
+            if len(fields) != 3 or fields[1] not in STATUS_LABELS:
+                raise ValueError("Invalid log record at line %d" % line_number)
+            lib, status, filename = fields
+            if lib not in libs:
+                libs.append(lib)
+            json_path = os.path.join(json_dir, filename)
+            by_file.setdefault(json_path, {})[lib] = status
+    return by_file, libs
 
-    for filename in txt_filenames:
-        path = os.path.join(results_dir, filename)
-
-        with open(path) as f:
-            for l in f:
-                comps = l.split("\t")
-                if len(comps) != 3:
-                    print("***", comps)
-                    continue
-
-                if comps[1] not in statuses:
-                    print("-- unhandled status:", comps[1])
-
-                (lib, status, json_filename) = (comps[0], comps[1], comps[2].rstrip())
-
-                if lib not in libs:
-                    libs.append(lib)
-
-                json_path = os.path.join(TEST_CASES_DIR_PATH, json_filename)
-
-                if json_path not in d:
-                    d[json_path] = {}
-
-                d[json_path][lib] = status
-
-    return d, libs
 
 def f_status_for_path_for_lib(json_dir, results_dir):
+    by_file, _ = f_status_for_lib_for_file(json_dir, results_dir)
+    return results_by_parser(by_file)
 
-    txt_filenames = [f for f in listdir(results_dir) if f.endswith(".txt")]
 
-    # comment to ignore some tests
-    statuses = [
-        "SHOULD_HAVE_FAILED",
+def results_by_parser(by_file):
+    by_parser = {}
+    for path, outcomes in by_file.items():
+        for lib, status in outcomes.items():
+            by_parser.setdefault(lib, {})[path] = status
+    return by_parser
 
-        "SHOULD_HAVE_PASSED",
-        "CRASH",
 
-        "IMPLEMENTATION_FAIL",
-        "IMPLEMENTATION_PASS",
+def status_cell(status):
+    return '<TD class="%s" title="%s">%s</TD>' % (
+        status, escape(STATUS_LABELS[status]),
+        "?" if status == "NOT_RECORDED" else ("skip" if status in SKIPPED_STATUSES else ""))
 
-        "TIMEOUT"
 
-    ]
+def fixture_preview(path):
+    try:
+        with open(path, "rb") as fixture:
+            return f_underline_non_printable_bytes(fixture.read())
+    except FileNotFoundError:
+        return "(MISSING FILE)"
 
-    d = {} # d['lib']['file'] = status
-
-    for filename in txt_filenames:
-        path = os.path.join(results_dir, filename)
-
-        with open(path) as f:
-            for l in f:
-                comps = l.split("\t")
-                if len(comps) != 3:
-                    continue
-
-                if comps[1] not in statuses:
-                    #print "-- unhandled status:", comps[1]
-                    continue
-
-                (lib, status, json_filename) = (comps[0], comps[1], comps[2].rstrip())
-
-                if lib not in d:
-                    d[lib] = {}
-
-                json_path = os.path.join(TEST_CASES_DIR_PATH, json_filename)
-
-                d[lib][json_path] = status
-
-    return d
 
 def f_tests_with_same_results(libs, status_for_lib_for_file):
 
@@ -772,7 +700,7 @@ def generate_report(report_path, keep_only_first_result_in_set = False):
 
     (status_for_lib_for_file, libs) = f_status_for_lib_for_file(TEST_CASES_DIR_PATH, LOGS_DIR_PATH)
 
-    status_for_path_for_lib = f_status_for_path_for_lib(TEST_CASES_DIR_PATH, LOGS_DIR_PATH)
+    status_for_path_for_lib = results_by_parser(status_for_lib_for_file)
 
     tests_with_same_results = f_tests_with_same_results(libs, status_for_lib_for_file)
 
@@ -791,8 +719,7 @@ def generate_report(report_path, keep_only_first_result_in_set = False):
         <BODY>
         """)
 
-        prog_names = list(programs.keys())
-        prog_names.sort()
+        prog_names = sorted(libs)
 
         libs = list(status_for_path_for_lib.keys())
         libs.sort()
@@ -813,24 +740,28 @@ def generate_report(report_path, keep_only_first_result_in_set = False):
         <LI><A HREF="#results_by_parser">Results by Parser</A>""")
         f.write("<UL>\n")
         for i, prog in enumerate(prog_names):
-            f.write('    <LI><A HREF="#%d">%s</A>\n' % (i, prog))
-        f.write("</OL>\n")
+            f.write('    <LI><A HREF="#%d">%s</A></LI>\n' % (i, escape(prog)))
+        f.write("</UL></LI></OL>\n")
 
-        f.write("""
-        <A NAME="color_scheme"></A>
-        <H4>1. Color scheme:</H4>
-        <TABLE>
-            <TR><TD class="EXPECTED_RESULT">expected result</TD><TR>
-            <TR><TD class="SHOULD_HAVE_PASSED">parsing should have succeeded but failed</TD><TR>
-            <TR><TD class="SHOULD_HAVE_FAILED">parsing should have failed but succeeded</TD><TR>
-            <TR><TD class="IMPLEMENTATION_PASS">result undefined, parsing succeeded</TD><TR>
-            <TR><TD class="IMPLEMENTATION_FAIL">result undefined, parsing failed</TD><TR>
-            <TR><TD class="CRASH">parser crashed</TD><TR>
-            <TR><TD class="TIMEOUT">timeout</TD><TR>
-        </TABLE>
-        """)
-
-        ###
+        f.write('<A NAME="color_scheme"></A><H4>1. Color scheme</H4><TABLE>')
+        for status, label in STATUS_LABELS.items():
+            f.write('<TR><TD class="%s">%s</TD></TR>' % (status, escape(label)))
+        f.write('</TABLE>')
+        f.write('<H4>Recorded outcomes by parser</H4>')
+        f.write('<P>Historical logs omit successful tests and skips. Counts below '
+                'cover recorded outcomes only; missing records are unknown, not successes. '
+                'Not recorded counts refer only to cases present in this log. '
+                'Pruning does not change these counts.</P>')
+        f.write('<TABLE><TR><TH>Parser</TH><TH>Executed (recorded)</TH>'
+                '<TH>Skipped (recorded)</TH><TH>Not recorded</TH></TR>')
+        for lib in libs:
+            outcomes = list(status_for_path_for_lib[lib].values())
+            skipped = sum(status in SKIPPED_STATUSES for status in outcomes)
+            unknown = len(status_for_lib_for_file) - len(outcomes) + outcomes.count("NOT_RECORDED")
+            executed = len(outcomes) - skipped - outcomes.count("NOT_RECORDED")
+            f.write('<TR><TD>%s</TD><TD>%d</TD><TD>%d</TD><TD>%d</TD></TR>' %
+                    (escape(lib), executed, skipped, unknown))
+        f.write('</TABLE>')
 
         f.write('<A NAME="all_results"></A>\n')
         f.write("<H4>2. Full Results</H4>\n")
@@ -839,7 +770,7 @@ def generate_report(report_path, keep_only_first_result_in_set = False):
         f.write("    <TR>\n")
         f.write("        <TH></TH>\n")
         for lib in libs:
-            f.write('        <TH class="vertical"><DIV>%s</DIV></TH>\n' % lib)
+            f.write('        <TH class="vertical"><DIV>%s</DIV></TH>\n' % escape(lib))
         f.write("        <TH></TH>\n")
         f.write("    </TR>\n")
 
@@ -851,21 +782,16 @@ def generate_report(report_path, keep_only_first_result_in_set = False):
             if keep_only_first_result_in_set:
                 ordered_file_set = [ordered_file_set[0]]
 
-            for path in [path for path in ordered_file_set if os.path.exists(path)]:
+            for path in ordered_file_set:
 
                 f.write("    <TR>\n")
-                f.write('        <TD>%s</TD>' % os.path.basename(path))
+                f.write('        <TD>%s</TD>' % escape(os.path.relpath(path, TEST_CASES_DIR_PATH)))
 
                 status_for_lib = status_for_lib_for_file[path]
-                bytes = open(path, "rb").read()
 
                 for lib in libs:
-                    if lib in status_for_lib:
-                        status = status_for_lib[lib]
-                        f.write('        <TD class="%s">%s</TD>' % (status, ""))
-                    else:
-                        f.write('        <TD class="EXPECTED_RESULT"></TD>')
-                f.write('        <TD>%s</TD>' % f_underline_non_printable_bytes(bytes))
+                    f.write(status_cell(status_for_lib.get(lib, "NOT_RECORDED")))
+                f.write('        <TD>%s</TD>' % fixture_preview(path))
                 f.write("    </TR>")
 
         f.write("</TABLE>\n")
@@ -876,13 +802,13 @@ def generate_report(report_path, keep_only_first_result_in_set = False):
         f.write('<A NAME="results_by_parser"></A>\n')
         f.write("<H4>3. Results by Parser</H4>")
         for i, prog in enumerate(prog_names):
-            url = programs[prog]["url"]
+            url = programs.get(prog, {}).get("url", "")
             f.write("<P>\n")
             f.write('<A NAME="%d"></A>' % i)
             if len(url) > 0:
-                f.write('<H4><A HREF="%s">%s</A></H4>\n' % (url, prog))
+                f.write('<H4><A HREF="%s">%s</A></H4>\n' % (escape(url, quote=True), escape(prog)))
             else:
-                f.write('<H4>%s</H4>\n' % prog)
+                f.write('<H4>%s</H4>\n' % escape(prog))
 
             ###
 
@@ -904,20 +830,10 @@ def generate_report(report_path, keep_only_first_result_in_set = False):
             for path in paths:
 
                 f.write("    <TR>\n")
-                f.write("        <TD>%s</TD>" % os.path.basename(path))
+                f.write("        <TD>%s</TD>" % escape(os.path.relpath(path, TEST_CASES_DIR_PATH)))
 
-                status_for_lib = status_for_lib_for_file[path]
-                if os.path.exists(path):
-                    bytes = open(path, "rb").read()
-                else:
-                    bytes = [ord(x) for x in "(MISSING FILE)"]
-
-                if prog in status_for_lib:
-                    status = status_for_lib[prog]
-                    f.write('        <TD class="%s">%s</TD>' % (status, ""))
-                else:
-                    f.write("        <TD></TD>")
-                f.write("        <TD>%s</TD>" % f_underline_non_printable_bytes(bytes))
+                f.write(status_cell(status_for_path[path]))
+                f.write("        <TD>%s</TD>" % fixture_preview(path))
                 f.write("    </TR>")
 
             f.write('</TABLE>\n')
