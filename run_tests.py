@@ -528,6 +528,31 @@ programs = {
        {
            "url":"https://github.com/realtimetech-solution/opack",
            "commands":["java", "-cp", os.path.join(PARSERS_DIR, "test_java_opack_0_2_1/.build/classes"), "TestJSONParsing"]
+       },
+   "Java fastjson2 2.0.53 (native mode)":
+       {
+           "url":"https://github.com/alibaba/fastjson2",
+           "commands":["java", "-cp", os.path.join(PARSERS_DIR, "test_java_fastjson2_2_0_53/.build/classes") + os.pathsep + os.path.join(PARSERS_DIR, "test_java_fastjson2_2_0_53/.build/fastjson2-2.0.53.jar"), "TestJSONParsing"]
+       },
+   "Python jsoncgx 1.1 (comments off)":
+       {
+           "url":"https://github.com/cigix/jsoncgx",
+           "commands":["python3", os.path.join(PARSERS_DIR, "test_jsoncgx_1_1/TestJSONParsing.py"), "off"]
+       },
+   "Python jsoncgx 1.1 (comments on)":
+       {
+           "url":"https://github.com/cigix/jsoncgx",
+           "commands":["python3", os.path.join(PARSERS_DIR, "test_jsoncgx_1_1/TestJSONParsing.py"), "on"]
+       },
+   "Clojure data.json 1.0.0":
+       {
+           "url":"https://github.com/clojure/data.json",
+           "commands":["sh", os.path.join(PARSERS_DIR, "test_clojure_data_json/run.sh"), "1.0.0"]
+       },
+   "Clojure data.json 2.2.0":
+       {
+           "url":"https://github.com/clojure/data.json",
+           "commands":["sh", os.path.join(PARSERS_DIR, "test_clojure_data_json/run.sh"), "2.2.0"]
        }
 }
 

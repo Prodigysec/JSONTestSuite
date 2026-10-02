@@ -11,6 +11,9 @@ ROOT = Path(__file__).resolve().parents[1]
 JSONPP = ROOT / 'parsers/test_jsonpp_0_1_1/.build/test_jsonpp'
 OPACK = ROOT / 'parsers/test_java_opack_0_2_1/.build/classes'
 NEWTONSOFT = ROOT / 'parsers/test_dotnet_newtonsoft/bin/Release/net5.0/app.dll'
+FASTJSON2 = ROOT / 'parsers/test_java_fastjson2_2_0_53/.build'
+JSONCGX = ROOT / 'parsers/test_jsoncgx_1_1/.build/jsoncgx-1.1'
+CLOJURE = ROOT / 'parsers/test_clojure_data_json/.build'
 
 
 class AdapterContract:
@@ -77,6 +80,80 @@ class NewtonsoftTests(AdapterContract, unittest.TestCase):
             path.write_bytes(b'"\xff"')
             result = self.invoke([str(path)])
             self.assertEqual(result.returncode, 1, result.stderr)
+
+
+@unittest.skipUnless(shutil.which('java') and
+                     (FASTJSON2 / 'classes/TestJSONParsing.class').is_file() and
+                     (FASTJSON2 / 'fastjson2-2.0.53.jar').is_file(),
+                     'Build fastjson2 and provide java on PATH first')
+class Fastjson2Tests(AdapterContract, unittest.TestCase):
+    command = [shutil.which('java'), '-cp',
+               str(FASTJSON2 / 'classes') + ':' + str(FASTJSON2 / 'fastjson2-2.0.53.jar'),
+               'TestJSONParsing']
+
+    def test_native_comment_mode(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'input.json'
+            path.write_bytes(b'/* comment */ {}')
+            self.assertEqual(self.invoke([str(path)]).returncode, 0)
+
+
+class JSONcgxContract(AdapterContract):
+    def test_comment_mode(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'input.json'
+            path.write_bytes(b'/* comment */ {}')
+            expected = 0 if self.mode == 'on' else 1
+            self.assertEqual(self.invoke([str(path)]).returncode, expected)
+
+    def test_missing_pinned_source_is_not_json_rejection(self):
+        with tempfile.TemporaryDirectory() as directory:
+            adapter = Path(directory) / 'TestJSONParsing.py'
+            shutil.copy2(ROOT / 'parsers/test_jsoncgx_1_1/TestJSONParsing.py', adapter)
+            result = subprocess.run(['python3', str(adapter), self.mode,
+                                     str(ROOT / 'test_parsing/y_structure_lonely_null.json')],
+                                    capture_output=True, timeout=5)
+            self.assertEqual(result.returncode, 2, result.stderr)
+
+
+@unittest.skipUnless(JSONCGX.is_dir(), 'Prepare pinned jsoncgx 1.1 first')
+class JSONcgxCommentsOffTests(JSONcgxContract, unittest.TestCase):
+    mode = 'off'
+    command = ['python3', str(ROOT / 'parsers/test_jsoncgx_1_1/TestJSONParsing.py'), mode]
+
+
+@unittest.skipUnless(JSONCGX.is_dir(), 'Prepare pinned jsoncgx 1.1 first')
+class JSONcgxCommentsOnTests(JSONcgxContract, unittest.TestCase):
+    mode = 'on'
+    command = ['python3', str(ROOT / 'parsers/test_jsoncgx_1_1/TestJSONParsing.py'), mode]
+
+
+class ClojureDataJsonContract(AdapterContract):
+    def test_parser_errors_are_distinguished(self):
+        for name, expected in (('n_string_octal_escape.json', 1),
+                               ('n_structure_open_open.json', 1),
+                               ('n_structure_open_array_object.json', 2)):
+            with self.subTest(name=name):
+                result = self.invoke([str(ROOT / 'test_parsing' / name)])
+                self.assertEqual(result.returncode, expected, result.stderr[:500])
+
+
+@unittest.skipUnless(shutil.which('java') and
+                     (CLOJURE / 'clojure-1.10.1.jar').is_file() and
+                     (CLOJURE / 'data.json-1.0.0.jar').is_file() and
+                     (CLOJURE / 'classes/1.0.0/jsonsuite/adapter__init.class').is_file(),
+                     'Prepare Clojure jars and provide java on PATH first')
+class ClojureDataJson1Tests(ClojureDataJsonContract, unittest.TestCase):
+    command = ['sh', str(ROOT / 'parsers/test_clojure_data_json/run.sh'), '1.0.0']
+
+
+@unittest.skipUnless(shutil.which('java') and
+                     (CLOJURE / 'clojure-1.10.1.jar').is_file() and
+                     (CLOJURE / 'data.json-2.2.0.jar').is_file() and
+                     (CLOJURE / 'classes/2.2.0/jsonsuite/adapter__init.class').is_file(),
+                     'Prepare Clojure jars and provide java on PATH first')
+class ClojureDataJson2Tests(ClojureDataJsonContract, unittest.TestCase):
+    command = ['sh', str(ROOT / 'parsers/test_clojure_data_json/run.sh'), '2.2.0']
 
 
 if __name__ == '__main__':

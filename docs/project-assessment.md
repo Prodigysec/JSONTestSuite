@@ -131,9 +131,9 @@ dependencies, not an assertion that a proposal is ready to merge.
 | [#128](https://github.com/nst/JSONTestSuite/pull/128) | Update Newtonsoft.Json 12.0.3 to 13.0.2 | Adapted, built, and run against all 324 fixtures locally. See [batch review](review-batch-128-147-143.md). |
 | [#147](https://github.com/nst/JSONTestSuite/pull/147) | Add JSONpp | Adapted into a pinned source build and run against all 324 fixtures locally. See [batch review](review-batch-128-147-143.md). |
 | [#143](https://github.com/nst/JSONTestSuite/pull/143) | Add opack | Adapted into a pinned source build and run against all 324 fixtures locally. See [batch review](review-batch-128-147-143.md). |
-| [#142](https://github.com/nst/JSONTestSuite/pull/142) | Add fastjson2 2.0.53 | Inspect Java dependencies, version pinning, whole-input validation, and mode. |
-| [#133](https://github.com/nst/JSONTestSuite/pull/133) | Add jsoncgx | Distinguish JSONC extensions from strict JSON expectations; review Python packaging and wrapper. |
-| [#124](https://github.com/nst/JSONTestSuite/pull/124) | Add clojure.data.json | Review Clojure dependencies, reproducible invocation, and scalar/trailing-input behavior. |
+| [#142](https://github.com/nst/JSONTestSuite/pull/142) | Add fastjson2 2.0.53 | Adapted with a verified dependency and tested against 324 fixtures; native extensions and crashes documented in [batch review](review-batch-142-133-124.md). |
+| [#133](https://github.com/nst/JSONTestSuite/pull/133) | Add jsoncgx | Adapted with pinned source and explicit comment modes; both modes tested against 324 fixtures. See [batch review](review-batch-142-133-124.md). |
+| [#124](https://github.com/nst/JSONTestSuite/pull/124) | Add clojure.data.json | Adapted two versioned wrappers with whole-input checks; both surveyed against 324 fixtures. See [batch review](review-batch-142-133-124.md). |
 | [#107](https://github.com/nst/JSONTestSuite/pull/107) | Add RubyLane's Tcl parser | Review native build, Tcl loading, and exit-code translation. |
 | [#103](https://github.com/nst/JSONTestSuite/pull/103) | Add libfyaml JSON mode | Verify strict JSON selection and compatibility with the referenced test harness. |
 
@@ -467,6 +467,19 @@ records. The five opack crashes on truncated input and the libraries' unexpected
 acceptances remain documented observations. See the
 [detailed review](review-batch-128-147-143.md) for revisions, build commands,
 tested versions, exact outcomes, and behavioral limits.
+
+### 2026-10-02: parser batch, PRs #142, #133, and #124
+
+fastjson2 2.0.53, jsoncgx 1.1 with comments off/on, and clojure.data.json
+1.0.0/2.2.0 are registered with reproducible pinned dependencies. Their
+wrappers preserve UTF-8 errors, validate complete input, and distinguish
+parse rejection from missing dependencies and unexpected parser failures.
+The upstream binaries were omitted. All 50 regression tests passed with
+isolated toolchains. A temporary runner recorded all 324 fixtures for fastjson2
+and both jsoncgx modes, with no skips or missing rows; both Clojure versions
+were surveyed against all fixture bytes in reused JVMs. Full per-invocation
+runner timing for Clojure remains unmeasured. See the [detailed review](review-batch-142-133-124.md)
+for exact results and known parser limits.
 
 ### 2026-10-02: batch of three, PRs #105, #113, and #126
 
