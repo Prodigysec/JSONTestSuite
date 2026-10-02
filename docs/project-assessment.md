@@ -124,10 +124,10 @@ dependencies, not an assertion that a proposal is ready to merge.
 | --- | --- | --- |
 | [#146](https://github.com/nst/JSONTestSuite/pull/146) | Reject trailing nonbreaking space | Reviewed and applied locally with exact upstream bytes; see implementation progress. Upstream remains open. |
 | [#137](https://github.com/nst/JSONTestSuite/pull/137) | Add an octal-escape negative test | Reviewed and applied locally for #136 with exact upstream bytes; see implementation progress. Both upstream items remain open. |
-| [#105](https://github.com/nst/JSONTestSuite/pull/105) | Add leading-zero negative tests | Pair with #104; compare fractional/exponent cases with existing fixtures. |
+| [#105](https://github.com/nst/JSONTestSuite/pull/105) | Add leading-zero negative tests | Integrated four exact fixtures for #104; see [batch review](review-batch-105-113-126.md). |
 | [#145](https://github.com/nst/JSONTestSuite/pull/145) | Fix Ruby wrapper | Reviewed and applied locally; see implementation progress below. Tested with Ruby 3.2.3 / JSON 2.6.3; upstream remains open. |
-| [#113](https://github.com/nst/JSONTestSuite/pull/113) | Correct executable flags | Pair with #87; review every mode change, shebang, and invocation method. |
-| [#126](https://github.com/nst/JSONTestSuite/pull/126) | Delete a duplicate minus-zero fixture | Bytes match locally; assess filename compatibility before deletion. |
+| [#113](https://github.com/nst/JSONTestSuite/pull/113) | Correct executable flags | Integrated with adaptations for current paths and debug-symbol files; see [batch review](review-batch-105-113-126.md). |
+| [#126](https://github.com/nst/JSONTestSuite/pull/126) | Delete a duplicate minus-zero fixture | Reviewed; deletion declined locally to preserve names used by historical reports and consumers. See [batch review](review-batch-105-113-126.md). |
 | [#128](https://github.com/nst/JSONTestSuite/pull/128) | Update Newtonsoft.Json 12.0.3 to 13.0.2 | Review target framework, dependency support, build, registry label, and behavioral changes. |
 | [#147](https://github.com/nst/JSONTestSuite/pull/147) | Add JSONpp | Review pinned source download, C++ build, adapter contract, and documented extension behavior. |
 | [#143](https://github.com/nst/JSONTestSuite/pull/143) | Add opack | Establish parser source/version, build steps, license, and JSON mode. |
@@ -453,3 +453,18 @@ and `["\\012"]` (an escaped backslash followed by ordinary digits), while
 rejecting the new fixture. Each invocation had a five-second limit. Existing
 fixture bytes and tracked historical reports were preserved; validation does
 not establish behavior for every parser or extension mode.
+
+### 2026-10-02: batch of three, PRs #105, #113, and #126
+
+The octal-escape integration was committed as `8520ebc`. The next batch adds
+four leading-zero rejection fixtures from Tyler Waters, adapts Mark Conway's
+executable-mode cleanup (234 mode-only changes), and records a compatibility
+decision to retain both minus-zero fixture names after reviewing PR #126.
+
+See the [full batch review](review-batch-105-113-126.md) for upstream revisions,
+attribution, exact fixture bytes, RFC reasoning, mode-change adaptations,
+validation, and limitations. All 24 regression tests passed; Perl JSON::PP
+executed the expanded 324-case corpus with 289 expected results, 35
+implementation-dependent results, and no unexpected outcomes or skips.
+All three upstream PRs remain open; local integration and review dispositions
+are separate from upstream closure.
