@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "description": "Non-exhaustive examples of invalid JSON texts that a parser may accept in an explicitly documented extension mode. These annotations do not change n_ expectations.",
+  "candidates": [
+    {"fixture": "n_number_+Inf.json", "category": "nonfinite-number"},
+    {"fixture": "n_number_-NaN.json", "category": "nonfinite-number"},
+    {"fixture": "n_number_Inf.json", "category": "nonfinite-number"},
+    {"fixture": "n_number_NaN.json", "category": "nonfinite-number"},
+    {"fixture": "n_number_infinity.json", "category": "nonfinite-number"},
+    {"fixture": "n_number_minus_infinity.json", "category": "nonfinite-number"}
+  ]
+}

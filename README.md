@@ -19,9 +19,10 @@ the same library; registration does not mean a parser is installed or runnable.
 See the [project assessment and upstream review queue](docs/project-assessment.md)
 for the baseline, known limitations, and planned work.
 
-The current parsing corpus has **324 fixtures** (95 `y_`, 194 `n_`, 35 `i_`),
+The current parsing corpus has **325 fixtures** (96 `y_`, 194 `n_`, 35 `i_`),
 including trailing nonbreaking-space, octal-escape, and leading-zero cases
-reviewed from upstream PRs #146, #137, and #105.
+reviewed from upstream PRs #146, #137, and #105, plus an escaped-NUL scalar
+reviewed from [issue #94](docs/review-batch-92-94-93.md).
 
 ## Start with one parser
 
@@ -155,6 +156,11 @@ formatter, encoding conversion, or newline normalization over the corpus.
 `y_number_minus_zero.json` and `y_number_negative_zero.json` intentionally retain
 identical bytes for filename compatibility. They count as two cases; see the
 [duplicate review](docs/review-batch-105-113-126.md#duplicate-minus-zero).
+
+The non-exhaustive [extension-candidate metadata](metadata/extension-candidates.json)
+labels six nonfinite-number rejection fixtures from upstream issue #93 without
+changing their `n_` expectations. It is not yet displayed by the runner; see
+the [CCAN and extension review](docs/review-batch-92-94-93.md) for scope.
 
 Adapters receive a file path as the final argument, or raw bytes on stdin when
 their registry entry sets `use_stdin: True`. The runner interprets outcomes as:
