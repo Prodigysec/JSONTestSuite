@@ -1,7 +1,8 @@
 # Build and corpus distribution issues #140, #87, and #81
 
-Reviewed on 2026-10-03 against local parent `0848fc7`. The upstream issues
-remain open; local dispositions do not close them.
+Reviewed on 2026-10-03 against local parent `0848fc7`. The implementation
+commit is `9adb8fc`. The upstream issues remain open; local dispositions do
+not close them.
 
 ## Source builds: issue #140
 
