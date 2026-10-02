@@ -3,7 +3,7 @@
 Reviewed on 2026-10-03 against the current local checkout. This is a local
 integration of the proposed adapters and runner feature, with substantive
 changes, rather than a cherry-pick or an upstream merge. Historical reports
-and fixture bytes were not changed.
+and fixture bytes were not changed. The implementation commit is `f6632f3`.
 
 ## Tcl rl_json: PR #107
 
