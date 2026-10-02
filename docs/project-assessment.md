@@ -123,7 +123,7 @@ dependencies, not an assertion that a proposal is ready to merge.
 | PR | Proposed change | Initial review focus |
 | --- | --- | --- |
 | [#146](https://github.com/nst/JSONTestSuite/pull/146) | Reject trailing nonbreaking space | Reviewed and applied locally with exact upstream bytes; see implementation progress. Upstream remains open. |
-| [#137](https://github.com/nst/JSONTestSuite/pull/137) | Add an octal-escape negative test | Pair with issue #136; verify literal backslash bytes and strict/extension distinction. |
+| [#137](https://github.com/nst/JSONTestSuite/pull/137) | Add an octal-escape negative test | Reviewed and applied locally for #136 with exact upstream bytes; see implementation progress. Both upstream items remain open. |
 | [#105](https://github.com/nst/JSONTestSuite/pull/105) | Add leading-zero negative tests | Pair with #104; compare fractional/exponent cases with existing fixtures. |
 | [#145](https://github.com/nst/JSONTestSuite/pull/145) | Fix Ruby wrapper | Reviewed and applied locally; see implementation progress below. Tested with Ruby 3.2.3 / JSON 2.6.3; upstream remains open. |
 | [#113](https://github.com/nst/JSONTestSuite/pull/113) | Correct executable flags | Pair with #87; review every mode change, shebang, and invocation method. |
@@ -405,3 +405,51 @@ included the new fixture. Temporary controls confirmed acceptance of `31` and
 `31 20 09 0d 0a`, and rejection of `31 c2 a0`, with a five-second timeout per
 invocation. Tracked reports were preserved. These measurements validate one
 parser configuration, not universal parser behavior or complete RFC compliance.
+
+### 2026-10-02: octal escape, PR #137 / issue #136
+
+The preceding Ruby and trailing-NBSP integrations were committed together as
+`d6e668d`, with co-author attribution to Jean Boussier and `rictic`.
+
+Refreshed [PR #137](https://github.com/nst/JSONTestSuite/pull/137) and
+[issue #136](https://github.com/nst/JSONTestSuite/issues/136), their comments,
+the PR review comments, reviews, and patch. All discussion/review lists were
+empty; both items remain open upstream. Reviewed API-reported base
+`c2011ba75905d2b36baccd60e4c364e785c29885` and head
+`91df0e5a8cadcf95ae5be96eed5b2c4a4fb47218`; local baseline was `d6e668d`.
+
+Applied Simon McVittie's (`smcv`) fixture unchanged as
+`test_parsing/n_string_octal_escape.json`. Its nine bytes are
+`5b 22 5c 30 31 32 22 5d 0a`: `["\012"]` followed by a final LF. The backslash
+and the three ASCII digits are literal bytes, not a decoded newline inside
+the string. Its Git blob hash matches upstream:
+`f18a5b57695d97ff650e51f4a09b5332baf686d6`. This is a working-tree integration
+with attribution, not an upstream merge or a cherry-picked commit.
+
+[RFC 8259 section 7](https://www.rfc-editor.org/rfc/rfc8259.html#section-7)
+enumerates string escapes: the character after a backslash must be a quotation
+mark, backslash, slash, `b`, `f`, `n`, `r`, `t`, or `u` followed by four hex
+digits. ASCII `0` is not allowed there. Thus `\012` is a syntax error (`n_`),
+not an implementation limit or Unicode-interoperability case. Section 9 allows
+extensions; acceptance in an extension mode does not make this standard JSON.
+The PR mentions json-glib's extension behavior, which was not tested here.
+
+Before integration, no existing root fixture matched the bytes or contained a
+backslash immediately followed by an ASCII octal digit. In particular,
+`n_string_backslash_00.json` is `5b 22 5c 00 22 5d`: its byte `00` is a literal
+NUL, not the digits `30 31 32`. `n_string_escape_x.json` covers a different
+invalid escape, while `y_string_uescaped_newline.json` covers a legal Unicode
+escape. Existing fixtures were preserved; this single addition brings the
+corpus to **320** cases (**95** `y_`, **190** `n_`, **35** `i_`).
+
+Validation ran all 320 distinct fixtures in a temporary copy of the current
+runner and corpus (`d6e668d` plus this fixture), using Perl **5.38.2** / JSON::PP
+**4.16** with the existing adapter options on Linux x86_64 / Python **3.12.3**.
+Results: **285** expected outcomes, **15** implementation-dependent acceptances,
+**20** implementation-dependent rejections, and zero crashes, timeouts, skips,
+or missing records. Full and pruned reports both included the new fixture and
+counted 320 executions. Temporary controls accepted `["\n"]`, `["\u000a"]`,
+and `["\\012"]` (an escaped backslash followed by ordinary digits), while
+rejecting the new fixture. Each invocation had a five-second limit. Existing
+fixture bytes and tracked historical reports were preserved; validation does
+not establish behavior for every parser or extension mode.

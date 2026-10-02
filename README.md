@@ -19,8 +19,9 @@ the same library; registration does not mean a parser is installed or runnable.
 See the [project assessment and upstream review queue](docs/project-assessment.md)
 for the baseline, known limitations, and planned work.
 
-The current parsing corpus has **319 fixtures** (95 `y_`, 189 `n_`, 35 `i_`),
-including the trailing nonbreaking-space case reviewed from upstream PR #146.
+The current parsing corpus has **320 fixtures** (95 `y_`, 190 `n_`, 35 `i_`),
+including trailing nonbreaking-space and octal-escape cases reviewed from
+upstream PRs #146 and #137.
 
 ## Start with one parser
 
