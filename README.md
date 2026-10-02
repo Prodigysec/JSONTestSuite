@@ -19,13 +19,15 @@ the same library; registration does not mean a parser is installed or runnable.
 See the [project assessment and upstream review queue](docs/project-assessment.md)
 for the baseline, known limitations, and planned work.
 
-The current parsing corpus has **326 fixtures** (93 `y_`, 194 `n_`, 39 `i_`),
+The current parsing corpus has **327 fixtures** (94 `y_`, 194 `n_`, 39 `i_`),
 including trailing nonbreaking-space, octal-escape, and leading-zero cases
 reviewed from upstream PRs #146, #137, and #105, plus an escaped-NUL scalar
 reviewed from [issue #94](docs/review-batch-92-94-93.md). Four large or
 underflowing number cases were reclassified under `i_` for
 [issue #149](docs/review-batch-149-119-118.md), and a modest fraction-exponent
-case was added under `y_`.
+case was added under `y_`. A lowercase-`u` scalar escape companion to an
+existing uppercase-`U` rejection was added for
+[issue #112](docs/review-batch-112-91-85.md).
 
 ## Start with one parser
 
@@ -165,6 +167,13 @@ The non-exhaustive [extension-candidate metadata](metadata/extension-candidates.
 labels six nonfinite-number rejection fixtures from upstream issue #93 without
 changing their `n_` expectations. It is not yet displayed by the runner; see
 the [CCAN and extension review](docs/review-batch-92-94-93.md) for scope.
+
+The [streaming-candidate metadata](metadata/streaming-candidates.json) marks two
+root `n_` fixtures that contain two complete JSON texts; a streaming parser may
+accept them, while the runner still expects one text. The
+[escape, stream, and encoding review](docs/review-batch-112-91-85.md) also
+explains why malformed UTF-8 and alternate-encoding fixtures retain their
+original bytes.
 
 Adapters receive a file path as the final argument, or raw bytes on stdin when
 their registry entry sets `use_stdin: True`. The runner interprets outcomes as:

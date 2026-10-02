@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "description": "Reviewed root rejection fixtures containing multiple complete JSON texts. Byte spans are start-inclusive and end-exclusive. They remain invalid as one JSON text; stream acceptance depends on an explicitly documented parser mode.",
+  "candidates": [
+    {
+      "fixture": "n_structure_double_array.json",
+      "category": "multiple-json-texts",
+      "texts": [[0, 2], [2, 4]]
+    },
+    {
+      "fixture": "n_structure_object_with_trailing_garbage.json",
+      "category": "multiple-json-texts",
+      "texts": [[0, 11], [12, 15]]
+    }
+  ]
+}
