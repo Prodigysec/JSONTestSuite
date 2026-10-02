@@ -523,3 +523,15 @@ adapter provenance, exact bytes, and validation. All 66 tests completed with
 fixtures for both CCAN and Perl JSON::PP. CCAN still has three escaped-NUL
 rejections and two native parser crashes on deeply nested invalid input. The
 three upstream issues remain open; this local disposition does not close them.
+
+### 2026-10-03: issues #112, #91, and #85
+
+Commit `58375ca` retains the invalid uppercase-`U` escape and adds a valid
+lowercase-`u` scalar companion (#112), marks two root multiple-text rejection
+fixtures in byte-span metadata without changing strict expectations (#91), and
+audits the malformed/alternate-encoding corpus bytes without transcoding them
+(#85). See the [batch review](review-batch-112-91-85.md) for exact bytes, RFC
+reasoning, jq 1.7 stream observations, and limits. A temporary Perl JSON::PP
+run recorded all 327 fixtures without discrepancies or missing rows. The 66
+repository tests completed with 47 passes and 19 optional-runtime skips. The
+three upstream issues remain open; local review does not close them.
