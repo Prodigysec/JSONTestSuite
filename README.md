@@ -236,7 +236,7 @@ are tracked in the [assessment](docs/project-assessment.md).
 | Path | Purpose |
 | --- | --- |
 | [test_parsing/](test_parsing/) | Acceptance/rejection fixtures consumed by the runner. |
-| [test_transform/](test_transform/) | Inputs exploring huge numbers, similar keys, NULs, and string transformations. |
+| [test_transform/](test_transform/) | 26 inputs exploring huge numbers, signed zero, similar keys, NULs, and string transformations. |
 | [parsers/](parsers/) | Wrappers, library sources, project files, and historical binaries. |
 | [run_tests.py](run_tests.py) | Parser registry, subprocess runner, log reader, and HTML generator. |
 | [results/](results/) | Historical logs/reports and report assets. |
@@ -247,6 +247,9 @@ are tracked in the [assessment](docs/project-assessment.md).
 The transformation fixtures were used for `results/transform.html`.
 `run_tests.py` does **not** run that corpus or regenerate that report; an automated
 transformation comparison remains future work.
+Four new examples compare signed zero and case-distinct object keys; see the
+[RFC and transformation review](docs/review-batch-77-76-71.md) for their exact
+bytes and direct Python/Perl observations.
 
 ## Contribute a fixture or parser
 

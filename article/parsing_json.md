@@ -77,7 +77,7 @@ Yet JSON is defined in at least seven different documents:
 
 5. 2014 - IETF [RFC 7158](https://tools.ietf.org/html/rfc7158) makes the specification "Standard Tracks" instead of "Informational", allows scalars (anything other than arrays and objects) such as `123` and `true` at the root level as ECMA does, warns about bad practices such as duplicated keys and broken Unicode strings, without explicitly forbidding them, though.
 6. 2014 - IETF [RFC 7159](https://tools.ietf.org/html/rfc7159) was released to fix a typo in RFC 7158, which was dated from "March 2013" instead of "March 2014".
-7. 2017 - IETF [RFC 8259](https://tools.ietf.org/html/rfc8259) was released in December 2017. It basically adds two things: 1) outside of closed eco-systems, JSON MUST be encoded in UTF-8 and 2) JSON text that is not networked transmitted MAY now add the byte order mark `U+FEFF`, although this is not stated explicitly.
+7. 2017 - IETF [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259.html) was released in December 2017. Its section 8.1 requires UTF-8 for JSON text exchanged outside a closed ecosystem, forbids generators from adding a BOM to network-transmitted JSON text, and permits parsers to ignore a BOM. It does not explicitly authorize adding a BOM in other contexts.
 
 Despite the clarifications they bring, RFC 7159 and 8259 contain several approximations and leaves many details loosely specified.
 
@@ -286,17 +286,15 @@ Variants of this special case include same key - same value `{"a":1,"a":1}`, and
 
 #### <a id="25"></a> 2.5 Strings
 
-**File Encoding** - Former [RFC 7159](https://tools.ietf.org/html/rfc7159#section-8.1) did only recommend UTF-8, and said that "JSON text SHALL be encoded in UTF-8, UTF-16, or UTF-32".
+**File Encoding** - Former [RFC 7159](https://www.rfc-editor.org/rfc/rfc7159.html#section-8.1) allowed UTF-8, UTF-16, or UTF-32 and identified UTF-8 as the interoperable default.
 
-Now RFC 8259 [section 8.1](https://tools.ietf.org/html/rfc8259#section-8.1) says that "JSON text exchanged between systems that are not part of a closed ecosystem MUST be encoded using UTF-8". 
+RFC 8259 [section 8.1](https://www.rfc-editor.org/rfc/rfc8259.html#section-8.1) requires UTF-8 for JSON text exchanged outside a closed ecosystem. The root corpus retains UTF-16 inputs as implementation-dependent probes, not unconditional passing tests; it currently has no UTF-32 fixture.
 
-Still, passing tests should include text encoded in these three encodings. UTF-16 and UTF-32 texts should also include both their big-endian and little-endian variants.
-
-The parsing of invalid UTF-8 will be implementation defined.
+Malformed UTF-8 bytes are also preserved to expose decoder differences. Their acceptance depends on parser mode and input handling; the fixtures are not transcoded.
 
 <TABLE class="monospace">
 <TR>
-    <TD class="fixedWidth">y_string_utf16.json</TD>
+    <TD class="fixedWidth">i_string_UTF-16LE_with_BOM.json</TD>
     <TD><U>FFFE</U>[<U>00</U>"<U>00E900</U>"<U>00</U>]<U>00</U></TD>
 </TR>
 <TR>
@@ -307,11 +305,11 @@ The parsing of invalid UTF-8 will be implementation defined.
 
 **[Update 2016-11-04]** The first version of this article considered invalid UTF-8 as `n_` tests. This classification was [challenged](https://github.com/nst/JSONTestSuite/issues/30) and I eventually changed these tests into `i_` tests.
 
-**Byte Order Mark** - Former RFC 8259 [section 8.1](https://tools.ietf.org/html/rfc8259#section-8.1) stated "Implementations MUST NOT add a byte order mark to the beginning of a JSON text", "implementations (...) MAY ignore the presence of a byte order mark rather than treating it as an error".
+**Byte Order Mark** - Former RFC 7159 [section 8.1](https://www.rfc-editor.org/rfc/rfc7159.html#section-8.1) prohibited generators from adding a BOM to any JSON text, while allowing parsers to ignore one.
 
-Now, RFC 8259 [section 8.1](https://tools.ietf.org/html/rfc8259#section-8.1) adds: "Implementations MUST NOT add a byte order mark (`U+FEFF`) to the beginning _of a networked-transmitted JSON text_.", which seems to imply that implementations may now add a BOM when JSON is not sent over the network.
+RFC 8259 [section 8.1](https://www.rfc-editor.org/rfc/rfc8259.html#section-8.1) limits that generator prohibition to network-transmitted JSON text and still permits parsers to ignore a BOM. It does not explicitly say that generators may add a BOM in other settings.
 
-Tests with implementation defined will include a plain UTF-8 BOM with no other content, a UTF-8 BOM with a UTF-8 string, but also a UTF-8 BOM with a UTF-16 string, and a UTF-16 BOM with a UTF-8 string.
+The current root corpus has a UTF-8 BOM followed by `{}` as an `i_` case. A BOM alone contains no JSON value and remains `n_`; an incomplete BOM is also `n_`. Other encoding/BOM combinations suggested in earlier plans are not current root fixtures.
 
 <TABLE class="monospace">
 <TR>
@@ -915,7 +913,7 @@ STJSON can be instantiated with additional parameters:
                    maxParserDepth:1024,
                    options:[.useUnicodeReplacementCharacter])
 
-In fact, there is only one test where STJSON fails: `y_string_utf16.json`. This is because, as in nearly all other parsers, STJSON does not support non UTF-8 encodings, even though it should not be very difficult to add, and I may do so in the future if needed. At least, STJSON does raise appropriate errors when a file starts with a UTF-16 or UTF-32 byte order mark.
+In that historical run, there was only one test where STJSON failed: `y_string_utf16.json`. The same bytes now appear under `i_string_UTF-16LE_with_BOM.json` because UTF-16 acceptance is implementation-dependent in the current corpus. STJSON did not support that non-UTF-8 encoding, but raised an appropriate error when a file began with a UTF-16 or UTF-32 byte order mark.
 
 ### <a id="7"></a> 7. Conclusion
 
