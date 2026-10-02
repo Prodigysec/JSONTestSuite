@@ -170,6 +170,17 @@ transformation comparison remains future work.
 
 ## Contribute a fixture or parser
 
+Run the runner's regression tests with Python 3 (no third-party dependencies):
+
+```sh
+python3 -B -m unittest discover -s tests -v
+```
+
+These tests use temporary fixtures and controlled adapters to exercise exit
+codes, timeouts, raw stdin bytes, and resource cleanup. They do not overwrite
+the checked-in reports. For runner changes, also check a known available parser
+against the full corpus in a disposable copy.
+
 For fixtures, check existing byte-level coverage, choose a descriptive prefixed
 filename, and explain the expectation with an RFC section and the relevant
 upstream issue or PR. Keep deliberately malformed bytes intact. Avoid removing

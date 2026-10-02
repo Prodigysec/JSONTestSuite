@@ -61,6 +61,9 @@ can contain their own tests and build scripts.
 
 ## Findings from the local code
 
+These findings describe the initial baseline. See
+[implementation progress](#implementation-progress) for subsequent fixes.
+
 | Priority | Finding and evidence | Consequence / next action |
 | --- | --- | --- |
 | High | `run_tests()` uses `result == "FAIL"` in the exit-1 branch. | This comparison leaves `result` as `None`. Later checks happen to classify ordinary rejection correctly, but the internal result is wrong. Fix with regression coverage. |
@@ -190,3 +193,33 @@ adapter, and CSS so checked-in reports and fixtures were preserved.
 This establishes one working baseline adapter, not validation of the remaining
 93 configurations. It also demonstrates why a report containing only the 35
 implementation-dependent cases does not describe all 318 executions.
+
+## Implementation progress
+
+### 2026-10-02: rejection, timeout, and resource handling
+
+The initial documentation was committed as `2a3ba8a`. The following runner
+changes address defects found during local inspection; they do not integrate an
+upstream PR or resolve the separate reporting issue #131.
+
+- Corrected the exit-1 assignment so the internal result is `FAIL`.
+- Removed the timeout handler's dependency on an unset or previous result. It
+  now logs and prints `TIMEOUT` and continues execution.
+- Closed fixture stdin streams on normal return, timeout, missing/invalid
+  executable, and unexpected subprocess errors. The output sink and log now
+  use context managers so they close even when an exception propagates.
+- Added six standard-library regression tests under `tests/test_runner.py`.
+  Before the fix, they reproduced the first-timeout exception, stale timeout
+  diagnostic, and unclosed streams. All six pass with the changes, including
+  the acceptance/rejection/crash matrix and POSIX signal termination.
+
+Validation: `python3 -B -m unittest discover -s tests -v`; a separate temporary
+copy ran all 318 fixtures with Perl 5.38.2 / JSON::PP 4.16 and generated both
+reports. All 95 `y_` and 188 `n_` cases matched expectations; the 35 `i_` cases
+retained the baseline 15 acceptances and 20 rejections. Validation ran on Linux
+x86_64 with Python 3.12.3. Corpus bytes and historical reports were preserved.
+
+Next runner work: explicit outcome accounting and report correctness (#131),
+selection validation, setup-failure handling, HTML escaping, and a documented
+CI exit policy. The existing discrepancy-only log format, selection semantics,
+and five-second parser timeout remain in effect.

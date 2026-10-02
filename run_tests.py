@@ -523,108 +523,104 @@ programs = {
 
 def run_tests(restrict_to_path=None, restrict_to_program=None):
 
-    FNULL = open(os.devnull, 'w')
-    log_file = open(LOG_FILE_PATH, 'w')
+    with open(os.devnull, 'w') as FNULL, open(LOG_FILE_PATH, 'w') as log_file:
+        prog_names = list(programs.keys())
+        prog_names.sort()
 
-    prog_names = list(programs.keys())
-    prog_names.sort()
+        if isinstance(restrict_to_program, io.TextIOBase):
+            restrict_to_program = json.load(restrict_to_program)
 
-    if isinstance(restrict_to_program, io.TextIOBase):
-        restrict_to_program = json.load(restrict_to_program)
+        if restrict_to_program:
+            prog_names = filter(lambda x: x in restrict_to_program, prog_names)
 
-    if restrict_to_program:
-        prog_names = filter(lambda x: x in restrict_to_program, prog_names)
+        for prog_name in prog_names:
+            d = programs[prog_name]
 
-    for prog_name in prog_names:
-        d = programs[prog_name]
-
-        url = d["url"]
-        commands = d["commands"]
-        setup = d.get("setup")
-        if setup != None:
-            print("--", " ".join(setup))
-            try:
-                subprocess.call(setup)
-            except Exception as e:
-                print("-- skip", e)
-                continue
-
-        for root, dirs, files in os.walk(TEST_CASES_DIR_PATH):
-            json_files = (f for f in files if f.endswith(".json"))
-            for filename in json_files:
-
-                if restrict_to_path:
-                    restrict_to_filename = os.path.basename(restrict_to_path)
-                    if filename != restrict_to_filename:
-                        continue
-
-                file_path = os.path.join(root, filename)
-
-                my_stdin = FNULL
-
-                use_stdin = "use_stdin" in d and d["use_stdin"]
-                if use_stdin:
-                    my_stdin = open(file_path, "rb")
-                    a = commands
-                else:
-                    a = commands + [file_path]
-
-                #print("->", a)
-                print("--", " ".join(a))
-
+            url = d["url"]
+            commands = d["commands"]
+            setup = d.get("setup")
+            if setup != None:
+                print("--", " ".join(setup))
                 try:
-                    status = subprocess.call(
-                        a,
-                        stdin=my_stdin,
-                        stdout=FNULL,
-                        stderr=subprocess.STDOUT,
-                        timeout=5
-                    )
-                    #print("-->", status)
-                except subprocess.TimeoutExpired:
-                    print("timeout expired")
-                    s = "%s\tTIMEOUT\t%s" % (prog_name, filename)
-                    log_file.write("%s\n" % s)
-                    print("RESULT:", result)
+                    subprocess.call(setup)
+                except Exception as e:
+                    print("-- skip", e)
                     continue
-                except FileNotFoundError as e:
-                    print("-- skip non-existing", e.filename)
-                    break
-                except OSError as e:
-                    if e.errno == INVALID_BINARY_FORMAT or e.errno == BAD_CPU_TYPE:
-                        print("-- skip invalid-binary", commands[0])
+
+            for root, dirs, files in os.walk(TEST_CASES_DIR_PATH):
+                json_files = (f for f in files if f.endswith(".json"))
+                for filename in json_files:
+
+                    if restrict_to_path:
+                        restrict_to_filename = os.path.basename(restrict_to_path)
+                        if filename != restrict_to_filename:
+                            continue
+
+                    file_path = os.path.join(root, filename)
+
+                    my_stdin = FNULL
+
+                    use_stdin = "use_stdin" in d and d["use_stdin"]
+                    if use_stdin:
+                        my_stdin = open(file_path, "rb")
+                        a = commands
+                    else:
+                        a = commands + [file_path]
+
+                    #print("->", a)
+                    print("--", " ".join(a))
+
+                    try:
+                        status = subprocess.call(
+                            a,
+                            stdin=my_stdin,
+                            stdout=FNULL,
+                            stderr=subprocess.STDOUT,
+                            timeout=5
+                        )
+                        #print("-->", status)
+                    except subprocess.TimeoutExpired:
+                        print("timeout expired")
+                        s = "%s\tTIMEOUT\t%s" % (prog_name, filename)
+                        log_file.write("%s\n" % s)
+                        print("RESULT:", "TIMEOUT")
+                        continue
+                    except FileNotFoundError as e:
+                        print("-- skip non-existing", e.filename)
                         break
-                    raise e
+                    except OSError as e:
+                        if e.errno == INVALID_BINARY_FORMAT or e.errno == BAD_CPU_TYPE:
+                            print("-- skip invalid-binary", commands[0])
+                            break
+                        raise e
+                    finally:
+                        if use_stdin:
+                            my_stdin.close()
 
-                if use_stdin:
-                    my_stdin.close()
+                    result = None
+                    if status == 0:
+                        result = "PASS"
+                    elif status == 1:
+                        result = "FAIL"
+                    else:
+                        result = "CRASH"
 
-                result = None
-                if status == 0:
-                    result = "PASS"
-                elif status == 1:
-                    result == "FAIL"
-                else:
-                    result = "CRASH"
+                    s = None
+                    if result == "CRASH":
+                        s = "%s\tCRASH\t%s" % (prog_name, filename)
+                    elif filename.startswith("y_") and result != "PASS":
+                        s = "%s\tSHOULD_HAVE_PASSED\t%s" % (prog_name, filename)
+                    elif filename.startswith("n_") and result == "PASS":
+                        s = "%s\tSHOULD_HAVE_FAILED\t%s" % (prog_name, filename)
+                    elif filename.startswith("i_") and result == "PASS":
+                        s = "%s\tIMPLEMENTATION_PASS\t%s" % (prog_name, filename)
+                    elif filename.startswith("i_") and result != "PASS":
+                        s = "%s\tIMPLEMENTATION_FAIL\t%s" % (prog_name, filename)
 
-                s = None
-                if result == "CRASH":
-                    s = "%s\tCRASH\t%s" % (prog_name, filename)
-                elif filename.startswith("y_") and result != "PASS":
-                    s = "%s\tSHOULD_HAVE_PASSED\t%s" % (prog_name, filename)
-                elif filename.startswith("n_") and result == "PASS":
-                    s = "%s\tSHOULD_HAVE_FAILED\t%s" % (prog_name, filename)
-                elif filename.startswith("i_") and result == "PASS":
-                    s = "%s\tIMPLEMENTATION_PASS\t%s" % (prog_name, filename)
-                elif filename.startswith("i_") and result != "PASS":
-                    s = "%s\tIMPLEMENTATION_FAIL\t%s" % (prog_name, filename)
+                    if s != None:
+                        print(s)
+                        log_file.write("%s\n" % s)
 
-                if s != None:
-                    print(s)
-                    log_file.write("%s\n" % s)
-
-    FNULL.close()
-    log_file.close()
 
 def f_underline_non_printable_bytes(bytes):
 
