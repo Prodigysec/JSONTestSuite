@@ -495,3 +495,16 @@ executed the expanded 324-case corpus with 289 expected results, 35
 implementation-dependent results, and no unexpected outcomes or skips.
 All three upstream PRs remain open; local integration and review dispositions
 are separate from upstream closure.
+
+### 2026-10-03: issues #92, #94, and #93
+
+Commit `4ea03eb` records the audit of duplicate CCAN vendor cases (#92), adds
+the RFC-valid escaped-NUL scalar to the root corpus (#94), and starts a
+non-exhaustive machine-readable category for six nonfinite-number extension
+candidates (#93). The vendored CCAN tests and strict `n_` expectations remain
+unchanged. See the [batch review](review-batch-92-94-93.md) for exact bytes,
+upstream discussion, and RFC reasoning. The 325-case corpus ran with Perl
+JSON::PP in a temporary runner copy without discrepancies or missing records;
+43 regression tests passed and 20 optional-runtime tests were skipped. The
+three upstream issues remain open; broader extension classification and report
+integration remain separate work.
