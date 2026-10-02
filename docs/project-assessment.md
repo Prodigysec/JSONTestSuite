@@ -113,18 +113,19 @@ classification needs a documented rationale and an impact review.
 
 The [open issues](https://github.com/nst/JSONTestSuite/issues) and
 [open PRs](https://github.com/nst/JSONTestSuite/pulls) were checked through the
-public GitHub API: **39 issues and 14 PRs**. All PRs listed below remain pending
-local diff review and integration. Suggested review order is based on scope and
+public GitHub API: **39 issues and 14 PRs**. At that initial check, all listed PRs
+were pending local diff review and integration; subsequent dispositions are
+recorded below and in implementation progress. Suggested review order is based on scope and
 dependencies, not an assertion that a proposal is ready to merge.
 
 ### Open pull requests
 
 | PR | Proposed change | Initial review focus |
 | --- | --- | --- |
-| [#146](https://github.com/nst/JSONTestSuite/pull/146) | Reject trailing nonbreaking space | Verify exact UTF-8 bytes, RFC whitespace grammar, and existing coverage. |
+| [#146](https://github.com/nst/JSONTestSuite/pull/146) | Reject trailing nonbreaking space | Reviewed and applied locally with exact upstream bytes; see implementation progress. Upstream remains open. |
 | [#137](https://github.com/nst/JSONTestSuite/pull/137) | Add an octal-escape negative test | Pair with issue #136; verify literal backslash bytes and strict/extension distinction. |
 | [#105](https://github.com/nst/JSONTestSuite/pull/105) | Add leading-zero negative tests | Pair with #104; compare fractional/exponent cases with existing fixtures. |
-| [#145](https://github.com/nst/JSONTestSuite/pull/145) | Fix Ruby wrapper | Check successful `null`, exception handling, and supported Ruby JSON options. Local falsey-value bug confirmed by code inspection. |
+| [#145](https://github.com/nst/JSONTestSuite/pull/145) | Fix Ruby wrapper | Reviewed and applied locally; see implementation progress below. Tested with Ruby 3.2.3 / JSON 2.6.3; upstream remains open. |
 | [#113](https://github.com/nst/JSONTestSuite/pull/113) | Correct executable flags | Pair with #87; review every mode change, shebang, and invocation method. |
 | [#126](https://github.com/nst/JSONTestSuite/pull/126) | Delete a duplicate minus-zero fixture | Bytes match locally; assess filename compatibility before deletion. |
 | [#128](https://github.com/nst/JSONTestSuite/pull/128) | Update Newtonsoft.Json 12.0.3 to 13.0.2 | Review target framework, dependency support, build, registry label, and behavioral changes. |
@@ -302,3 +303,105 @@ the filter instead. Invalid selections now fail instead of silently running a
 subset or nothing. The CLI's aggregate pass/fail policy for executed tests
 remains future work; status `2` here identifies invalid selection, not parser
 discrepancies. External-file selection is still unsupported.
+
+### 2026-10-02: Ruby null handling, PR #145
+
+Refreshed [PR #145](https://github.com/nst/JSONTestSuite/pull/145), its patch,
+issue comments, review comments, and reviews (all discussion/review lists empty).
+The PR remains open. Reviewed upstream base
+`1ef36fa01286573e846ac449e8683f8833c5b26a` and head
+`c1126847737c02a842f9767ba6a5823813b7e618`; local work started at `d303267`.
+
+Applied Jean Boussier's (`byroot`) adapter patch without substantive changes:
+successful `JSON.parse` now exits `0` regardless of the returned value, and the
+legacy `quirks_mode` option and parsed-value debug print are removed. Parse
+exceptions still exit `1`. This is a working-tree integration with attribution,
+not an upstream merge or a cherry-picked commit. Added adapter documentation and
+three regression tests locally; no fixtures, dependencies, or license notices
+were changed.
+
+Before editing the adapter, the new regression tests reproduced rejection of
+the four bytes `6e 75 6c 6c` (`null`); all other focused cases passed.
+[RFC 8259 section 2](https://www.rfc-editor.org/rfc/rfc8259.html#section-2)
+permits a value as the entire JSON text, and
+[section 3](https://www.rfc-editor.org/rfc/rfc8259.html#section-3) includes `null`.
+The existing `y_structure_lonely_null.json` already covers this case, so no
+duplicate corpus fixture was added.
+
+Validation used an isolated Ruby **3.2.3** / JSON **2.6.3** runtime on Linux
+x86_64 with Python **3.12.3** (see [adapter notes](ruby-adapter.md) for package
+versions and invocation). All **24** regression tests pass with Ruby available.
+Tests bound each invocation to five seconds and cover scalars, containers,
+invalid syntax, trailing data, malformed bytes, and implementation-dependent
+inputs. Without Ruby, the three adapter tests explicitly skip.
+
+Before/after full-corpus runs used temporary copies of the runner and the **318**
+fixtures at `d303267`. Each run logged all 318 distinct pairs; both full and
+pruned reports showed 318 executions, zero skips, and zero missing records.
+No crashes or timeouts occurred. The sole outcome change was
+`y_structure_lonely_null.json`: `SHOULD_HAVE_PASSED` became `EXPECTED_RESULT`.
+After the fix, the counts were **275** expected results, **25** implementation-
+dependent acceptances, **10** implementation-dependent rejections, and **8**
+unexpected acceptances, all unchanged from baseline except the null result.
+
+The eight remaining `SHOULD_HAVE_FAILED` cases are:
+
+- `n_object_trailing_comment.json`
+- `n_string_escape_x.json`
+- `n_string_escaped_emoji.json`
+- `n_string_incomplete_surrogate_escape_invalid.json`
+- `n_string_invalid_backslash_esc.json`
+- `n_string_invalid_utf8_after_escape.json`
+- `n_string_unicode_CapitalU.json`
+- `n_structure_object_with_comment.json`
+
+These are observed behavior of the tested default parser configuration, not
+resolved by this wrapper fix. Other Ruby versions, platforms, and the separate
+`Ruby regex` adapter remain untested. Historical reports were preserved.
+Unhandled runtime/dependency/file errors still need a separate adapter-contract
+audit because Ruby can exit `1` for those failures too.
+
+### 2026-10-02: trailing nonbreaking space, PR #146
+
+Reviewed [PR #146](https://github.com/nst/JSONTestSuite/pull/146), its patch,
+comments, review comments, and reviews (all PR discussion/review lists empty).
+Upstream base: `1ef36fa01286573e846ac449e8683f8833c5b26a`; head:
+`7a779d6a7b65d54155bc9741c22d1db4a785ffb2`. The PR remains open.
+The linked [jsonriver issue #36](https://github.com/rictic/jsonriver/issues/36)
+and its comment describe overly broad trailing-whitespace trimming, attribute
+the report to `alexyorke`, and report a fix in jsonriver 1.0.2. Jsonriver was not
+installed or independently retested here; this change fills a corpus gap.
+
+Applied `rictic`'s fixture without adaptation as
+`test_parsing/n_structure_trailing_invalid_whitespace.json`: exactly three bytes
+`31 c2 a0` (ASCII `1` followed by UTF-8 U+00A0), with **no final newline**.
+The Git blob hash matches upstream: `dcf4a614b36a275eacf7609735bbcd170d68cca9`.
+This is a working-tree integration with attribution, not an upstream merge or
+cherry-picked commit. Local HEAD remains `d303267`; the prior Ruby work was
+preserved.
+
+Expectation: [RFC 8259 section 2](https://www.rfc-editor.org/rfc/rfc8259.html#section-2)
+defines `JSON-text = ws value ws` and restricts whitespace to U+0020, U+0009,
+U+000A, and U+000D. U+00A0 is excluded, making this a syntax rejection case,
+not an implementation-limit or Unicode-interoperability case. Section 9 permits
+parser extensions, so an extension mode might accept it, but that does not
+change its `n_` classification under the JSON grammar.
+
+Before adding it, a byte-level audit found no identical fixture and no literal
+UTF-8 NBSP bytes in the root corpus. `y_string_nbsp_uescaped.json` contains a
+legal escaped NBSP inside a string; the two U+2060 word-joiner cases and the
+form-feed whitespace case test different characters inside arrays. None tests
+a trailing NBSP after a complete scalar. Existing names and bytes were kept;
+the sole corpus change is the new fixture. Current totals are **319** fixtures:
+**95** `y_`, **189** `n_`, and **35** `i_`.
+
+Validation used a temporary copy of the current runner and corpus (`d303267`
+plus this fixture), on Linux x86_64 / Python 3.12.3 with Perl **5.38.2** and
+JSON::PP **4.16**, using the existing adapter's options. All **319** distinct
+cases executed: **284** expected results, **15** implementation-dependent
+acceptances, and **20** implementation-dependent rejections, with zero crashes,
+timeouts, skips, or missing records. Full and pruned reports were generated and
+included the new fixture. Temporary controls confirmed acceptance of `31` and
+`31 20 09 0d 0a`, and rejection of `31 c2 a0`, with a five-second timeout per
+invocation. Tracked reports were preserved. These measurements validate one
+parser configuration, not universal parser behavior or complete RFC compliance.

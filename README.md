@@ -19,6 +19,9 @@ the same library; registration does not mean a parser is installed or runnable.
 See the [project assessment and upstream review queue](docs/project-assessment.md)
 for the baseline, known limitations, and planned work.
 
+The current parsing corpus has **319 fixtures** (95 `y_`, 189 `n_`, 35 `i_`),
+including the trailing nonbreaking-space case reviewed from upstream PR #146.
+
 ## Start with one parser
 
 The corpus can be used directly in your own tests without installing the bundled
@@ -75,6 +78,9 @@ dependencies. To list the exact registered names without executing parsers:
 python3 -B -c 'import run_tests; print("\n".join(sorted(run_tests.programs)))'
 python3 run_tests.py --help
 ```
+
+For the Ruby adapter's dependencies, tested version, invocation, and default
+parser behavior, see [Ruby adapter notes](docs/ruby-adapter.md).
 
 To attempt all registered parsers, after preparing their dependencies:
 
@@ -203,7 +209,9 @@ python3 -B -m unittest discover -s tests -v
 These tests use temporary fixtures and controlled adapters to exercise exit
 codes, timeouts, skips, raw stdin bytes, resource cleanup, and report accounting
 for both current and historical logs, plus selection validation and preservation
-of existing outputs on selection errors. They do not overwrite
+of existing outputs on selection errors. Ruby adapter tests also run when
+`ruby` or `ruby3.2` is available on PATH, and otherwise explicitly skip.
+They do not overwrite
 the checked-in reports. For runner changes, also check a known available parser
 against the full corpus in a disposable copy.
 
