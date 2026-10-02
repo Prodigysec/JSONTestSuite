@@ -1,4 +1,4 @@
-# These three historical C adapters have checked-in source. Keep their
+# These four historical C adapters have checked-in source. Keep their
 # rebuilt executables separate from the tracked platform-specific binaries.
 CC ?= cc
 CFLAGS ?= -O2
@@ -12,7 +12,7 @@ CORPUS_ARCHIVE = $(DIST_DIR)/JSONTestSuite-corpus-$(CORPUS_REVISION).tar.gz
 
 all: c-parsers
 
-c-parsers: $(BUILD_DIR)/test_jsmn $(BUILD_DIR)/jsonChecker $(BUILD_DIR)/test_cJSON_1_7_3
+c-parsers: $(BUILD_DIR)/test_jsmn $(BUILD_DIR)/jsonChecker $(BUILD_DIR)/test_cJSON_1_7_3 $(BUILD_DIR)/test_ccan
 
 $(BUILD_DIR):
 	mkdir -p "$@"
@@ -31,6 +31,11 @@ $(BUILD_DIR)/test_cJSON_1_7_3: parsers/test_cJSON_1_7_3/test-cJSON/main.c parser
 	$(CC) $(CPPFLAGS) $(CFLAGS) -std=c99 -Iparsers/test_cJSON_1_7_3 $(LDFLAGS) \
 		parsers/test_cJSON_1_7_3/test-cJSON/main.c \
 		parsers/test_cJSON_1_7_3/cJSON.c -o "$@" $(LDLIBS) -lm
+
+$(BUILD_DIR)/test_ccan: parsers/test_ccan_json/test_ccan/test_ccan/main.c parsers/test_ccan_json/json/json.c parsers/test_ccan_json/json/json.h | $(BUILD_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -std=c99 -Iparsers/test_ccan_json/json $(LDFLAGS) \
+		parsers/test_ccan_json/test_ccan/test_ccan/main.c \
+		parsers/test_ccan_json/json/json.c -o "$@" $(LDLIBS)
 
 # Git supplies the committed bytes and paths; gzip -n removes host/time fields.
 corpus-archive:

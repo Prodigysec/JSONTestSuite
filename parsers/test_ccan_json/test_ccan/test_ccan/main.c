@@ -8,37 +8,35 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "json.h"
 
-typedef enum testStatus {ERROR, PASS, FAIL} TestStatus;
+typedef enum testStatus {PASS = 0, FAIL = 1, ERROR = 2} TestStatus;
 
 TestStatus testFile(const char *filename) {
-    FILE *f=fopen(filename,"rb");
-    if(f == NULL) { return ERROR; };
-    fseek(f,0,SEEK_END);
-    long len=ftell(f);
-    fseek(f,0,SEEK_SET);
-    char *data=(char*)malloc(len+1);
-    fread(data,1,len,f);
-    data[len]='\0';
-    fclose(f);
-    
-    bool isValid = json_validate(data);
+    FILE *f = fopen(filename, "rb");
+    if (f == NULL) return ERROR;
+    if (fseek(f, 0, SEEK_END) != 0) { fclose(f); return ERROR; }
+    long length = ftell(f);
+    if (length < 0 || fseek(f, 0, SEEK_SET) != 0) { fclose(f); return ERROR; }
+    size_t len = (size_t)length;
+    char *data = malloc(len + 1);
+    if (data == NULL) { fclose(f); return ERROR; }
+    size_t read_count = fread(data, 1, len, f);
+    int close_status = fclose(f);
+    if (read_count != len || close_status != 0) {
+        free(data);
+        return ERROR;
+    }
+    data[len] = '\0';
 
+    /* json_validate takes a C string; an embedded NUL would hide trailing bytes. */
+    bool isValid = memchr(data, '\0', len) == NULL && json_validate(data);
     free(data);
-    
     return isValid ? PASS : FAIL;
 }
 
 int main(int argc, const char * argv[]) {
-
-    const char* path = argv[1];
-    
-    int result = testFile(path);
-    
-    if (result == PASS) {
-        return 0;
-    } else {
-        return 1;
-    }
+    if (argc != 2) return ERROR;
+    return testFile(argv[1]);
 }

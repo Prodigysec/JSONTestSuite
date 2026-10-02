@@ -19,10 +19,13 @@ the same library; registration does not mean a parser is installed or runnable.
 See the [project assessment and upstream review queue](docs/project-assessment.md)
 for the baseline, known limitations, and planned work.
 
-The current parsing corpus has **325 fixtures** (96 `y_`, 194 `n_`, 35 `i_`),
+The current parsing corpus has **326 fixtures** (93 `y_`, 194 `n_`, 39 `i_`),
 including trailing nonbreaking-space, octal-escape, and leading-zero cases
 reviewed from upstream PRs #146, #137, and #105, plus an escaped-NUL scalar
-reviewed from [issue #94](docs/review-batch-92-94-93.md).
+reviewed from [issue #94](docs/review-batch-92-94-93.md). Four large or
+underflowing number cases were reclassified under `i_` for
+[issue #149](docs/review-batch-149-119-118.md), and a modest fraction-exponent
+case was added under `y_`.
 
 ## Start with one parser
 
@@ -50,11 +53,12 @@ versions, absolute executable paths, or platform-specific binaries. Check the
 `programs` dictionary in [run_tests.py](run_tests.py) and the relevant files in
 `parsers/` before running an adapter.
 
-Three checked-in C adapters can be rebuilt with `make c-parsers` using make and
-a C99 compiler. The executables go into ignored `parsers/.build/`; the
-historical binaries and registry entries are unchanged because their wrappers
-still need input-contract review. See the
-[build and distribution review](docs/review-batch-140-87-81.md).
+Four checked-in C adapters can be rebuilt with `make c-parsers` using make and
+a C99 compiler. The executables go into ignored `parsers/.build/`. CCAN now
+uses its rebuilt executable through the runner after a whole-input wrapper fix;
+the other three retain their historical registry entries pending adapter
+review. See the [build and distribution review](docs/review-batch-140-87-81.md)
+and [CCAN follow-up](docs/review-batch-149-119-118.md).
 
 To use the fixtures without parser binaries, run `make corpus-archive` for a
 small archive of the committed fixture trees and `LICENSE`, or use a partial

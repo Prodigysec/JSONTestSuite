@@ -327,7 +327,8 @@ programs = {
    "C ccan":
        {
            "url":"",
-           "commands":[os.path.join(PARSERS_DIR, "test_ccan_json/bin/test_ccan")]
+           "setup":["make", "-C", BASE_DIR, "parsers/.build/test_ccan"],
+           "commands":[os.path.join(PARSERS_DIR, ".build/test_ccan")]
        },
    "C cJSON 20160806":
        {
