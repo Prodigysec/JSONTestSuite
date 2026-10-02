@@ -508,3 +508,18 @@ JSON::PP in a temporary runner copy without discrepancies or missing records;
 43 regression tests passed and 20 optional-runtime tests were skipped. The
 three upstream issues remain open; broader extension classification and report
 integration remain separate work.
+
+### 2026-10-03: issues #149, #119, and #118
+
+Commit `f1e6f95` reclassifies four range-sensitive number fixtures from `y_`
+to `i_` without changing their bytes, and adds a modest exact
+fraction-exponent `y_` case (#149). It retains the literal-NUL rejection and
+fixes CCAN's C-string wrapper so NUL cannot hide trailing input; the registered
+CCAN adapter now builds from checked-in source (#119). The existing unescaped
+DEL acceptance was verified against RFC 8259 section 7 and retained (#118).
+See the [batch review](review-batch-149-119-118.md) for fixture-name migration,
+adapter provenance, exact bytes, and validation. All 66 tests completed with
+47 passes and 19 optional-runtime skips; a temporary runner recorded all 326
+fixtures for both CCAN and Perl JSON::PP. CCAN still has three escaped-NUL
+rejections and two native parser crashes on deeply nested invalid input. The
+three upstream issues remain open; this local disposition does not close them.
