@@ -82,6 +82,8 @@ python3 run_tests.py --help
 
 For the Ruby adapter's dependencies, tested version, invocation, and default
 parser behavior, see [Ruby adapter notes](docs/ruby-adapter.md).
+The source builds and validation status for JSONpp, opack, and Newtonsoft.Json
+are recorded in the [parser review batch](docs/review-batch-128-147-143.md).
 
 To attempt all registered parsers, after preparing their dependencies:
 

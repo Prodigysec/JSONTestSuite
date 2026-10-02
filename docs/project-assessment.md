@@ -128,9 +128,9 @@ dependencies, not an assertion that a proposal is ready to merge.
 | [#145](https://github.com/nst/JSONTestSuite/pull/145) | Fix Ruby wrapper | Reviewed and applied locally; see implementation progress below. Tested with Ruby 3.2.3 / JSON 2.6.3; upstream remains open. |
 | [#113](https://github.com/nst/JSONTestSuite/pull/113) | Correct executable flags | Integrated with adaptations for current paths and debug-symbol files; see [batch review](review-batch-105-113-126.md). |
 | [#126](https://github.com/nst/JSONTestSuite/pull/126) | Delete a duplicate minus-zero fixture | Reviewed; deletion declined locally to preserve names used by historical reports and consumers. See [batch review](review-batch-105-113-126.md). |
-| [#128](https://github.com/nst/JSONTestSuite/pull/128) | Update Newtonsoft.Json 12.0.3 to 13.0.2 | Review target framework, dependency support, build, registry label, and behavioral changes. |
-| [#147](https://github.com/nst/JSONTestSuite/pull/147) | Add JSONpp | Review pinned source download, C++ build, adapter contract, and documented extension behavior. |
-| [#143](https://github.com/nst/JSONTestSuite/pull/143) | Add opack | Establish parser source/version, build steps, license, and JSON mode. |
+| [#128](https://github.com/nst/JSONTestSuite/pull/128) | Update Newtonsoft.Json 12.0.3 to 13.0.2 | Adapted, built, and run against all 324 fixtures locally. See [batch review](review-batch-128-147-143.md). |
+| [#147](https://github.com/nst/JSONTestSuite/pull/147) | Add JSONpp | Adapted into a pinned source build and run against all 324 fixtures locally. See [batch review](review-batch-128-147-143.md). |
+| [#143](https://github.com/nst/JSONTestSuite/pull/143) | Add opack | Adapted into a pinned source build and run against all 324 fixtures locally. See [batch review](review-batch-128-147-143.md). |
 | [#142](https://github.com/nst/JSONTestSuite/pull/142) | Add fastjson2 2.0.53 | Inspect Java dependencies, version pinning, whole-input validation, and mode. |
 | [#133](https://github.com/nst/JSONTestSuite/pull/133) | Add jsoncgx | Distinguish JSONC extensions from strict JSON expectations; review Python packaging and wrapper. |
 | [#124](https://github.com/nst/JSONTestSuite/pull/124) | Add clojure.data.json | Review Clojure dependencies, reproducible invocation, and scalar/trailing-input behavior. |
@@ -453,6 +453,20 @@ and `["\\012"]` (an escaped backslash followed by ordinary digits), while
 rejecting the new fixture. Each invocation had a five-second limit. Existing
 fixture bytes and tracked historical reports were preserved; validation does
 not establish behavior for every parser or extension mode.
+
+### 2026-10-02: parser batch, PRs #128, #147, and #143
+
+The three proposals have been reviewed and adapted locally. Newtonsoft.Json's
+package and registry label are updated to 13.0.2; the wrapper now checks a
+complete JSON text and rejects malformed UTF-8. JSONpp 0.1.1 and opack 0.2.1
+have pinned source builds and registered adapters. The upstream binary artifacts
+were not imported. All three adapters compiled, and all 33 regression tests
+passed with isolated toolchains. A temporary runner copy recorded all 324
+fixtures for each of these adapters and Perl JSON::PP, with no skips or missing
+records. The five opack crashes on truncated input and the libraries' unexpected
+acceptances remain documented observations. See the
+[detailed review](review-batch-128-147-143.md) for revisions, build commands,
+tested versions, exact outcomes, and behavioral limits.
 
 ### 2026-10-02: batch of three, PRs #105, #113, and #126
 

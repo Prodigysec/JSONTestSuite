@@ -467,7 +467,7 @@ programs = {
                     "test_JSON.st"
             ]
         },
-   ".NET Newtonsoft.Json 12.0.3":
+   ".NET Newtonsoft.Json 13.0.2":
        {
            "url":"http://www.newtonsoft.com/json",
            "setup":["dotnet", "build", "--configuration", "Release", os.path.join(PARSERS_DIR, "test_dotnet_newtonsoft/app.csproj")],
@@ -518,6 +518,16 @@ programs = {
        {
            "url":"https://github.com/nlohmann/json",
            "commands":[os.path.join(PARSERS_DIR, "test_nlohmann_json_20190718/bin/test_nlohmann_json")]
+       },
+   "C++ JSONpp 0.1.1":
+       {
+           "url":"https://github.com/mikami-w/jsonpp",
+           "commands":[os.path.join(PARSERS_DIR, "test_jsonpp_0_1_1/.build/test_jsonpp")]
+       },
+   "Java opack 0.2.1 (UTF-8)":
+       {
+           "url":"https://github.com/realtimetech-solution/opack",
+           "commands":["java", "-cp", os.path.join(PARSERS_DIR, "test_java_opack_0_2_1/.build/classes"), "TestJSONParsing"]
        }
 }
 
