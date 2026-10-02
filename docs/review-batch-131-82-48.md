@@ -1,9 +1,9 @@
 # Runner issue review: #131, #82, and #48
 
-Reviewed on 2026-10-03 against local parent `4697fc9`. All three upstream
-issues remain open. They had no comments when refreshed; local dispositions
-do not change their upstream status. Fixture bytes and tracked historical
-reports were not changed.
+Reviewed on 2026-10-03 against local parent `4697fc9`. The implementation
+commit is `0f28ed3`. All three upstream issues remain open. They had no
+comments when refreshed; local dispositions do not change their upstream
+status. Fixture bytes and tracked historical reports were not changed.
 
 ## Expected results in reports: issue #131
 
