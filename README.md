@@ -84,11 +84,15 @@ python3 run_tests.py
 
 Current CLI details:
 
-- The optional positional argument selects an existing corpus file **by
-  basename**. It does not load an arbitrary external JSON file. An unknown name
-  runs no matching tests and still replaces the output files.
-- `--filter` reads a JSON array of exact registry names. Unknown names are
-  silently ignored; an empty array currently selects **all** parsers.
+- The optional positional argument selects existing corpus files **by
+  basename**. It does not load an arbitrary external JSON file. An unmatched
+  selector is an error; matching basenames in multiple subdirectories select
+  all of those fixtures.
+- `--filter` requires a non-empty JSON array of exact registry names. Invalid
+  JSON, other value types, non-string entries, and unknown names are errors.
+  Repeated names select a parser once. Omit `--filter` to select all parsers.
+- Invalid selections, an empty parser registry, or an empty corpus exit with
+  status `2` before setup commands execute or logs/reports are overwritten.
 - The registry's `Python 2.7.10` and `Python 3.5.2` entries are historical. The
   latter invokes `python3.5`, not whichever `python3` is installed. For a newer
   runtime, add/update an entry with an accurate label and executable.
@@ -198,7 +202,8 @@ python3 -B -m unittest discover -s tests -v
 
 These tests use temporary fixtures and controlled adapters to exercise exit
 codes, timeouts, skips, raw stdin bytes, resource cleanup, and report accounting
-for both current and historical logs. They do not overwrite
+for both current and historical logs, plus selection validation and preservation
+of existing outputs on selection errors. They do not overwrite
 the checked-in reports. For runner changes, also check a known available parser
 against the full corpus in a disposable copy.
 

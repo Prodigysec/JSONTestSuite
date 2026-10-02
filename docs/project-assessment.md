@@ -268,3 +268,37 @@ as rejection/crash; unavailable dependencies inside a running wrapper cannot be
 identified from its exit code alone. Filter validation and an aggregate CI exit
 policy remain future work. Interrupted runs are not represented as complete
 execution merely because a report can be generated.
+
+### 2026-10-02: selection validation before execution
+
+Starting from local commit `e890aea`, inspection confirmed that empty filters
+selected all parsers, unknown parser names were silently ignored, and unmatched
+fixture selectors could overwrite the log with no outcomes. This local change
+addresses the selection finding above; it does not integrate an upstream PR.
+
+- Filters now require a non-empty JSON array of strings, with every name present
+  in the registry. Malformed JSON and unknown names produce clear CLI errors.
+  Omitting the filter still selects all parsers; repeated names execute once.
+- Unmatched fixture selectors, an empty corpus, and an empty parser registry
+  are errors. Existing basename matching remains: a path selector selects all
+  corpus fixtures with that basename, including matches in subdirectories.
+- Validation completes before setup commands run or the log is opened. The CLI
+  exits with status `2` on selection errors without generating reports, keeping
+  existing log and HTML bytes intact. Direct `run_tests()` callers receive
+  `SelectionError`, a `ValueError` subclass.
+- Added regression coverage for malformed and empty filters, incorrect JSON
+  types, unknown/mixed parser names, unmatched selectors, empty inventories,
+  preservation of existing outputs, and valid selections with duplicate names.
+
+Validation: all **21** regression tests pass. A temporary copy exercised the CLI
+with Perl **5.38.2** / JSON::PP **4.16** on Linux x86_64, Python **3.12.3**:
+all **318** fixtures produced distinct records, with **283** expected results,
+**15** implementation-dependent acceptances, and **20** implementation-dependent
+rejections. Both reports show 318 executions, zero skips, and zero missing
+records. Tracked fixtures and historical reports were preserved.
+
+Compatibility: callers that previously used `[]` to mean all parsers must omit
+the filter instead. Invalid selections now fail instead of silently running a
+subset or nothing. The CLI's aggregate pass/fail policy for executed tests
+remains future work; status `2` here identifies invalid selection, not parser
+discrepancies. External-file selection is still unsupported.

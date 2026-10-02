@@ -211,6 +211,76 @@ class RunnerTests(unittest.TestCase):
         self.assertNotIn('unselected', html)
         self.assertNotIn('y_one.json', html)
 
+    def test_invalid_cli_selection_preserves_outputs_and_never_starts_setup(self):
+        self.fixture('y_case.json')
+        self.adapter('selected')
+        self.registry['selected']['setup'] = ['controlled-setup']
+        filter_path = self.root / 'filter.json'
+        results = self.root / 'results'
+        results.mkdir()
+        outputs = [self.log, results / 'parsing.html', results / 'parsing_pruned.html']
+        for path in outputs:
+            path.write_bytes(b'previous results\x00\xff')
+        invalid_selections = [
+            ('[]', [], 'non-empty JSON array'),
+            ('null', [], 'non-empty JSON array'),
+            ('"selected"', [], 'non-empty JSON array'),
+            ('{"selected": true}', [], 'non-empty JSON array'),
+            ('[1]', [], 'non-empty JSON array'),
+            ('["selected", null]', [], 'non-empty JSON array'),
+            ('[', [], 'Invalid JSON filter'),
+            ('["missing"]', [], "Unknown parser name(s): 'missing'"),
+            ('["selected", "missing"]', [], "Unknown parser name(s): 'missing'"),
+            ('["selected"]', ['y_missing.json'], 'No corpus fixture matches'),
+            ('["selected"]', [''], 'No corpus fixture matches'),
+        ]
+        for content, selectors, message in invalid_selections:
+            with self.subTest(content=content, selectors=selectors):
+                filter_path.write_text(content)
+                stderr = io.StringIO()
+                with patch.object(run_tests, 'BASE_DIR', str(self.root)), \
+                        patch.object(run_tests.subprocess, 'call') as call, \
+                        patch.object(run_tests, 'generate_report') as report, \
+                        contextlib.redirect_stderr(stderr):
+                    with self.assertRaises(SystemExit) as raised:
+                        run_tests.main(selectors + ['--filter', str(filter_path)])
+                self.assertEqual(raised.exception.code, 2)
+                self.assertIn(message, stderr.getvalue())
+                self.assertNotIn('Traceback', stderr.getvalue())
+                call.assert_not_called()
+                report.assert_not_called()
+                for path in outputs:
+                    self.assertEqual(path.read_bytes(), b'previous results\x00\xff')
+
+    def test_empty_corpus_or_registry_preserves_log(self):
+        self.log.write_text('previous results')
+        self.adapter('selected')
+        with patch.object(run_tests.subprocess, 'call') as call:
+            with self.assertRaisesRegex(run_tests.SelectionError, 'No JSON fixtures'):
+                run_tests.run_tests()
+            self.fixture('y_case.json')
+            self.registry.clear()
+            with self.assertRaisesRegex(run_tests.SelectionError, 'No parsers selected'):
+                run_tests.run_tests()
+        call.assert_not_called()
+        self.assertEqual(self.log.read_text(), 'previous results')
+
+    def test_direct_empty_filter_is_rejected_before_creating_log(self):
+        self.fixture('y_case.json')
+        self.adapter('selected')
+        with self.assertRaisesRegex(run_tests.SelectionError, 'non-empty JSON array'):
+            run_tests.run_tests(restrict_to_program=[])
+        self.assertFalse(self.log.exists())
+
+    def test_valid_filter_keeps_basename_selection_and_deduplicates_parsers(self):
+        self.fixture('y_case.json')
+        self.fixture('y_other.json')
+        self.adapter('selected')
+        self.adapter('unselected')
+        with contextlib.redirect_stdout(self.output):
+            run_tests.run_tests('test_parsing/y_case.json', ['selected', 'selected'])
+        self.assertEqual(self.log.read_text(), 'selected\tEXPECTED_RESULT\ty_case.json\n')
+
     def test_nested_fixtures_have_distinct_log_identifiers(self):
         for folder in ('one', 'two'):
             (self.corpus / folder).mkdir()

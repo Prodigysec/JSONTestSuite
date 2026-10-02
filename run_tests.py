@@ -536,12 +536,28 @@ STATUS_LABELS = {
 SKIPPED_STATUSES = {"SKIPPED_UNAVAILABLE", "SKIPPED_SETUP_FAILED"}
 
 
+class SelectionError(ValueError):
+    """Invalid parser or fixture selection, detected before run side effects."""
+
+
 def run_tests(restrict_to_path=None, restrict_to_program=None):
+    has_filter = restrict_to_program is not None
     if isinstance(restrict_to_program, io.TextIOBase):
-        restrict_to_program = json.load(restrict_to_program)
+        try:
+            restrict_to_program = json.load(restrict_to_program)
+        except (ValueError, UnicodeError) as error:
+            raise SelectionError("Invalid JSON filter: %s" % error) from error
     prog_names = sorted(programs)
-    if restrict_to_program:
+    if has_filter:
+        if (not isinstance(restrict_to_program, list) or not restrict_to_program
+                or not all(isinstance(name, str) for name in restrict_to_program)):
+            raise SelectionError("Filter must be a non-empty JSON array of parser names")
+        unknown = sorted(set(restrict_to_program) - programs.keys())
+        if unknown:
+            raise SelectionError("Unknown parser name(s): %s" % ", ".join(repr(name) for name in unknown))
         prog_names = [name for name in prog_names if name in restrict_to_program]
+    if not prog_names:
+        raise SelectionError("No parsers selected")
 
     # Snapshot the selected corpus so each selected pair gets one outcome.
     cases = []
@@ -550,10 +566,15 @@ def run_tests(restrict_to_path=None, restrict_to_program=None):
         for filename in sorted(files):
             if not filename.endswith(".json"):
                 continue
-            if restrict_to_path and filename != os.path.basename(restrict_to_path):
+            if restrict_to_path is not None and filename != os.path.basename(restrict_to_path):
                 continue
             file_path = os.path.join(root, filename)
             cases.append((os.path.relpath(file_path, TEST_CASES_DIR_PATH), file_path))
+
+    if not cases:
+        if restrict_to_path is not None:
+            raise SelectionError("No corpus fixture matches selector: %r" % restrict_to_path)
+        raise SelectionError("No JSON fixtures found in corpus: %s" % TEST_CASES_DIR_PATH)
 
     with open(os.devnull, 'w') as FNULL, open(LOG_FILE_PATH, 'w') as log_file:
         def record(prog_name, status, filename):
@@ -852,27 +873,24 @@ def generate_report(report_path, keep_only_first_result_in_set = False):
 
 ###
 
-if __name__ == '__main__':
-
-    restrict_to_path = None
-    """
-    if len(sys.argv) == 2:
-        restrict_to_path = os.path.join(BASE_DIR, sys.argv[1])
-        if not os.path.exists(restrict_to_path):
-            print("-- file does not exist:", restrict_to_path)
-            sys.exit(-1)
-    """
-
+def main(argv=None):
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('restrict_to_path', nargs='?', type=str, default=None)
     parser.add_argument('--filter', dest='restrict_to_program', type=argparse.FileType('r'), default=None)
 
-    args = parser.parse_args()
-
-    #args.restrict_to_program = ["C ConcreteServer"]
-
-    run_tests(args.restrict_to_path, args.restrict_to_program)
+    args = parser.parse_args(argv)
+    try:
+        run_tests(args.restrict_to_path, args.restrict_to_program)
+    except SelectionError as error:
+        parser.error(str(error))
+    finally:
+        if args.restrict_to_program is not None and args.restrict_to_program is not sys.stdin:
+            args.restrict_to_program.close()
 
     generate_report(os.path.join(BASE_DIR, "results/parsing.html"), keep_only_first_result_in_set = False)
     generate_report(os.path.join(BASE_DIR, "results/parsing_pruned.html"), keep_only_first_result_in_set = True)
+
+
+if __name__ == '__main__':
+    main()
