@@ -43,10 +43,62 @@ class RunnerTests(unittest.TestCase):
             "use_stdin": use_stdin,
         }
 
-    def run_runner(self):
+    def run_runner(self, jobs=1):
         with contextlib.redirect_stdout(self.output):
-            run_tests.run_tests()
+            run_tests.run_tests(jobs=jobs)
         return self.log.read_text().splitlines()
+
+    def test_parallel_parsers_overlap_and_log_in_registry_order(self):
+        self.fixture('y_case.json')
+        for name, peer in (('a', 'b'), ('b', 'a')):
+            marker = self.root / (name + '.started')
+            peer_marker = self.root / (peer + '.started')
+            code = ('import pathlib, sys, time\n'
+                    f'pathlib.Path({str(marker)!r}).touch()\n'
+                    'deadline = time.monotonic() + 2\n'
+                    f'while not pathlib.Path({str(peer_marker)!r}).exists() and time.monotonic() < deadline:\n'
+                    '    time.sleep(0.01)\n'
+                    f'time.sleep({0.15 if name == "a" else 0})\n'
+                    f'raise SystemExit(0 if pathlib.Path({str(peer_marker)!r}).exists() else 2)')
+            self.adapter(name, code)
+        self.assertEqual(self.run_runner(jobs=2), [
+            'a\tEXPECTED_RESULT\ty_case.json',
+            'b\tEXPECTED_RESULT\ty_case.json',
+        ])
+        self.assertIn('<TD>a</TD><TD>1</TD><TD>0</TD><TD>0</TD>', self.report())
+
+    def test_parallel_timeout_and_unavailable_have_one_record_each(self):
+        for name in ('y_first.json', 'n_second.json'):
+            self.fixture(name)
+        for name in ('a_timeout', 'b_missing', 'c_accept'):
+            self.registry[name] = {'url': '', 'commands': [name]}
+
+        def invoke(command, **_kwargs):
+            if command[0] == 'a_timeout':
+                raise subprocess.TimeoutExpired(command, 5)
+            if command[0] == 'b_missing':
+                raise FileNotFoundError(2, 'missing', command[0])
+            return 0
+
+        with patch.object(run_tests.subprocess, 'call', side_effect=invoke):
+            self.assertEqual(self.run_runner(jobs=3), [
+                'a_timeout\tTIMEOUT\tn_second.json',
+                'a_timeout\tTIMEOUT\ty_first.json',
+                'b_missing\tSKIPPED_UNAVAILABLE\tn_second.json',
+                'b_missing\tSKIPPED_UNAVAILABLE\ty_first.json',
+                'c_accept\tSHOULD_HAVE_FAILED\tn_second.json',
+                'c_accept\tEXPECTED_RESULT\ty_first.json',
+            ])
+
+    def test_invalid_job_count_preserves_existing_log(self):
+        self.fixture('y_case.json')
+        self.adapter('selected')
+        self.log.write_bytes(b'previous\x00\xff')
+        for jobs in (0, -1, True, '2'):
+            with self.subTest(jobs=jobs):
+                with self.assertRaisesRegex(run_tests.SelectionError, 'positive integer'):
+                    run_tests.run_tests(jobs=jobs)
+                self.assertEqual(self.log.read_bytes(), b'previous\x00\xff')
 
     def test_exit_codes_record_every_outcome(self):
         for prefix in ("y", "n", "i"):

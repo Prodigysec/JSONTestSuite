@@ -86,12 +86,20 @@ The source builds and validation status for JSONpp, opack, and Newtonsoft.Json
 are recorded in the [parser review batch](docs/review-batch-128-147-143.md).
 The next [adapter review batch](docs/review-batch-142-133-124.md) covers
 fastjson2, jsoncgx's two comment modes, and two clojure.data.json versions.
+The [rl_json, libfyaml, and parallel-runner review](docs/review-batch-107-103-141.md)
+records pinned source builds and their validation.
 
 To attempt all registered parsers, after preparing their dependencies:
 
 ```sh
 python3 run_tests.py
 ```
+
+To run independent parsers concurrently, add `--jobs N` (a positive integer).
+For example, `python3 run_tests.py --jobs 2` runs up to two registered parsers
+at a time after their dependencies are prepared. A parser's fixtures still run
+sequentially, and setup commands finish one at a time before parallel testing
+starts. Logs and reports retain parser-name order. The default is `--jobs 1`.
 
 Current CLI details:
 
@@ -104,6 +112,8 @@ Current CLI details:
   Repeated names select a parser once. Omit `--filter` to select all parsers.
 - Invalid selections, an empty parser registry, or an empty corpus exit with
   status `2` before setup commands execute or logs/reports are overwritten.
+- `--jobs` accepts a positive integer; invalid values exit with status `2`
+  before the log is replaced.
 - The registry's `Python 2.7.10` and `Python 3.5.2` entries are historical. The
   latter invokes `python3.5`, not whichever `python3` is installed. For a newer
   runtime, add/update an entry with an accurate label and executable.

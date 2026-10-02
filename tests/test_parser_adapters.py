@@ -1,6 +1,7 @@
 """Contract checks for optional source-built adapters; no automatic downloads."""
 
 from pathlib import Path
+import os
 import shutil
 import subprocess
 import tempfile
@@ -14,6 +15,8 @@ NEWTONSOFT = ROOT / 'parsers/test_dotnet_newtonsoft/bin/Release/net5.0/app.dll'
 FASTJSON2 = ROOT / 'parsers/test_java_fastjson2_2_0_53/.build'
 JSONCGX = ROOT / 'parsers/test_jsoncgx_1_1/.build/jsoncgx-1.1'
 CLOJURE = ROOT / 'parsers/test_clojure_data_json/.build'
+RL_JSON = ROOT / 'parsers/test_rl_json_0_17_6'
+LIBFYAML = ROOT / 'parsers/test_libfyaml_0_9_6'
 
 
 class AdapterContract:
@@ -44,6 +47,47 @@ class AdapterContract:
 @unittest.skipUnless(JSONPP.is_file(), 'Build the optional JSONpp adapter first')
 class JSONppTests(AdapterContract, unittest.TestCase):
     command = [str(JSONPP)]
+
+
+@unittest.skipUnless(shutil.which('tclsh') and
+                     (RL_JSON / '.build/rl_json-v0.17.6/rl_json0.17.6.so').is_file(),
+                     'Build rl_json and provide tclsh on PATH first')
+class RlJsonTests(unittest.TestCase):
+    command = ['python3', str(RL_JSON / 'TestJSONParsing.py')]
+
+    def test_strict_bytes_comments_and_complete_text(self):
+        cases = [(b'null', 0), (b'false', 0), (b'0', 0),
+                 (b'"\xe2\x82\xac"', 0), (b'{} garbage', 1),
+                 (b'{} {}', 1), (b'// comment\n{}', 1),
+                 (b'"\xff"', 1), (b'"\xed\xa0\x80"', 1)]
+        for data, expected in cases:
+            with self.subTest(data=data):
+                result = subprocess.run(self.command, input=data,
+                                        capture_output=True, timeout=5)
+                self.assertEqual(result.returncode, expected, result.stderr)
+
+    def test_missing_package_is_not_rejection_even_for_malformed_bytes(self):
+        env = os.environ.copy()
+        env['RL_JSON_PACKAGE_DIR'] = '/nonexistent-rl-json-package'
+        for data in (b'null', b'"\xff"'):
+            with self.subTest(data=data):
+                result = subprocess.run(self.command, input=data, env=env,
+                                        capture_output=True, timeout=5)
+                self.assertEqual(result.returncode, 2, result.stderr)
+
+
+@unittest.skipUnless((LIBFYAML / '.build/libfyaml-0.9.6/src/fy-tool').is_file(),
+                     'Build the optional libfyaml adapter first')
+class LibfyamlTests(AdapterContract, unittest.TestCase):
+    command = ['sh', str(LIBFYAML / 'run.sh')]
+
+    def test_comment_and_malformed_utf8_are_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'input with space.json'
+            for data in (b'// comment\n{}', b'"\xff"'):
+                with self.subTest(data=data):
+                    path.write_bytes(data)
+                    self.assertEqual(self.invoke([str(path)]).returncode, 1)
 
 
 @unittest.skipUnless(shutil.which('java') and (OPACK / 'TestJSONParsing.class').is_file(),

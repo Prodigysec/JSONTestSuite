@@ -7,6 +7,8 @@ import subprocess
 import sys
 import json
 
+from concurrent.futures import ThreadPoolExecutor
+from contextlib import nullcontext
 from html import escape
 from time import strftime
 
@@ -534,6 +536,17 @@ programs = {
            "url":"https://github.com/alibaba/fastjson2",
            "commands":["java", "-cp", os.path.join(PARSERS_DIR, "test_java_fastjson2_2_0_53/.build/classes") + os.pathsep + os.path.join(PARSERS_DIR, "test_java_fastjson2_2_0_53/.build/fastjson2-2.0.53.jar"), "TestJSONParsing"]
        },
+   "Tcl rl_json 0.17.6 (strict UTF-8, no comments)":
+       {
+           "url":"https://github.com/RubyLane/rl_json",
+           "commands":["python3", os.path.join(PARSERS_DIR, "test_rl_json_0_17_6/TestJSONParsing.py")],
+           "use_stdin": True
+       },
+   "C libfyaml 0.9.6 (JSON force, streaming)":
+       {
+           "url":"https://github.com/pantoniou/libfyaml",
+           "commands":["sh", os.path.join(PARSERS_DIR, "test_libfyaml_0_9_6/run.sh")]
+       },
    "Python jsoncgx 1.1 (comments off)":
        {
            "url":"https://github.com/cigix/jsoncgx",
@@ -575,7 +588,9 @@ class SelectionError(ValueError):
     """Invalid parser or fixture selection, detected before run side effects."""
 
 
-def run_tests(restrict_to_path=None, restrict_to_program=None):
+def run_tests(restrict_to_path=None, restrict_to_program=None, jobs=1):
+    if isinstance(jobs, bool) or not isinstance(jobs, int) or jobs < 1:
+        raise SelectionError("jobs must be a positive integer")
     has_filter = restrict_to_program is not None
     if isinstance(restrict_to_program, io.TextIOBase):
         try:
@@ -612,48 +627,54 @@ def run_tests(restrict_to_path=None, restrict_to_program=None):
         raise SelectionError("No JSON fixtures found in corpus: %s" % TEST_CASES_DIR_PATH)
 
     with open(os.devnull, 'w') as FNULL, open(LOG_FILE_PATH, 'w') as log_file:
-        def record(prog_name, status, filename):
-            row = "%s\t%s\t%s" % (prog_name, status, filename)
-            print(row)
-            log_file.write(row + "\n")
+        def replay(events):
+            for event in events:
+                if event[0] == "row":
+                    _, prog_name, status, filename = event
+                    row = "%s\t%s\t%s" % (prog_name, status, filename)
+                    print(row)
+                    log_file.write(row + "\n")
+                else:
+                    print(*event[1:])
 
-        for prog_name in prog_names:
+        def prepare(prog_name):
+            setup = programs[prog_name].get("setup")
+            if setup is None:
+                return False, []
+            events = [("message", "--", " ".join(setup))]
+            try:
+                failed = subprocess.call(setup) != 0
+            except (OSError, subprocess.SubprocessError) as error:
+                events.append(("message", "-- skip setup", error))
+                failed = True
+            if failed:
+                events.extend(("row", prog_name, "SKIPPED_SETUP_FAILED", filename)
+                              for filename, _ in cases)
+            return failed, events
+
+        def execute(prog_name):
             d = programs[prog_name]
             commands = d["commands"]
-            setup = d.get("setup")
-            if setup is not None:
-                print("--", " ".join(setup))
-                try:
-                    setup_failed = subprocess.call(setup) != 0
-                except (OSError, subprocess.SubprocessError) as error:
-                    print("-- skip setup", error)
-                    setup_failed = True
-                if setup_failed:
-                    for filename, _ in cases:
-                        record(prog_name, "SKIPPED_SETUP_FAILED", filename)
-                    continue
-
+            use_stdin = d.get("use_stdin", False)
+            events = []
             for index, (filename, file_path) in enumerate(cases):
-                use_stdin = d.get("use_stdin", False)
-                my_stdin = open(file_path, "rb") if use_stdin else FNULL
                 command = commands if use_stdin else commands + [file_path]
-                print("--", " ".join(command))
-                try:
-                    status = subprocess.call(command, stdin=my_stdin, stdout=FNULL,
-                                             stderr=subprocess.STDOUT, timeout=5)
-                except subprocess.TimeoutExpired:
-                    record(prog_name, "TIMEOUT", filename)
-                    print("RESULT:", "TIMEOUT")
-                    continue
-                except OSError as error:
-                    # A process that never starts has no JSON parsing verdict.
-                    print("-- skip unavailable", error)
-                    for skipped_filename, _ in cases[index:]:
-                        record(prog_name, "SKIPPED_UNAVAILABLE", skipped_filename)
-                    break
-                finally:
-                    if use_stdin:
-                        my_stdin.close()
+                events.append(("message", "--", " ".join(command)))
+                stream = open(file_path, "rb") if use_stdin else nullcontext(FNULL)
+                with stream as my_stdin:
+                    try:
+                        status = subprocess.call(command, stdin=my_stdin, stdout=FNULL,
+                                                 stderr=subprocess.STDOUT, timeout=5)
+                    except subprocess.TimeoutExpired:
+                        events.append(("row", prog_name, "TIMEOUT", filename))
+                        events.append(("message", "RESULT:", "TIMEOUT"))
+                        continue
+                    except OSError as error:
+                        # A process that never starts has no JSON parsing verdict.
+                        events.append(("message", "-- skip unavailable", error))
+                        events.extend(("row", prog_name, "SKIPPED_UNAVAILABLE", skipped_filename)
+                                      for skipped_filename, _ in cases[index:])
+                        break
 
                 prefix = os.path.basename(filename)[:2]
                 if status not in (0, 1):
@@ -666,7 +687,27 @@ def run_tests(restrict_to_path=None, restrict_to_program=None):
                     result = "EXPECTED_RESULT" if status == 1 else "SHOULD_HAVE_FAILED"
                 else:
                     raise ValueError("Unknown fixture prefix: " + filename)
-                record(prog_name, result, filename)
+                events.append(("row", prog_name, result, filename))
+            return events
+
+        if jobs == 1:
+            for prog_name in prog_names:
+                failed, events = prepare(prog_name)
+                replay(events)
+                if not failed:
+                    replay(execute(prog_name))
+        else:
+            # Setups are serialized because configurations may share build output.
+            prepared = {name: prepare(name) for name in prog_names}
+            with ThreadPoolExecutor(max_workers=jobs) as executor:
+                futures = {name: executor.submit(execute, name) for name in prog_names
+                           if not prepared[name][0]}
+                # Only the main thread writes logs, in sorted parser order.
+                for prog_name in prog_names:
+                    failed, events = prepared[prog_name]
+                    replay(events)
+                    if not failed:
+                        replay(futures[prog_name].result())
 
 
 def f_underline_non_printable_bytes(data):
@@ -913,10 +954,12 @@ def main(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('restrict_to_path', nargs='?', type=str, default=None)
     parser.add_argument('--filter', dest='restrict_to_program', type=argparse.FileType('r'), default=None)
+    parser.add_argument('--jobs', type=int, default=1,
+                        help='run this many independent parsers concurrently (default: 1)')
 
     args = parser.parse_args(argv)
     try:
-        run_tests(args.restrict_to_path, args.restrict_to_program)
+        run_tests(args.restrict_to_path, args.restrict_to_program, args.jobs)
     except SelectionError as error:
         parser.error(str(error))
     finally:
