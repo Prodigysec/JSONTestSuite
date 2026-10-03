@@ -110,6 +110,9 @@ The [simdjson, PostgreSQL JSONB, and Linux Swift Foundation review](docs/review-
 records the next three adapters and their isolated validation.
 The [VHDL, picojson, and octal-escape review](docs/review-batch-23-21-136.md)
 records two additional parser modes and verifies existing octal coverage.
+The [Rust, PHP, and container review](docs/review-batch-114-111-41.md)
+records a pinned serde_json build, PHP 7.4.33 and 8.3.27 Docker modes, and the
+scoped `Dockerfile.core` environment. A universal toolchain image remains pending.
 The [rl_json, libfyaml, and parallel-runner review](docs/review-batch-107-103-141.md)
 records pinned source builds and their validation.
 The [jq and Node.js review](docs/review-batch-39-25-83.md) documents two

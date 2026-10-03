@@ -1,9 +1,15 @@
 <?php
 
+if (count($argv) !== 2) {
+    exit(2);
+}
 $path = $argv[1];
 // var_dump($filename);
 
-$data = file_get_contents($path);
+$data = @file_get_contents($path);
+if ($data === false) {
+    exit(2);
+}
 
 // http://php.net/manual/en/function.json-decode.php
 // This function only works with UTF-8 encoded strings.

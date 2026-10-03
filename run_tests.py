@@ -254,6 +254,24 @@ programs = {
            "url":"",
            "commands":["/usr/bin/php", os.path.join(PARSERS_DIR, "test_json.php")]
        },
+   "PHP 7.4.33 Docker":
+       {
+           "url":"https://www.php.net/manual/en/function.json-decode.php",
+           "setup":["docker", "image", "inspect", "--format", "{{.Id}}", "php@sha256:620a6b9f4d4feef2210026172570465e9d0c1de79766418d3affd09190a7fda5"],
+           "commands":["docker", "run", "--rm", "--network", "none", "--pull", "never",
+                       "--mount", "type=bind,src=%s,dst=%s,readonly" % (BASE_DIR, BASE_DIR),
+                       "php@sha256:620a6b9f4d4feef2210026172570465e9d0c1de79766418d3affd09190a7fda5",
+                       "php", os.path.join(PARSERS_DIR, "test_json.php")]
+       },
+   "PHP 8.3.27 Docker":
+       {
+           "url":"https://www.php.net/manual/en/function.json-decode.php",
+           "setup":["docker", "image", "inspect", "--format", "{{.Id}}", "php@sha256:01224f5f2e75fa43a326797d7b80552ca0bcfb37f60cbb81efdf63956b4d3fe4"],
+           "commands":["docker", "run", "--rm", "--network", "none", "--pull", "never",
+                       "--mount", "type=bind,src=%s,dst=%s,readonly" % (BASE_DIR, BASE_DIR),
+                       "php@sha256:01224f5f2e75fa43a326797d7b80552ca0bcfb37f60cbb81efdf63956b4d3fe4",
+                       "php", os.path.join(PARSERS_DIR, "test_json.php")]
+       },
    "Swift Freddy 2.1.0":
        {
            "url":"",
@@ -426,10 +444,10 @@ programs = {
            "url":"https://doc.rust-lang.org/rustc-serialize/rustc_serialize/json/index.html",
            "commands":[os.path.join(PARSERS_DIR, "test_json-rustc_serialize/rj/target/debug/rj")]
        },
-   "Rust serde_json":
+   "Rust serde_json 1.0.145":
        {
            "url":"https://github.com/serde-rs/json",
-           "commands":[os.path.join(PARSERS_DIR, "test_json-rust-serde_json/rj/target/debug/rj")]
+           "commands":[os.path.join(PARSERS_DIR, ".build/rust-serde-json/debug/rj")]
        },
    "Java json-simple 1.1.1":
        {

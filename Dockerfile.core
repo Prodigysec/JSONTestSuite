@@ -1,0 +1,12 @@
+# A reproducible starting environment for the runner, PHP 8.3, and Rust 1.90.
+# Other registry adapters have separate toolchain and platform requirements.
+FROM rust@sha256:3914072ca0c3b8aad871db9169a651ccfce30cf58303e5d6f2db16d1d8a7e58f AS rust
+
+FROM php@sha256:01224f5f2e75fa43a326797d7b80552ca0bcfb37f60cbb81efdf63956b4d3fe4
+RUN apt-get update && apt-get install -y --no-install-recommends python3 && rm -rf /var/lib/apt/lists/*
+COPY --from=rust /usr/local/cargo /usr/local/cargo
+COPY --from=rust /usr/local/rustup /usr/local/rustup
+ENV CARGO_HOME=/usr/local/cargo RUSTUP_HOME=/usr/local/rustup
+ENV PATH=/usr/local/cargo/bin:$PATH
+WORKDIR /suite
+CMD ["python3", "run_tests.py", "--help"]

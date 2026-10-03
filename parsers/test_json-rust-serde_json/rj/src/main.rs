@@ -1,30 +1,20 @@
-extern crate serde_json;
-use std::fs::File;
-use std::io::Read;
 use std::env;
+use std::fs;
+use std::process;
 
 fn main() {
-    println!("Hello, world!");
-
-    let args: Vec<_> = env::args().collect();
-    if args.len() != 2 {
-        println!("Usage: {} file.json", args[0]);
-	    std::process::exit(1);
-    }
-
-    let ref path = args[1];
-    let mut s = String::new();
-    let mut f = File::open(path).expect("Unable to open file");
-    //f.read_to_string(&mut s).expect("Unable to read string");
-    //println!("{}", s);
-
-    match f.read_to_string(&mut s) {
-        Err(_) => std::process::exit(1),
-        Ok(_) => println!("{}", s),
-    }
-
-    match serde_json::from_str::<serde_json::Value>(&s) {
-        Ok(_) => std::process::exit(0),
-        Err(_) => std::process::exit(1)
+    let mut args = env::args_os();
+    let _program = args.next();
+    let path = match (args.next(), args.next()) {
+        (Some(path), None) => path,
+        _ => process::exit(2),
     };
+    let input = match fs::read(path) {
+        Ok(input) => input,
+        Err(_) => process::exit(2),
+    };
+    match serde_json::from_slice::<serde_json::Value>(&input) {
+        Ok(_) => process::exit(0),
+        Err(_) => process::exit(1),
+    }
 }
