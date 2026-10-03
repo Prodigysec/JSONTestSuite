@@ -1,53 +1,27 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "JSON_checker.h"
+#include "../../../read_fixture.h"
 
-#include <sys/stat.h>
-#include <dirent.h>
-#include <string.h>
-
-typedef enum testStatus {ERROR, PASS, FAIL} TestStatus;
-
-TestStatus testFile(const char *filename) {
-    FILE *f=fopen(filename,"rb");
-    if(f == NULL) { return ERROR; };
-    fseek(f,0,SEEK_END);
-    long len=ftell(f);
-    fseek(f,0,SEEK_SET);
-    char *data=(char*)malloc(len+1);
-    fread(data,1,len,f);
-    data[len]='\0';
-    fclose(f);
-    
-    JSON_checker jc = new_JSON_checker(20); // max depth
-    for (int i = 0; i < len; i++) {
-        char c = data[i];
-        if (JSON_checker_char(jc, c) == 0) {
-            return FAIL;
+int main(int argc, const char *argv[])
+{
+    char *data;
+    size_t length, i;
+    JSON_checker checker;
+    int accepted;
+    if (argc != 2) return 2;
+    if (read_fixture(argv[1], &data, &length) != 0) return 2;
+    checker = new_JSON_checker(20); /* Preserve the historical stack limit. */
+    if (checker == NULL) {
+        free(data);
+        return 2;
+    }
+    for (i = 0; i < length; i++) {
+        if (!JSON_checker_char(checker, (unsigned char)data[i])) {
+            /* JSON_checker_char frees the checker on rejection. */
+            free(data);
+            return 1;
         }
     }
-    return JSON_checker_done(jc) ? PASS : FAIL;
-}
-
-int main(int argc, char* argv[]) {
-    
-    if (argc != 2) {
-        printf("Usage: %s test.json\n", argv[0]);
-        return 1;
-    }
-    
-    const char* path = argv[1];
-    
-    int result = testFile(path);
-    
-    if (result == PASS) {
-        printf("-- PASS\n");
-        return 0;
-    } else if (result == FAIL) {
-        printf("-- FAIL\n");
-        return 1;
-    } else if (result == ERROR) {
-        printf("-- ERROR\n");
-        return 1;
-    }
+    accepted = JSON_checker_done(checker); /* Also frees the checker. */
+    free(data);
+    return accepted ? 0 : 1;
 }

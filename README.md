@@ -56,11 +56,12 @@ versions, absolute executable paths, or platform-specific binaries. Check the
 `parsers/` before running an adapter.
 
 Four checked-in C adapters can be rebuilt with `make c-parsers` using make and
-a C99 compiler. The executables go into ignored `parsers/.build/`. CCAN now
-uses its rebuilt executable through the runner after a whole-input wrapper fix;
-the other three retain their historical registry entries pending adapter
-review. See the [build and distribution review](docs/review-batch-140-87-81.md)
-and [CCAN follow-up](docs/review-batch-149-119-118.md).
+a C99 compiler. The executables go into ignored `parsers/.build/`. The runner
+uses these rebuilt executables, with an individual Makefile setup target for
+each adapter. See the [build and distribution review](docs/review-batch-140-87-81.md),
+[CCAN follow-up](docs/review-batch-149-119-118.md), and
+[jsmn, JSON Checker, and cJSON review](docs/source-c-adapter-review.md) for
+wrapper repairs, native parser limits, and full-corpus results.
 
 To use the fixtures without parser binaries, run `make corpus-archive` for a
 small archive of the committed fixture trees and `LICENSE`, or use a partial

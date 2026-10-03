@@ -1,50 +1,58 @@
-//
-//  main.c
-//  test_jsmn
-//
-//  Created by nst on 30/08/16.
-//  Copyright © 2016 Nicolas Seriot. All rights reserved.
-//
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h>
-#include <dirent.h>
-#include <stdio.h>
+// Original adapter by Nicolas Seriot, 30/08/16.
+// Copyright © 2016 Nicolas Seriot. All rights reserved.
+#include <limits.h>
 #include <string.h>
 #include "jsmn.h"
+#include "../../../read_fixture.h"
 
-#define JSMN_STRICT 1
-
-int testFile(const char *filename) {
-    
-    FILE *f=fopen(filename,"rb");
-    if(f == NULL) { return -1; };
-    fseek(f,0,SEEK_END);
-    long len=ftell(f);
-    fseek(f,0,SEEK_SET);
-    char *data=(char*)malloc(len+1);
-    fread(data,1,len,f);
-    data[len]='\0';
-    fclose(f);
-
-    jsmn_parser p;
-    jsmntok_t tokens[128]; // a number >= total number of tokens
-    
-    jsmn_init(&p);
-    int resultCode = jsmn_parse(&p, data, 100, tokens, 50);
-    //printf("-- %d\n", resultCode);
-
-    free(data);
-    
-    return resultCode;
+static int json_space(char c)
+{
+    return c == ' ' || c == '\t' || c == '\r' || c == '\n';
 }
 
-int main(int argc, const char * argv[]) {
-
-    int resultCode = testFile(argv[1]);
-    
-    if (resultCode > 0) return 0;
-    if (resultCode <= 0) return 1; // error
-    return resultCode;
+int main(int argc, const char *argv[])
+{
+    char *data;
+    size_t length, start, end, i;
+    jsmn_parser parser;
+    jsmntok_t *tokens;
+    int parsed, verdict = 1;
+    if (argc != 2) return 2;
+    if (read_fixture(argv[1], &data, &length) != 0) return 2;
+    /* Token positions are signed int; literal NUL must not end parsing early. */
+    if (length >= INT_MAX || memchr(data, '\0', length) != NULL) {
+        free(data);
+        return 1;
+    }
+    /* At most one token per input byte, with space for an empty input. */
+    if (length + 1 > SIZE_MAX / sizeof(*tokens)) {
+        free(data);
+        return 2;
+    }
+    tokens = malloc((length + 1) * sizeof(*tokens));
+    if (tokens == NULL) {
+        free(data);
+        return 2;
+    }
+    jsmn_init(&parser);
+    /* The vendored library is compiled in its native non-strict mode. */
+    parsed = jsmn_parse(&parser, data, length, tokens, (unsigned int)(length + 1));
+    if (parsed > 0 && parser.pos == length) {
+        start = (size_t)tokens[0].start;
+        end = (size_t)tokens[0].end;
+        if (tokens[0].type == JSMN_STRING) {
+            start--;
+            end++; /* String token boundaries exclude the quotes. */
+        }
+        for (i = 0; i < start && json_space(data[i]); i++) {}
+        if (i == start) {
+            for (i = end; i < length && json_space(data[i]); i++) {}
+            if (i == length) verdict = 0;
+        }
+    } else if (parsed == JSMN_ERROR_NOMEM) {
+        verdict = 2; /* Exhausting the per-byte budget is an adapter failure. */
+    }
+    free(tokens);
+    free(data);
+    return verdict;
 }

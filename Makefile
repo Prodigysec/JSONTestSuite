@@ -17,17 +17,17 @@ c-parsers: $(BUILD_DIR)/test_jsmn $(BUILD_DIR)/jsonChecker $(BUILD_DIR)/test_cJS
 $(BUILD_DIR):
 	mkdir -p "$@"
 
-$(BUILD_DIR)/test_jsmn: parsers/test_jsmn/test_jsmn/test_jsmn/main.c parsers/test_jsmn/jsmn.c parsers/test_jsmn/jsmn.h | $(BUILD_DIR)
+$(BUILD_DIR)/test_jsmn: parsers/test_jsmn/test_jsmn/test_jsmn/main.c parsers/test_jsmn/jsmn.c parsers/test_jsmn/jsmn.h parsers/read_fixture.h | $(BUILD_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -std=c99 -Iparsers/test_jsmn $(LDFLAGS) \
 		parsers/test_jsmn/test_jsmn/test_jsmn/main.c parsers/test_jsmn/jsmn.c \
 		-o "$@" $(LDLIBS)
 
-$(BUILD_DIR)/jsonChecker: parsers/test_jsonChecker/jsonChecker/jsonChecker/main.c parsers/test_jsonChecker/jsonChecker/JSON_checker.c parsers/test_jsonChecker/jsonChecker/JSON_checker.h | $(BUILD_DIR)
+$(BUILD_DIR)/jsonChecker: parsers/test_jsonChecker/jsonChecker/jsonChecker/main.c parsers/test_jsonChecker/jsonChecker/JSON_checker.c parsers/test_jsonChecker/jsonChecker/JSON_checker.h parsers/read_fixture.h | $(BUILD_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -std=c99 -Iparsers/test_jsonChecker/jsonChecker $(LDFLAGS) \
 		parsers/test_jsonChecker/jsonChecker/jsonChecker/main.c \
 		parsers/test_jsonChecker/jsonChecker/JSON_checker.c -o "$@" $(LDLIBS)
 
-$(BUILD_DIR)/test_cJSON_1_7_3: parsers/test_cJSON_1_7_3/test-cJSON/main.c parsers/test_cJSON_1_7_3/cJSON.c parsers/test_cJSON_1_7_3/cJSON.h | $(BUILD_DIR)
+$(BUILD_DIR)/test_cJSON_1_7_3: parsers/test_cJSON_1_7_3/test-cJSON/main.c parsers/test_cJSON_1_7_3/cJSON.c parsers/test_cJSON_1_7_3/cJSON.h parsers/read_fixture.h | $(BUILD_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -std=c99 -Iparsers/test_cJSON_1_7_3 $(LDFLAGS) \
 		parsers/test_cJSON_1_7_3/test-cJSON/main.c \
 		parsers/test_cJSON_1_7_3/cJSON.c -o "$@" $(LDLIBS) -lm

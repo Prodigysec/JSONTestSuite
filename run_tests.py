@@ -396,7 +396,8 @@ programs = {
    "C jsmn":
        {
            "url":"https://github.com/zserge/jsmn",
-           "commands":[os.path.join(PARSERS_DIR, "test_jsmn/bin/test_jsmn")]
+           "setup":["make", "-C", BASE_DIR, "parsers/.build/test_jsmn"],
+           "commands":[os.path.join(PARSERS_DIR, ".build/test_jsmn")]
        },
    "C jansson":
        {
@@ -406,7 +407,8 @@ programs = {
    "C JSON Checker":
        {
            "url":"http://www.json.org/JSON_checker/",
-           "commands":[os.path.join(PARSERS_DIR, "test_jsonChecker/bin/jsonChecker")]
+           "setup":["make", "-C", BASE_DIR, "parsers/.build/jsonChecker"],
+           "commands":[os.path.join(PARSERS_DIR, ".build/jsonChecker")]
        },
    "C JSON Checker 2":
        {
@@ -437,7 +439,8 @@ programs = {
    "C cJSON 1.7.3":
        {
            "url":"https://github.com/DaveGamble/cJSON",
-           "commands":[os.path.join(PARSERS_DIR, "test_cJSON_1_7_3/bin/test_cJSON")]
+           "setup":["make", "-C", BASE_DIR, "parsers/.build/test_cJSON_1_7_3"],
+           "commands":[os.path.join(PARSERS_DIR, ".build/test_cJSON_1_7_3")]
        },
    "C JSON-C":
        {
