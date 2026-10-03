@@ -574,3 +574,14 @@ outcomes; jq accepted 24 `n_` number cases as extensions. The full regression
 suite completed 72 tests, with 53 passes and 19 optional-runtime skips.
 Browser-engine comparisons requested by #83 remain pending. All three issues
 remain open upstream; this is a local integration and partial review.
+
+### 2026-10-03: issues #97, #42, and #70
+
+Commit `ab026ac` adds pinned-source amjson and C YAJL adapters and an in-process
+SQLite JSON1 adapter. See the [parser review](review-batch-97-42-70.md) for
+source revisions, licenses, build commands, modes, and byte-level findings.
+Each adapter logged all 327 corpus cases in a temporary runner copy without
+skips, crashes, or timeouts. SQLite's literal-NUL truncation was guarded in its
+wrapper; YAJL's acceptance of form feed inside an array remains visible as an
+unexpected acceptance. All three issues remain open upstream; this is a local
+integration and test result, not an upstream disposition.
