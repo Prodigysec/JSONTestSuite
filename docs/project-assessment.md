@@ -585,3 +585,15 @@ skips, crashes, or timeouts. SQLite's literal-NUL truncation was guarded in its
 wrapper; YAJL's acceptance of form feed inside an array remains visible as an
 unexpected acceptance. All three issues remain open upstream; this is a local
 integration and test result, not an upstream disposition.
+
+### 2026-10-03: issues #95, #62, and #40
+
+Commit `8f4ed19` adds simdjson 5.0.1 DOM, PostgreSQL 16 JSONB UTF8, and
+Swift Foundation 6.1.3 Linux Docker modes. See the [batch review](review-batch-95-62-40.md)
+for source revisions, the closed unmerged PostgreSQL PR #61, pinned builds,
+dependencies, parser modes, and exact byte-level findings. Each adapter logged
+all 327 fixtures in temporary runner copies with no skips, crashes, or
+timeouts. PostgreSQL rejected three valid escaped-NUL texts because JSONB
+cannot store U+0000; Linux Foundation accepted three invalid trailing-comma
+texts. Historical reports and fixture bytes were unchanged. The upstream
+issues remain open; this is a local integration and test result.
