@@ -159,6 +159,12 @@ programs = {
            "url":"https://nodejs.org/",
            "commands":["node", os.path.join(PARSERS_DIR, "test_node_json_utf8.js")]
        },
+   "JavaScriptCore 2.50.6 JSON.parse (strict UTF-8)":
+       {
+           "url":"https://webkit.org/",
+           "setup":["docker", "image", "inspect", "--format", "{{.Id}}", "jsonsuite-jsc:local"],
+           "commands":["python3", os.path.join(PARSERS_DIR, "test_jsc.py")]
+       },
    "jq (raw-slurp fromjson)":
        {
            "url":"https://jqlang.org/jq/",
@@ -448,6 +454,11 @@ programs = {
        {
            "url":"https://github.com/serde-rs/json",
            "commands":[os.path.join(PARSERS_DIR, ".build/rust-serde-json/debug/rj")]
+       },
+   "C++ JSON Spirit c7245a39":
+       {
+           "url":"https://github.com/cierelabs/json_spirit",
+           "commands":[os.path.join(PARSERS_DIR, ".build/json-spirit/test_json_spirit")]
        },
    "Java json-simple 1.1.1":
        {

@@ -1,0 +1,6 @@
+FROM php@sha256:01224f5f2e75fa43a326797d7b80552ca0bcfb37f60cbb81efdf63956b4d3fe4
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libjavascriptcoregtk-4.0-bin=2.50.6-1~deb12u2 \
+    libjavascriptcoregtk-4.0-18=2.50.6-1~deb12u2 \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /suite

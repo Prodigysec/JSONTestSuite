@@ -113,6 +113,11 @@ records two additional parser modes and verifies existing octal coverage.
 The [Rust, PHP, and container review](docs/review-batch-114-111-41.md)
 records a pinned serde_json build, PHP 7.4.33 and 8.3.27 Docker modes, and the
 scoped `Dockerfile.core` environment. A universal toolchain image remains pending.
+The [JavaScriptCore, JSON Spirit, and tool inventory review](docs/review-batch-83-21-41.md)
+records a distinct JavaScript engine, a Boost.Spirit-based C++ parser, and the
+`python3 -B inventory_parser_tools.py` executable inventory. Build JavaScriptCore
+with `docker build -f Dockerfile.jsc -t jsonsuite-jsc:local .` and JSON Spirit
+with `sh parsers/build_json_spirit.sh` before selecting those registry modes.
 The [rl_json, libfyaml, and parallel-runner review](docs/review-batch-107-103-141.md)
 records pinned source builds and their validation.
 The [jq and Node.js review](docs/review-batch-39-25-83.md) documents two
