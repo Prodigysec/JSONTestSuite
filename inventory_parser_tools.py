@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""List first-stage executables required by every registered parser mode."""
+"""List first-stage run and setup executables for every registered parser mode."""
 
 import json
 import os
@@ -28,11 +28,15 @@ def main():
     modes = []
     for name, entry in sorted(programs.items()):
         program = executable(entry["commands"])
+        setup = entry.get("setup")
+        setup_program = executable(setup) if setup else None
         modes.append({
             "name": name,
             "executable": program,
             "resolved": resolve(program),
-            "setup": entry.get("setup"),
+            "setup": setup,
+            "setup_executable": setup_program,
+            "setup_resolved": resolve(setup_program),
         })
     print(json.dumps({"modes": modes}, indent=2, sort_keys=True))
 

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Observe value and serialization behavior for selected transform fixtures."""
+"""Observe value and serialization behavior for transform fixtures."""
 
 import json
+import argparse
 import math
 import os
 import subprocess
@@ -24,9 +25,12 @@ def observe_python(path, kind):
         with open(path, "rb") as stream:
             value = json.loads(stream.read().decode("utf-8"))
     except (OSError, UnicodeError, json.JSONDecodeError) as error:
-        return {"status": "error", "detail": str(error)}
+        return {"status": "reject" if kind == "survey" and isinstance(error, (UnicodeError, json.JSONDecodeError)) else "error",
+                "detail": str(error)}
 
-    if kind == "zero":
+    if kind == "survey":
+        observation = {"value_type": type(value).__name__}
+    elif kind == "zero":
         if not (isinstance(value, list) and len(value) == 1
                 and isinstance(value[0], (int, float)) and not isinstance(value[0], bool)
                 and value[0] == 0):
@@ -50,6 +54,8 @@ def observe_node(path, kind):
     except subprocess.TimeoutExpired:
         return {"status": "timeout"}
     if result.returncode != 0:
+        if kind == "survey" and result.returncode == 1:
+            return {"status": "reject", "detail": result.stderr.strip()}
         return {"status": "error", "detail": result.stderr.strip(), "exit_code": result.returncode}
     try:
         return json.loads(result.stdout)
@@ -57,9 +63,14 @@ def observe_node(path, kind):
         return {"status": "error", "detail": "invalid observer output"}
 
 
-def main():
+def main(argv=None):
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--all", action="store_true", help="survey every transformation fixture")
+    args = parser.parse_args(argv)
+    cases = ((name, "survey") for name in sorted(os.listdir(os.path.join(BASE_DIR, "test_transform")))
+             if name.endswith(".json")) if args.all else CASES
     failed = False
-    for filename, kind in CASES:
+    for filename, kind in cases:
         path = os.path.join(BASE_DIR, "test_transform", filename)
         record = {
             "fixture": filename,

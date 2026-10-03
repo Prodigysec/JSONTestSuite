@@ -48,6 +48,28 @@ class RunnerTests(unittest.TestCase):
             run_tests.run_tests(jobs=jobs)
         return self.log.read_text().splitlines()
 
+    def cli_verdict(self, *args):
+        with patch.object(run_tests, "generate_report"), contextlib.redirect_stdout(io.StringIO()):
+            return run_tests.main([*args, "--fail-on-discrepancy"])
+
+    def test_ci_verdict_requires_expected_and_complete_run(self):
+        self.fixture("y_case.json")
+        self.fixture("i_case.json")
+        self.adapter("accept", "raise SystemExit(0)")
+        self.assertEqual(self.cli_verdict(), 0)
+        self.adapter("reject", "raise SystemExit(1)")
+        self.assertEqual(self.cli_verdict(), 1)
+        self.registry.pop("reject")
+        self.registry["missing"] = {"url": "", "commands": [str(self.root / "missing")]}
+        self.assertEqual(self.cli_verdict(), 1)
+
+    def test_ci_verdict_counts_crash_and_preserves_default_exit(self):
+        self.fixture("i_case.json")
+        self.adapter("crash", "raise SystemExit(2)")
+        self.assertEqual(self.cli_verdict(), 1)
+        with patch.object(run_tests, "generate_report"), contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(run_tests.main([]), 0)
+
     def test_parallel_parsers_overlap_and_log_in_registry_order(self):
         self.fixture('y_case.json')
         for name, peer in (('a', 'b'), ('b', 'a')):

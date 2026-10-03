@@ -2,7 +2,7 @@
 const fs = require('fs');
 const { isUtf8 } = require('buffer');
 
-if (process.argv.length !== 4 || !['zero', 'keys'].includes(process.argv[2])) {
+if (process.argv.length !== 4 || !['zero', 'keys', 'survey'].includes(process.argv[2])) {
   process.stderr.write('expected a kind and fixture path\n');
   process.exit(2);
 }
@@ -16,7 +16,7 @@ try {
 }
 if (typeof isUtf8 !== 'function' || !isUtf8(bytes)) {
   process.stderr.write('strict UTF-8 decoding unavailable or failed\n');
-  process.exit(2);
+  process.exit(typeof isUtf8 === 'function' && process.argv[2] === 'survey' ? 1 : 2);
 }
 
 let value;
@@ -28,7 +28,9 @@ try {
 }
 
 let observation;
-if (process.argv[2] === 'zero') {
+if (process.argv[2] === 'survey') {
+  observation = { value_type: value === null ? 'null' : Array.isArray(value) ? 'array' : typeof value };
+} else if (process.argv[2] === 'zero') {
   if (!Array.isArray(value) || value.length !== 1 || typeof value[0] !== 'number' || value[0] !== 0) {
     process.stderr.write('expected a one-element zero array\n');
     process.exit(2);

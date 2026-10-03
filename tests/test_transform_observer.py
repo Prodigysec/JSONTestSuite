@@ -37,6 +37,16 @@ class TransformObserverTests(unittest.TestCase):
             self.assertEqual(run_transform.observe_python(path, "zero")["status"], "error")
             if shutil.which("node"):
                 self.assertEqual(run_transform.observe_node(path, "zero")["status"], "error")
+                self.assertEqual(run_transform.observe_node(path, "survey")["status"], "reject")
+            self.assertEqual(run_transform.observe_python(path, "survey")["status"], "reject")
+
+    def test_survey_reports_type_and_serialization(self):
+        path = os.path.join(run_transform.BASE_DIR, "test_transform", "number_negative_zero.json")
+        self.assertEqual(run_transform.observe_python(path, "survey"),
+                         {"status": "ok", "value_type": "list", "serialized": "[-0.0]"})
+        if shutil.which("node"):
+            self.assertEqual(run_transform.observe_node(path, "survey"),
+                             {"status": "ok", "value_type": "array", "serialized": "[0]"})
 
 
 if __name__ == "__main__":

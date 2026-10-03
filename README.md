@@ -249,7 +249,11 @@ somewhere in that log; completely omitted cases or parsers cannot be recovered.
 Counts from old or interrupted runs are therefore recorded counts, not proof of
 complete execution. New statuses extend the format; external log consumers that
 validate status names must recognize them. Invalid records raise an error.
-The runner's exit status is not an aggregate pass/fail status suitable for CI.
+By default, the runner exits zero after a completed run even if it records
+discrepancies. Add `--fail-on-discrepancy` for a CI verdict: exit 1 if any
+selected case has an unexpected acceptance/rejection, crash, timeout, or skip.
+`i_` acceptance and rejection are both allowed; their crashes and timeouts fail.
+Selection errors still exit 2. Reports are generated before this verdict.
 
 The checked-in reports are historical examples, not measurements of your
 machine or current parser releases. Known runner defects and reporting gaps
@@ -274,7 +278,9 @@ The transformation fixtures were used for `results/transform.html`.
 signed-zero and case-distinct-key fixtures using Python, Node/V8, and a built
 Chromium image when available. The [value-observation review](docs/review-batch-76-71-21.md)
 and [browser follow-up](docs/review-batch-83-76-71.md) explain the output and
-limits; a general 26-fixture comparison remains future work.
+limits. Add `--all` to survey all 26 transformation inputs, recording each
+runtime's parse status, value type, and serialized text. These observations
+are not corpus acceptance verdicts or byte-for-byte round-trip requirements.
 
 ## Contribute a fixture or parser
 

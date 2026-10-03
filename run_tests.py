@@ -680,6 +680,12 @@ class SelectionError(ValueError):
     """Invalid parser or fixture selection, detected before run side effects."""
 
 
+CI_FAILURE_STATUSES = frozenset((
+    "SHOULD_HAVE_PASSED", "SHOULD_HAVE_FAILED", "CRASH", "TIMEOUT",
+    "SKIPPED_UNAVAILABLE", "SKIPPED_SETUP_FAILED",
+))
+
+
 def run_tests(restrict_to_path=None, restrict_to_program=None, jobs=1):
     if isinstance(jobs, bool) or not isinstance(jobs, int) or jobs < 1:
         raise SelectionError("jobs must be a positive integer")
@@ -751,11 +757,14 @@ def run_tests(restrict_to_path=None, restrict_to_program=None, jobs=1):
             raise SelectionError("No corpus fixture matches selector: %r" % restrict_to_path)
         raise SelectionError("No JSON fixtures found in corpus: %s" % TEST_CASES_DIR_PATH)
 
+    failures = 0
     with open(os.devnull, 'w') as FNULL, open(LOG_FILE_PATH, 'w') as log_file:
         def replay(events):
+            nonlocal failures
             for event in events:
                 if event[0] == "row":
                     _, prog_name, status, filename = event
+                    failures += status in CI_FAILURE_STATUSES
                     row = "%s\t%s\t%s" % (prog_name, status, filename)
                     print(row)
                     log_file.write(row + "\n")
@@ -833,6 +842,7 @@ def run_tests(restrict_to_path=None, restrict_to_program=None, jobs=1):
                     replay(events)
                     if not failed:
                         replay(futures[prog_name].result())
+    return failures
 
 
 def f_underline_non_printable_bytes(data):
@@ -1081,10 +1091,12 @@ def main(argv=None):
     parser.add_argument('--filter', dest='restrict_to_program', type=argparse.FileType('r'), default=None)
     parser.add_argument('--jobs', type=int, default=1,
                         help='run this many independent parsers concurrently (default: 1)')
+    parser.add_argument('--fail-on-discrepancy', action='store_true',
+                        help='exit 1 for unexpected results, crashes, timeouts, or skipped cases')
 
     args = parser.parse_args(argv)
     try:
-        run_tests(args.restrict_to_path, args.restrict_to_program, args.jobs)
+        failures = run_tests(args.restrict_to_path, args.restrict_to_program, args.jobs)
     except SelectionError as error:
         parser.error(str(error))
     finally:
@@ -1093,7 +1105,8 @@ def main(argv=None):
 
     generate_report(os.path.join(BASE_DIR, "results/parsing.html"), keep_only_first_result_in_set = False)
     generate_report(os.path.join(BASE_DIR, "results/parsing_pruned.html"), keep_only_first_result_in_set = True)
+    return 1 if args.fail_on_discrepancy and failures else 0
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())

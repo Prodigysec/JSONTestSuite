@@ -16,7 +16,7 @@ RESULT = re.compile(r'<pre id="result">([^<]*)</pre>')
 
 
 def observe(path, mode="parse"):
-    if mode not in ("parse", "zero", "keys"):
+    if mode not in ("parse", "zero", "keys", "survey"):
         return {"status": "error", "detail": "unknown probe mode"}
     try:
         payload = base64.b64encode(pathlib.Path(path).read_bytes()).decode("ascii")
