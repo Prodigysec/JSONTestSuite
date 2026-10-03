@@ -328,6 +328,17 @@ programs = {
            "url":"https://github.com/simdjson/simdjson",
            "commands":[os.path.join(PARSERS_DIR, ".build/simdjson/test_simdjson")]
        },
+   "C++ picojson 111c9be5":
+       {
+           "url":"https://github.com/kazuho/picojson",
+           "commands":[os.path.join(PARSERS_DIR, ".build/picojson/test_picojson")]
+       },
+   "VHDL JSON-for-VHDL 2ab1ebc2 (GHDL 4.1)":
+       {
+           "url":"https://github.com/Paebbels/JSON-for-VHDL",
+           "setup":[sys.executable, os.path.join(PARSERS_DIR, "test_vhdl_json.py"), "--check"],
+           "commands":[sys.executable, os.path.join(PARSERS_DIR, "test_vhdl_json.py")]
+       },
    "SQLite JSON1 (Python sqlite3)":
        {
            "url":"https://www.sqlite.org/json1.html",

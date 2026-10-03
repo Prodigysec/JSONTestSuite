@@ -108,6 +108,8 @@ The [amjson, C YAJL, and SQLite JSON1 review](docs/review-batch-97-42-70.md)
 records reproducible builds, modes, dependencies, and full-corpus results.
 The [simdjson, PostgreSQL JSONB, and Linux Swift Foundation review](docs/review-batch-95-62-40.md)
 records the next three adapters and their isolated validation.
+The [VHDL, picojson, and octal-escape review](docs/review-batch-23-21-136.md)
+records two additional parser modes and verifies existing octal coverage.
 The [rl_json, libfyaml, and parallel-runner review](docs/review-batch-107-103-141.md)
 records pinned source builds and their validation.
 The [jq and Node.js review](docs/review-batch-39-25-83.md) documents two
