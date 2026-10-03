@@ -81,7 +81,9 @@ Yet JSON is defined in at least seven different documents:
 
 Despite the clarifications they bring, RFC 7159 and 8259 contain several approximations and leaves many details loosely specified.
 
-For instance, RFC 8259 [mentions](https://tools.ietf.org/html/rfc8259#section-1) that a design goal of JSON was to be "a subset of JavaScript", but it's actually not. Specifically, JSON allows the Unicode line terminators `U+2028 LINE SEPARATOR` and `U+2029 PARAGRAPH SEPARATOR` to appear unescaped. But JavaScript specifies that strings cannot contains line terminators ([ECMA-262 - 7.8.4 String Literals](http://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4)), and line terminators include... `U+2028` and `U+2029` ([7.3 Line Terminators](http://www.ecma-international.org/ecma-262/5.1/#sec-7.3)). The single fact that these two characters are allowed without escape in JSON strings while they are not in JavaScript implies that JSON is **not** a subset of JavaScript, despite the JSON design goals.
+For instance, RFC 8259 [mentions](https://www.rfc-editor.org/rfc/rfc8259.html#section-1) that a design goal of JSON was to be "a subset of JavaScript". JSON allows `U+2028 LINE SEPARATOR` and `U+2029 PARAGRAPH SEPARATOR` unescaped inside strings; [ECMAScript 5.1](https://262.ecma-international.org/5.1/#sec-7.8.4) did not allow them in string literals. At the time, those characters gave a concrete counterexample to the design goal.
+
+**[Update 2026-10-03]** [ECMAScript 2019](https://tc39.es/ecma262/2019/#sec-literals-string-literals) adopted the [JSON superset change](https://tc39.es/proposal-json-superset/) and permits both characters in string literals. The counterexample above applies to earlier ECMAScript editions, not to ES2019 and later. This concerns string-literal syntax; it does not mean that every JSON text is directly executable as a standalone JavaScript program.
 
 Also, RFC 7159 is unclear about how a JSON parser should treat extreme number values, malformed Unicode strings, similar objects or handle recursion depth. Some corner cases are explicitly left free to implementations, while others suffer from contradictory statements.
 
@@ -412,9 +414,9 @@ The editors considered that the grammar should not be restricted, and that warni
 
 **Raw non-Unicode Characters**
 
-The previous section discussed non-Unicode codepoints that appear in strings, such as `"uDEAD"`, which is valid Unicode in its u-escaped form, but doesn't decode into a Unicode character.
+The previous section discussed escapes such as `"\uDEAD"`: the escape is grammatically allowed, but a lone surrogate does not denote a Unicode scalar value. [RFC 8259 section 8.2](https://www.rfc-editor.org/rfc/rfc8259.html#section-8.2) warns that behavior on such strings is unpredictable.
 
-Parsers also have to handle raw bytes that don't encode Unicode characters. For instance, the byte <CODE><U>FF</U></CODE> does not represent a Unicode character in UTF-8. As a consequence, a string containing <CODE><U>FF</U></CODE> is not an UTF-8 string. In this case, parsers should simply refuse to parse the string, because "A string is a sequence of zero or more Unicode characters" [RFC 8259 section 1](https://tools.ietf.org/html/rfc8259#section-1) and "JSON text (...) MUST be encoded using UTF-8 [RFC 8259 section 8.1](https://tools.ietf.org/html/rfc8259#section-8.1).
+Parsers also encounter raw bytes that are not valid UTF-8. The byte <CODE><U>FF</U></CODE> in the string below cannot encode a Unicode character in UTF-8. Under [RFC 8259 section 8.1](https://www.rfc-editor.org/rfc/rfc8259.html#section-8.1), JSON text exchanged outside a closed ecosystem must be UTF-8. The corpus nevertheless classifies this inside-string case as `i_` to record parser decoding modes, including replacement of malformed input; this does not make the original byte stream well-formed UTF-8. The bare <CODE><U>FF</U></CODE> in the array case remains `n_` because it cannot form a JSON value.
 
 <TABLE class="monospace">
 <TR>
@@ -422,7 +424,7 @@ Parsers also have to handle raw bytes that don't encode Unicode characters. For 
     <TD>["€𝄞"]</TD>
 </TR>
 <TR>
-    <TD class="fixedWidth">n_string_invalid_utf-8.json</TD>
+    <TD class="fixedWidth">i_string_invalid_utf-8.json</TD>
     <TD>["<U>FF</U>"]</TD>
 </TR>
 <TR>
@@ -880,13 +882,13 @@ JSONKit will simply refuse to parse it and return an error.
 
 **Strings**
 
-- `["Au0000B"]` contains the u-escaped form of the `0x00 NUL` character, which is likely to cause problems in C-based JSON parsers. Most parsers handle this payload gracefully, but JSONKit and cJSON won't parse it. Interestingly, Freddy yields only `["A"]` (the string stop after unescaping byte `0x00`).
+- `["A\u0000B"]` contains the u-escaped form of the `0x00 NUL` character, which is likely to cause problems in C-based JSON parsers. Most parsers handle this payload gracefully, but JSONKit and cJSON won't parse it. Interestingly, Freddy yields only `["A"]` (the string stop after unescaping byte `0x00`).
 
-- `["uD800"]` is the u-escaped form of `U+D800`, an invalid lone UTF-16 surrogate. Many parsers will fail and return an error, despite the string being perfectly valid according to JSON grammar. Python leaves the string untouched and yields `["uD800"]`. Go and JavaScript replace the offending character with "�" `U+FFFD REPLACEMENT CHARACTER` <CODE>["<U>EFBFBD</U>"]</CODE>, R rjson and Lua dkjson simply translate the codepoint into its UTF-8 representation <CODE>["<U>EDA080</U>"]</CODE>. R jsonlite and Lua JSON 20160728.17 replace the offending codepoint with a question mark `["?"]`.
+- `["\uD800"]` is the u-escaped form of `U+D800`, an invalid lone UTF-16 surrogate. Many parsers will fail and return an error, despite the string being valid according to JSON grammar. Python preserves the escaped code unit; Go and JavaScript replace it with "�" `U+FFFD REPLACEMENT CHARACTER` <CODE>["<U>EFBFBD</U>"]</CODE>. R rjson and Lua dkjson historically emitted <CODE>["<U>EDA080</U>"]</CODE>, an ill-formed UTF-8 encoding of that surrogate. R jsonlite and Lua JSON 20160728.17 replaced it with `["?"]`.
 
-- `["EDA080"]` is the non-escaped, UTF-8 form or `U+D800`, the invalid lone UTF-16 surrogate discussed in previous point. This string is not valid UTF-8 and should be rejected  (see [section 2.5 Strings - Raw non-Unicode Characters](#25)). In practice however, several parsers leave the string untouched `["EDA080"]` such as cJSON, R rjson and jsonlite, Lua JSON, Lua dkjson and Ruby. Go and JavaScript yield <CODE>["<U>EFBFBDEFBFBDEFBFBD</U>"]</CODE> that is three replacement characters (one per byte). Interestingly, Python 2 converts the sequence into its unicode-escaped form `["ud800"]`, while Python 3 throws a `UnicodeDecodeError` exception.
+- The raw bytes <CODE>["<U>EDA080</U>"]</CODE> in `i_string_UTF8_surrogate_U+D800.json` are an ill-formed UTF-8 encoding of a lone surrogate. A strict UTF-8 decoder rejects them. Historical parsers differed: some retained the bytes, some replaced each malformed byte with U+FFFD, and Python 3's wrapper raised `UnicodeDecodeError`. The `i_` classification records those decoder-mode differences; it does not declare the original bytes well-formed UTF-8 (see [section 2.5](#25)).
 
-- `["uD800uD800"]` makes some parsers go nuts. R jsonlite yields `["U00010000"]`, while Ruby parser yields <CODE>["<U>F0908080</U>"]</CODE>. I still don't get where this value comes from.
+- `["\uD800\uD800"]` made some historical parsers produce surprising values. The report displayed R jsonlite's result as `\U00010000` and Ruby's output as bytes <CODE><U>F0908080</U></CODE>. The bytes `F0 90 80 80` encode U+10000 in UTF-8. A valid UTF-16 pair for U+10000 is `\uD800\uDC00`; here the second `\uD800` is another high surrogate. A decoder that combines it as though it were the low surrogate and discards its high bits can incorrectly produce U+10000. These are historical transformation observations, not a claim about current parser versions.
 
 **[Update 2017-11-18]** A [RCE vulnerability was found in CouchDB](https://justi.cz/security/2017/11/14/couchdb-rce-npm.html) because two JSON parsers handle duplicate key  differently. The same JSON object, when parsed in JavaScript, contains `"roles": []'`, but when parsed in Erlang it contains `"roles": ["_admin"]`.
 
