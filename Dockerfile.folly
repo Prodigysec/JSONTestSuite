@@ -1,0 +1,28 @@
+FROM php@sha256:01224f5f2e75fa43a326797d7b80552ca0bcfb37f60cbb81efdf63956b4d3fe4
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    cmake ninja-build g++ libboost-context-dev libboost-filesystem-dev \
+    libboost-program-options-dev libboost-regex-dev libboost-system-dev \
+    libboost-thread-dev libdouble-conversion-dev libfast-float-dev \
+    libfmt-dev libgflags-dev libgoogle-glog-dev libevent-dev libssl-dev \
+    zlib1g-dev libbz2-dev liblzma-dev liblz4-dev libzstd-dev libsnappy-dev \
+    libunwind-dev \
+    && rm -rf /var/lib/apt/lists/*
+RUN mkdir -p /build/folly && curl -LfsS \
+    https://codeload.github.com/facebook/folly/tar.gz/af67dd1016a6e75785ae8905262d63b441123fb2 \
+    -o /build/folly.tar.gz \
+    && echo '079e5add12810f143504e87a8ec2452e0fe9d9ebf9d4b82e384477e4f957aadb  /build/folly.tar.gz' | sha256sum -c - \
+    && tar -xzf /build/folly.tar.gz -C /build/folly --strip-components=1
+COPY parsers/test_folly.cpp /build/test_folly.cpp
+COPY parsers/folly/CMakeLists.txt /build/adapter/CMakeLists.txt
+RUN mkdir -p /build/fast-float && curl -LfsS \
+    https://codeload.github.com/fastfloat/fast_float/tar.gz/refs/tags/v8.0.0 \
+    -o /build/fast-float.tar.gz \
+    && echo 'f312f2dc34c61e665f4b132c0307d6f70ad9420185fa831911bc24408acf625d  /build/fast-float.tar.gz' | sha256sum -c - \
+    && tar -xzf /build/fast-float.tar.gz -C /build/fast-float --strip-components=1
+RUN cmake -S /build/adapter -B /build/adapter-build -G Ninja -DCMAKE_BUILD_TYPE=Release \
+    -DFASTFLOAT_INCLUDE_DIR=/build/fast-float/include \
+    && cmake --build /build/adapter-build --target test_folly --parallel 2 \
+    && cp /build/adapter-build/test_folly /usr/local/bin/test_folly \
+    && mkdir -p /usr/share/doc/folly \
+    && cp /build/folly/LICENSE /usr/share/doc/folly/LICENSE
+WORKDIR /suite

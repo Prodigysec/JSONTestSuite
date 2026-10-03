@@ -132,6 +132,10 @@ The Firefox batch survey uses one browser session:
 The [Firefox runner validation](docs/firefox-runner-validation.md) records
 the completed 327-fixture run with separate browser launches and the startup
 timeout fix for concurrent execution.
+The [Folly adapter notes](docs/folly-adapter.md) describe the pinned native
+C++ JSON mode and its build dependencies. Build it with
+`docker build -f Dockerfile.folly -t jsonsuite-folly:local .` before selecting
+`C++ Folly v2025.09.29.00 parseJson (native defaults, NUL guard)`.
 The [rl_json, libfyaml, and parallel-runner review](docs/review-batch-107-103-141.md)
 records pinned source builds and their validation.
 The [jq and Node.js review](docs/review-batch-39-25-83.md) documents two

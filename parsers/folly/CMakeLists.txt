@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.18)
+project(jsonsuite_folly LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 20)
+set(BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(BUILD_BENCHMARKS OFF CACHE BOOL "" FORCE)
+add_subdirectory(/build/folly /build/folly-build)
+add_executable(test_folly /build/test_folly.cpp)
+target_link_libraries(test_folly PRIVATE folly)

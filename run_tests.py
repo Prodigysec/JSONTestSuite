@@ -479,6 +479,12 @@ programs = {
            "url":"https://github.com/cierelabs/json_spirit",
            "commands":[os.path.join(PARSERS_DIR, ".build/json-spirit/test_json_spirit")]
        },
+   "C++ Folly v2025.09.29.00 parseJson (native defaults, NUL guard)":
+       {
+           "url":"https://github.com/facebook/folly",
+           "setup":["docker", "image", "inspect", "--format", "{{.Id}}", "jsonsuite-folly:local"],
+           "commands":[sys.executable, os.path.join(PARSERS_DIR, "test_folly.py")]
+       },
    "Java json-simple 1.1.1":
        {
            "url":"",
