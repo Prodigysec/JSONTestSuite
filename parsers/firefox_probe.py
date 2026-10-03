@@ -16,9 +16,10 @@ SCRIPT = "try { JSON.parse(arguments[0]); return true; } catch (error) { if (err
 
 def request(base, method, path, data=None):
     body = None if data is None else json.dumps(data).encode("utf-8")
+    # Creating a browser session can exceed 10 seconds during concurrent runs.
     with urllib.request.urlopen(urllib.request.Request(
             base + path, data=body, method=method,
-            headers={"Content-Type": "application/json"}), timeout=10) as response:
+            headers={"Content-Type": "application/json"}), timeout=25) as response:
         return json.load(response)
 
 

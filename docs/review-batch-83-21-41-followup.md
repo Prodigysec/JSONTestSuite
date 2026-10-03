@@ -4,6 +4,12 @@ Reviewed on 2026-10-03 against open upstream [#83](https://github.com/nst/JSONTe
 
 Local integration commit: `207aa6f`.
 
+The subsequent [per-fixture runner validation](firefox-runner-validation.md)
+reproduced startup request timeouts under concurrent load, increased the
+bounded runner budget to 45 seconds, and completed all 327 separate Firefox
+adapter invocations without errors. The original 18-second limits and
+one-session survey described below record the initial integration.
+
 `C++ V8 10.2.154.26 (libnode 18.20.4)` is a native C++ adapter calling `v8::JSON::Parse` on one complete JSON string. `Dockerfile.v8` builds it from source against Debian Bookworm `libnode-dev=18.20.4+dfsg-1~deb12u3`; the installed Node package reported V8 `10.2.154.26-node.37`. The host wrapper reads the fixture only to reject malformed UTF-8, because V8's `NewFromUtf8` can replace malformed sequences, then mounts the original file into the image read-only. It does not transcode valid input. The image uses the digest-pinned PHP 8.3.27 base, GCC 12 from Bookworm, and Debian's libnode packages. Debian packages retain their licensing metadata. Transitive APT revisions are not snapshot-pinned. Build with `docker build -f Dockerfile.v8 -t jsonsuite-v8:local .` on Linux x86-64; invocation is `python3 parsers/test_v8_native.py FILE` after the image check.
 
 `Firefox ESR 153.4.0 JSON.parse (headless)` calls browser `JSON.parse` through geckodriver's WebDriver Execute Script endpoint. `Dockerfile.firefox` installs Debian Bookworm `firefox-esr=153.4.0esr-1~deb12u1` and the official Mozilla geckodriver 0.36.0 Linux x86-64 release archive, verified with SHA-256 `0bde38707eb0a686a20c6bd50f4adcc7d60d4f73c60eb83ee9e0db8f65823e04`. Debian Firefox and Mozilla geckodriver retain their distributed license notices. The same digest-pinned PHP base is used; transitive Debian dependencies are not snapshot-pinned. The probe strictly decodes the original fixture bytes without removing a BOM, sends the complete resulting string to `JSON.parse`, and returns only a boolean verdict. Input rejection maps to 1; launch, browser, WebDriver, and timeout failures map to 2. The host adapter mounts the checkout read-only with networking disabled. Firefox startup needs a bounded 18-second runner timeout instead of the default five seconds. Build with `docker build -f Dockerfile.firefox -t jsonsuite-firefox:local .`; invoke through `python3 parsers/test_firefox.py FILE` after the image check.

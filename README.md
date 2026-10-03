@@ -129,6 +129,9 @@ images with `docker build -f Dockerfile.v8 -t jsonsuite-v8:local .` and
 `docker build -f Dockerfile.firefox -t jsonsuite-firefox:local .` respectively.
 The Firefox batch survey uses one browser session:
 `docker run --rm --network none --pull never --mount type=bind,src="$PWD",dst=/suite,readonly jsonsuite-firefox:local python3 /usr/local/bin/firefox_probe.py --survey /suite/test_parsing`.
+The [Firefox runner validation](docs/firefox-runner-validation.md) records
+the completed 327-fixture run with separate browser launches and the startup
+timeout fix for concurrent execution.
 The [rl_json, libfyaml, and parallel-runner review](docs/review-batch-107-103-141.md)
 records pinned source builds and their validation.
 The [jq and Node.js review](docs/review-batch-39-25-83.md) documents two
@@ -167,7 +170,7 @@ Current CLI details:
   latter invokes `python3.5`, not whichever `python3` is installed. For a newer
   runtime, add/update an entry with an accurate label and executable.
 - A parser process has a five-second timeout per fixture by default. A registry
-  mode may set a longer bounded `timeout` (Firefox uses 18 seconds). Some
+  mode may set a longer bounded `timeout` (Firefox uses 45 seconds). Some
   entries run a setup/build command before testing; that command has no such timeout.
 - The script attempts to open reports when `/usr/bin/open` exists. Otherwise,
   open the HTML files manually, keeping `style.css` alongside them.

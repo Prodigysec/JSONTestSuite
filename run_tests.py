@@ -170,7 +170,7 @@ programs = {
            "url":"https://www.mozilla.org/firefox/",
            "setup":["docker", "image", "inspect", "--format", "{{.Id}}", "jsonsuite-firefox:local"],
            "commands":[sys.executable, os.path.join(PARSERS_DIR, "test_firefox.py")],
-           "timeout":18,
+           "timeout":45,
        },
    "JavaScriptCore 2.50.6 JSON.parse (strict UTF-8)":
        {

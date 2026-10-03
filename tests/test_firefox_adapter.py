@@ -18,8 +18,8 @@ class FirefoxAdapterTests(unittest.TestCase):
                 run.return_value = subprocess.CompletedProcess([], code)
                 self.assertEqual(test_firefox.main(["adapter", self.valid]),
                                  code if code in (0, 1) else 2)
-        self.assertEqual(run.call_args.kwargs["timeout"], 16)
-        run.side_effect = subprocess.TimeoutExpired([], 16)
+        self.assertEqual(run.call_args.kwargs["timeout"], 42)
+        run.side_effect = subprocess.TimeoutExpired([], 42)
         self.assertEqual(test_firefox.main(["adapter", self.valid]), 2)
 
     def test_missing_file_is_adapter_error(self):

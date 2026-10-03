@@ -23,12 +23,12 @@ def main(argv):
     command = [
         "docker", "run", "--rm", "--network", "none", "--pull", "never",
         "--mount", f"type=bind,src={ROOT},dst=/suite,readonly",
-        IMAGE, "timeout", "14s", "python3", "/usr/local/bin/firefox_probe.py",
+        IMAGE, "timeout", "40s", "python3", "/usr/local/bin/firefox_probe.py",
         f"/suite/{relative}",
     ]
     try:
         result = subprocess.run(command, stdout=subprocess.DEVNULL,
-                                stderr=subprocess.DEVNULL, timeout=16)
+                                stderr=subprocess.DEVNULL, timeout=42)
     except (OSError, subprocess.TimeoutExpired):
         return 2
     return result.returncode if result.returncode in (0, 1) else 2
