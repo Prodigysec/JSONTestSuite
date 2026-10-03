@@ -6,6 +6,7 @@ it remains open, has no comments, and requests source builds rather than
 platform-specific binaries. There is no contribution revision to integrate.
 The earlier [build review](review-batch-140-87-81.md) added build targets;
 this local follow-up repairs and registers the remaining three wrappers.
+Local integration commit: `4303a068fdf4a796b21a280af4d0e406a61c68f2`.
 
 ## Sources, build, and invocation
 

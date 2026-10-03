@@ -625,7 +625,8 @@ dependency skips. Corpus bytes and historical reports were preserved. Issue
 
 ### 2026-10-03: issue #140, source-built C adapters
 
-The [C adapter follow-up](source-c-adapter-review.md) repairs and registers
+Commit `4303a06`, documented in the [C adapter follow-up](source-c-adapter-review.md),
+repairs and registers
 jsmn, JSON Checker, and cJSON 1.7.3 from existing vendored source. It fixes
 file/error handling, jsmn input length and token capacity, whole-input guards,
 JSON Checker's unsigned-byte handling, and allocation-error reporting. Each
