@@ -1,0 +1,8 @@
+FROM php@sha256:01224f5f2e75fa43a326797d7b80552ca0bcfb37f60cbb81efdf63956b4d3fe4
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    g++ libnode-dev=18.20.4+dfsg-1~deb12u3 \
+    && rm -rf /var/lib/apt/lists/*
+COPY parsers/test_v8_native.cpp /build/test_v8_native.cpp
+RUN g++ -std=c++17 -O2 -Wall -Wextra -I/usr/include/node \
+    /build/test_v8_native.cpp -lnode -pthread -o /usr/local/bin/test_v8_native
+WORKDIR /suite

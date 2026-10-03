@@ -70,6 +70,14 @@ class RunnerTests(unittest.TestCase):
         with patch.object(run_tests, "generate_report"), contextlib.redirect_stdout(io.StringIO()):
             self.assertEqual(run_tests.main([]), 0)
 
+    def test_parser_specific_timeout_is_applied(self):
+        self.fixture("y_case.json")
+        self.adapter("slow")
+        self.registry["slow"]["timeout"] = 18
+        with patch.object(run_tests.subprocess, "call", return_value=0) as call:
+            self.assertEqual(self.run_runner(), ["slow\tEXPECTED_RESULT\ty_case.json"])
+        self.assertEqual(call.call_args.kwargs["timeout"], 18)
+
     def test_parallel_parsers_overlap_and_log_in_registry_order(self):
         self.fixture('y_case.json')
         for name, peer in (('a', 'b'), ('b', 'a')):

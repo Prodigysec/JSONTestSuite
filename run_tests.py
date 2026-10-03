@@ -159,6 +159,19 @@ programs = {
            "url":"https://nodejs.org/",
            "commands":["node", os.path.join(PARSERS_DIR, "test_node_json_utf8.js")]
        },
+   "C++ V8 10.2.154.26 (libnode 18.20.4)":
+       {
+           "url":"https://v8.dev/",
+           "setup":["docker", "image", "inspect", "--format", "{{.Id}}", "jsonsuite-v8:local"],
+           "commands":[sys.executable, os.path.join(PARSERS_DIR, "test_v8_native.py")]
+       },
+   "Firefox ESR 153.4.0 JSON.parse (headless)":
+       {
+           "url":"https://www.mozilla.org/firefox/",
+           "setup":["docker", "image", "inspect", "--format", "{{.Id}}", "jsonsuite-firefox:local"],
+           "commands":[sys.executable, os.path.join(PARSERS_DIR, "test_firefox.py")],
+           "timeout":18,
+       },
    "JavaScriptCore 2.50.6 JSON.parse (strict UTF-8)":
        {
            "url":"https://webkit.org/",
@@ -790,6 +803,7 @@ def run_tests(restrict_to_path=None, restrict_to_program=None, jobs=1):
             d = programs[prog_name]
             commands = d["commands"]
             use_stdin = d.get("use_stdin", False)
+            timeout = d.get("timeout", 5)
             events = []
             for index, (filename, file_path) in enumerate(cases):
                 command = commands if use_stdin else commands + [file_path]
@@ -798,7 +812,7 @@ def run_tests(restrict_to_path=None, restrict_to_program=None, jobs=1):
                 with stream as my_stdin:
                     try:
                         status = subprocess.call(command, stdin=my_stdin, stdout=FNULL,
-                                                 stderr=subprocess.STDOUT, timeout=5)
+                                                 stderr=subprocess.STDOUT, timeout=timeout)
                     except subprocess.TimeoutExpired:
                         events.append(("row", prog_name, "TIMEOUT", filename))
                         events.append(("message", "RESULT:", "TIMEOUT"))

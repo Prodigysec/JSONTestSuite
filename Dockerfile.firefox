@@ -1,0 +1,12 @@
+FROM php@sha256:01224f5f2e75fa43a326797d7b80552ca0bcfb37f60cbb81efdf63956b4d3fe4
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    firefox-esr=153.4.0esr-1~deb12u1 python3 ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+RUN curl -LfsS https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-linux64.tar.gz \
+    -o /tmp/geckodriver.tar.gz \
+    && echo '0bde38707eb0a686a20c6bd50f4adcc7d60d4f73c60eb83ee9e0db8f65823e04  /tmp/geckodriver.tar.gz' | sha256sum -c - \
+    && tar -xzf /tmp/geckodriver.tar.gz -C /usr/local/bin \
+    && rm /tmp/geckodriver.tar.gz
+COPY parsers/licenses/geckodriver-LICENSE /usr/share/doc/geckodriver/LICENSE
+COPY parsers/firefox_probe.py /usr/local/bin/firefox_probe.py
+WORKDIR /suite
