@@ -106,6 +106,11 @@ The next [adapter review batch](docs/review-batch-142-133-124.md) covers
 fastjson2, jsoncgx's two comment modes, and two clojure.data.json versions.
 The [rl_json, libfyaml, and parallel-runner review](docs/review-batch-107-103-141.md)
 records pinned source builds and their validation.
+The [jq and Node.js review](docs/review-batch-39-25-83.md) documents two
+additional registry modes: jq raw-slurp `fromjson` for one complete text, and
+Node.js/V8 `JSON.parse` with strict UTF-8 decoding. They use `jq` and `node`
+from `PATH`; check their runtime versions before comparing results. The old
+`JavaScript` entry and historical reports remain unchanged.
 
 To attempt all registered parsers, after preparing their dependencies:
 

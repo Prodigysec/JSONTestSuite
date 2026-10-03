@@ -7,6 +7,8 @@ import subprocess
 import tempfile
 import unittest
 
+import run_tests
+
 
 ROOT = Path(__file__).resolve().parents[1]
 JSONPP = ROOT / 'parsers/test_jsonpp_0_1_1/.build/test_jsonpp'
@@ -198,6 +200,56 @@ class ClojureDataJson1Tests(ClojureDataJsonContract, unittest.TestCase):
                      'Prepare Clojure jars and provide java on PATH first')
 class ClojureDataJson2Tests(ClojureDataJsonContract, unittest.TestCase):
     command = ['sh', str(ROOT / 'parsers/test_clojure_data_json/run.sh'), '2.2.0']
+
+
+@unittest.skipUnless(shutil.which('node'), 'Node.js is required')
+class NodeV8Tests(AdapterContract, unittest.TestCase):
+    command = run_tests.programs['Node.js V8 JSON.parse (strict UTF-8)']['commands']
+
+    def test_unsupported_runtime_is_not_a_json_rejection(self):
+        with tempfile.TemporaryDirectory() as directory:
+            preload = Path(directory) / 'preload.js'
+            preload.write_text("require('buffer').isUtf8 = undefined;\n")
+            fixture = Path(directory) / 'input.json'
+            fixture.write_bytes(b'null')
+            result = subprocess.run([self.command[0], '--require', str(preload),
+                                     self.command[1], str(fixture)],
+                                    capture_output=True, timeout=5)
+            self.assertEqual(result.returncode, 2, result.stderr)
+
+    def test_malformed_bytes_and_bom_are_not_changed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'input.json'
+            for content, expected in ((b'"\xff"', 1), (b'"\xed\xa0\x80"', 1),
+                                      (b'\xef\xbb\xbf{}', 1),
+                                      (b'"\xe2\x80\xa8"', 0)):
+                with self.subTest(content=content):
+                    path.write_bytes(content)
+                    self.assertEqual(self.invoke([str(path)]).returncode, expected)
+
+
+@unittest.skipUnless(shutil.which('jq'), 'jq is required')
+class JqRawSlurpTests(unittest.TestCase):
+    command = run_tests.programs['jq (raw-slurp fromjson)']['commands']
+
+    def test_one_complete_text_and_scalar_values(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'input.json'
+            cases = ((b'null', 0), (b'false', 0), (b'0', 0),
+                     (b'[]', 0), (b'', 1), (b'null false', 1),
+                     (b'{} garbage', 1), (b'[1,]', 1), (b'\xff', 1))
+            for content, expected in cases:
+                with self.subTest(content=content):
+                    path.write_bytes(content)
+                    result = subprocess.run(self.command + [str(path)],
+                                            capture_output=True, timeout=5)
+                    self.assertEqual(result.returncode, expected, result.stderr)
+
+    def test_missing_file_is_an_adapter_error(self):
+        with tempfile.TemporaryDirectory() as directory:
+            result = subprocess.run(self.command + [str(Path(directory) / 'missing')],
+                                    capture_output=True, timeout=5)
+            self.assertEqual(result.returncode, 2, result.stderr)
 
 
 if __name__ == '__main__':

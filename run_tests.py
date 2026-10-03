@@ -154,6 +154,16 @@ programs = {
            "url":"",
            "commands":["/usr/local/bin/node", os.path.join(PARSERS_DIR, "test_json.js")]
        },
+   "Node.js V8 JSON.parse (strict UTF-8)":
+       {
+           "url":"https://nodejs.org/",
+           "commands":["node", os.path.join(PARSERS_DIR, "test_node_json_utf8.js")]
+       },
+   "jq (raw-slurp fromjson)":
+       {
+           "url":"https://jqlang.org/jq/",
+           "commands":["jq", "-Rs", "try (fromjson | empty) catch (halt_error(1))"]
+       },
    "Python 2.7.10":
        {
            "url":"",
