@@ -259,11 +259,11 @@ are tracked in the [assessment](docs/project-assessment.md).
 | [docs/project-assessment.md](docs/project-assessment.md) | Architecture, initial findings, and upstream triage. |
 
 The transformation fixtures were used for `results/transform.html`.
-`run_tests.py` does **not** run that corpus or regenerate that report; an automated
-transformation comparison remains future work.
-Four new examples compare signed zero and case-distinct object keys; see the
-[RFC and transformation review](docs/review-batch-77-76-71.md) for their exact
-bytes and direct Python/Perl observations.
+`run_tests.py` does **not** run that corpus or regenerate that report. Run
+`python3 -B run_transform.py` to print JSON Lines observations for the four
+signed-zero and case-distinct-key fixtures using Python and, when installed,
+Node/V8. The [value-observation review](docs/review-batch-76-71-21.md) explains
+the output and limits; a general 26-fixture comparison remains future work.
 
 ## Contribute a fixture or parser
 
