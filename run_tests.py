@@ -304,6 +304,21 @@ programs = {
            "url":"https://github.com/skeeto/pdjson",
            "commands":[os.path.join(PARSERS_DIR, "test_pdjson/bin/test_pdjson")]
        },
+   "C amjson 1e282121":
+       {
+           "url":"https://github.com/amwales-888/amjson",
+           "commands":[os.path.join(PARSERS_DIR, ".build/amjson/test_amjson")]
+       },
+   "C YAJL 2.1.0":
+       {
+           "url":"https://github.com/lloyd/yajl",
+           "commands":[os.path.join(PARSERS_DIR, ".build/yajl-c/test_yajl_c")]
+       },
+   "SQLite JSON1 (Python sqlite3)":
+       {
+           "url":"https://www.sqlite.org/json1.html",
+           "commands":[sys.executable, os.path.join(PARSERS_DIR, "test_sqlite_json.py")]
+       },
    "C jsmn":
        {
            "url":"https://github.com/zserge/jsmn",
