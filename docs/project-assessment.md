@@ -561,3 +561,16 @@ literals and retained two high-surrogate code units in the direct parse. The
 327-case parsing corpus, runner, and historical reports are unchanged; they
 were not rerun for this documentation-only batch. All three upstream issues
 remain open; this is a local disposition.
+
+### 2026-10-03: issues #39, #25, and #83
+
+Commit `0d76960` adds a registered jq raw-slurp `fromjson` mode for one
+complete JSON text (#39/#25) and a Node.js/V8 `JSON.parse` adapter that
+checks UTF-8 bytes before decoding (#83). See the [runtime review](review-batch-39-25-83.md)
+for dependencies, exact commands, parser versions, modes, and limits. A
+temporary runner copy recorded all 327 fixtures for each entry and generated
+both reports without altering historical results. Node.js/V8 had no unexpected
+outcomes; jq accepted 24 `n_` number cases as extensions. The full regression
+suite completed 72 tests, with 53 passes and 19 optional-runtime skips.
+Browser-engine comparisons requested by #83 remain pending. All three issues
+remain open upstream; this is a local integration and partial review.
