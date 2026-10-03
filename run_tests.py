@@ -299,6 +299,15 @@ programs = {
            "url":"",
            "commands":[os.path.join(PARSERS_DIR, "test-AppleJSONSerialization/bin/test-AppleJSONSerialization")]
        },
+   "Swift Foundation 6.1.3 Linux Docker":
+       {
+           "url":"https://github.com/swiftlang/swift-corelibs-foundation",
+           "setup":["docker", "image", "inspect", "--format", "{{.Id}}", "swift@sha256:19792fa7ef68fb0e0ca5763ec3dfd40d6461afca7c081eb689e2e374fa80c0be"],
+           "commands":["docker", "run", "--rm", "--network", "none", "--pull", "never",
+                       "--mount", "type=bind,src=%s,dst=%s,readonly" % (BASE_DIR, BASE_DIR),
+                       "--entrypoint", os.path.join(PARSERS_DIR, ".build/swift-foundation-linux/test_swift_foundation_linux"),
+                       "swift@sha256:19792fa7ef68fb0e0ca5763ec3dfd40d6461afca7c081eb689e2e374fa80c0be"]
+       },
    "C pdjson 20170325":
        {
            "url":"https://github.com/skeeto/pdjson",
@@ -314,10 +323,21 @@ programs = {
            "url":"https://github.com/lloyd/yajl",
            "commands":[os.path.join(PARSERS_DIR, ".build/yajl-c/test_yajl_c")]
        },
+   "C++ simdjson 5.0.1 DOM":
+       {
+           "url":"https://github.com/simdjson/simdjson",
+           "commands":[os.path.join(PARSERS_DIR, ".build/simdjson/test_simdjson")]
+       },
    "SQLite JSON1 (Python sqlite3)":
        {
            "url":"https://www.sqlite.org/json1.html",
            "commands":[sys.executable, os.path.join(PARSERS_DIR, "test_sqlite_json.py")]
+       },
+   "PostgreSQL 16 JSONB UTF8":
+       {
+           "url":"https://www.postgresql.org/docs/16/datatype-json.html",
+           "commands":[sys.executable, os.path.join(PARSERS_DIR, "test_postgres_jsonb.py")],
+           "setup":[sys.executable, os.path.join(PARSERS_DIR, "test_postgres_jsonb.py"), "--check"]
        },
    "C jsmn":
        {
