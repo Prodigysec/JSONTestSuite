@@ -597,3 +597,15 @@ timeouts. PostgreSQL rejected three valid escaped-NUL texts because JSONB
 cannot store U+0000; Linux Foundation accepted three invalid trailing-comma
 texts. Historical reports and fixture bytes were unchanged. The upstream
 issues remain open; this is a local integration and test result.
+
+### 2026-10-03: issues #23, #21, and #136
+
+Commit `54d7d02` adds pinned-source picojson and JSON-for-VHDL adapters for
+the C++ and VHDL coverage requests. The [batch review](review-batch-23-21-136.md)
+records their build commands, parser modes, exact bytes, and full 327-case
+surveys. picojson accepted 14 malformed numbers and had no crashes; the VHDL
+library accepted 55 invalid cases, rejected three valid LF-containing cases,
+and caused 12 simulator failures. The previously integrated #136 octal fixture
+was reverified against PR #137's Git blob with no duplicate added. Historical
+reports and corpus bytes were unchanged. These are local integrations and
+review findings; all three upstream issues remain open.
