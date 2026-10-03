@@ -37,16 +37,19 @@ parsers. To try the supplied Python wrapper, clone this fork and use Python 3:
 ```sh
 git clone https://github.com/Prodigysec/JSONTestSuite.git
 cd JSONTestSuite
-python3 parsers/test_json.py test_parsing/y_structure_lonely_null.json
+python3 parsers/test_python_json.py test_parsing/y_structure_lonely_null.json
 echo $?  # expected: 0 (accepted)
-python3 parsers/test_json.py test_parsing/n_array_extra_comma.json
+python3 parsers/test_python_json.py test_parsing/n_array_extra_comma.json
 echo $?  # expected: 1 (rejected)
 ```
 
 These POSIX-shell examples test the locally installed Python standard-library
-parser. They do not generate reports or establish that Python passes the whole
-suite. In particular, the wrapper uses Python's default JSON options and reads
-text using the environment's encoding; it is not a strict reference validator.
+parser with explicit UTF-8 decoding. They do not generate reports. The runner
+registers this active interpreter with its actual version, in default-constant
+and nonfinite-constant rejection modes. The default mode accepts NaN/Infinity;
+add `--reject-nonfinite` before the fixture path to reject those spellings.
+Neither mode is a complete compliance reference. See the
+[Python adapter notes](docs/python-json-adapter.md) for limits and corpus results.
 
 The runner itself uses Python 3's standard library. Each selected adapter has
 its own runtime, library, and build requirements. There is no repository-wide

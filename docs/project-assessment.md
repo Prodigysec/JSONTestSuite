@@ -637,3 +637,17 @@ suite passed 102 tests with 19 optional dependency skips, and an available
 SQLite JSON1 control completed all 327 cases without discrepancies. Historical
 binaries, fixture bytes, and reports were preserved. This is a local Linux
 integration; issue #140 remains open upstream.
+
+### 2026-10-04: active Python standard-library modes
+
+The [Python adapter notes](python-json-adapter.md) record two new modes using
+the runner's active interpreter, actual runtime version, explicit UTF-8 decoding,
+and distinct parsing versus file/runtime error codes. The modes preserve native
+constants or reject NaN/Infinity spellings through `parse_constant`. Both ran
+all 327 fixtures without crashes, timeouts, or skips. Default constants yielded
+three native unexpected acceptances; the constant-rejection mode had none.
+Both recorded 25/14 implementation-dependent accept/reject outcomes. Historical
+Python entries were retained. The full regression suite ran 107 tests with 19
+optional skips; corpus bytes and historical reports were preserved. This gives
+the existing core image a usable current-Python mode, while issue #41's universal
+all-parser environment remains pending and the core image was not rebuilt.

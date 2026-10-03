@@ -6,6 +6,7 @@ import os.path
 import subprocess
 import sys
 import json
+import platform
 
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import nullcontext
@@ -188,6 +189,16 @@ programs = {
        {
            "url":"https://jqlang.org/jq/",
            "commands":["jq", "-Rs", "try (fromjson | empty) catch (halt_error(1))"]
+       },
+   "Python stdlib %s (%s, UTF-8, default constants)" % (platform.python_version(), platform.python_implementation()):
+       {
+           "url":"https://docs.python.org/3/library/json.html",
+           "commands":[sys.executable, os.path.join(PARSERS_DIR, "test_python_json.py")]
+       },
+   "Python stdlib %s (%s, UTF-8, nonfinite constants rejected)" % (platform.python_version(), platform.python_implementation()):
+       {
+           "url":"https://docs.python.org/3/library/json.html",
+           "commands":[sys.executable, os.path.join(PARSERS_DIR, "test_python_json.py"), "--reject-nonfinite"]
        },
    "Python 2.7.10":
        {
