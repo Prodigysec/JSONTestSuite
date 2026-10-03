@@ -548,3 +548,16 @@ the commit, the corpus archive test also verified committed fixture bytes and
 archive reproducibility. Transformation inputs still lack a general runner, so
 cross-parser value assertions remain pending. All three upstream issues remain
 open; this is a local review and integration disposition.
+
+### 2026-10-03: issues #148, #134, and #75
+
+Commit `d0cc30e` dates the article's pre-ES2019 U+2028/U+2029 comparison
+(#148), verifies prior local typo and escape fixes while repairing two more
+display examples (#134), and updates the invalid-UTF-8 fixture name and
+surrogate explanation (#75). See the [article review](review-batch-148-134-75.md)
+for exact bytes, standards links, existing attribution, and limits. Node
+24.21.0 confirmed both separator characters in JSON and JavaScript string
+literals and retained two high-surrogate code units in the direct parse. The
+327-case parsing corpus, runner, and historical reports are unchanged; they
+were not rerun for this documentation-only batch. All three upstream issues
+remain open; this is a local disposition.
