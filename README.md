@@ -118,6 +118,11 @@ records a distinct JavaScript engine, a Boost.Spirit-based C++ parser, and the
 `python3 -B inventory_parser_tools.py` executable inventory. Build JavaScriptCore
 with `docker build -f Dockerfile.jsc -t jsonsuite-jsc:local .` and JSON Spirit
 with `sh parsers/build_json_spirit.sh` before selecting those registry modes.
+The [headless browser review](docs/review-batch-83-76-71.md) adds a Chromium
+browser-context mode. Build its image with
+`docker build -f Dockerfile.chromium -t jsonsuite-chromium:local .`. For a faster
+browser-engine survey that records every fixture outcome as JSON Lines, run
+`python3 -B survey_chromium.py > /tmp/jsonsuite-chromium-327.jsonl`.
 The [rl_json, libfyaml, and parallel-runner review](docs/review-batch-107-103-141.md)
 records pinned source builds and their validation.
 The [jq and Node.js review](docs/review-batch-39-25-83.md) documents two
@@ -266,9 +271,10 @@ are tracked in the [assessment](docs/project-assessment.md).
 The transformation fixtures were used for `results/transform.html`.
 `run_tests.py` does **not** run that corpus or regenerate that report. Run
 `python3 -B run_transform.py` to print JSON Lines observations for the four
-signed-zero and case-distinct-key fixtures using Python and, when installed,
-Node/V8. The [value-observation review](docs/review-batch-76-71-21.md) explains
-the output and limits; a general 26-fixture comparison remains future work.
+signed-zero and case-distinct-key fixtures using Python, Node/V8, and a built
+Chromium image when available. The [value-observation review](docs/review-batch-76-71-21.md)
+and [browser follow-up](docs/review-batch-83-76-71.md) explain the output and
+limits; a general 26-fixture comparison remains future work.
 
 ## Contribute a fixture or parser
 

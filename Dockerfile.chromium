@@ -1,0 +1,5 @@
+FROM php@sha256:01224f5f2e75fa43a326797d7b80552ca0bcfb37f60cbb81efdf63956b4d3fe4
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    chromium=154.0.8037.92-1~deb12u1 \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /suite

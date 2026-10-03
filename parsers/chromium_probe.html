@@ -1,0 +1,36 @@
+<!doctype html>
+<meta charset="utf-8">
+<pre id="result"></pre>
+<script>
+(() => {
+    const output = document.getElementById('result');
+    const finish = (result) => { output.textContent = 'JSONTESTSUITE:' + JSON.stringify(result); };
+    try {
+        const binary = atob('__PAYLOAD__');
+        const bytes = Uint8Array.from(binary, char => char.charCodeAt(0));
+        // Retain a leading BOM in the decoded string so JSON.parse sees it.
+        const text = new TextDecoder('utf-8', { fatal: true, ignoreBOM: true }).decode(bytes);
+        const value = JSON.parse(text);
+        const mode = '__MODE__';
+        if (mode === 'zero') {
+            if (!Array.isArray(value) || value.length !== 1 || typeof value[0] !== 'number' || value[0] !== 0) {
+                throw new Error('expected a one-element zero array');
+            }
+            finish({ status: 'ok', negative_zero: Object.is(value[0], -0), serialized: JSON.stringify(value) });
+        } else if (mode === 'keys') {
+            if (value === null || typeof value !== 'object' || Array.isArray(value)) {
+                throw new Error('expected an object');
+            }
+            finish({ status: 'ok', members: Object.entries(value), serialized: JSON.stringify(value) });
+        } else {
+            finish({ status: 'ok' });
+        }
+    } catch (error) {
+        if (error instanceof SyntaxError || error instanceof TypeError) {
+            finish({ status: 'reject' });
+        } else {
+            finish({ status: 'error', detail: String(error) });
+        }
+    }
+})();
+</script>

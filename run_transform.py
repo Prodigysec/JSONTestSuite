@@ -7,6 +7,8 @@ import os
 import subprocess
 import sys
 
+from parsers.chromium_browser import observe as observe_chromium
+
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 CASES = (
@@ -63,9 +65,11 @@ def main():
             "fixture": filename,
             "python": observe_python(path, kind),
             "node_v8": observe_node(path, kind),
+            "chromium": observe_chromium(path, kind),
         }
         print(json.dumps(record, ensure_ascii=True, sort_keys=True))
-        failed |= any(record[mode]["status"] in ("error", "timeout") for mode in ("python", "node_v8"))
+        failed |= any(record[mode]["status"] in ("error", "timeout")
+                      for mode in ("python", "node_v8", "chromium"))
     return 1 if failed else 0
 
 

@@ -165,6 +165,12 @@ programs = {
            "setup":["docker", "image", "inspect", "--format", "{{.Id}}", "jsonsuite-jsc:local"],
            "commands":["python3", os.path.join(PARSERS_DIR, "test_jsc.py")]
        },
+   "Chromium 154.0.8037.92 JSON.parse (headless)":
+       {
+           "url":"https://www.chromium.org/",
+           "setup":["docker", "image", "inspect", "--format", "{{.Id}}", "jsonsuite-chromium:local"],
+           "commands":["python3", os.path.join(PARSERS_DIR, "test_chromium.py")]
+       },
    "jq (raw-slurp fromjson)":
        {
            "url":"https://jqlang.org/jq/",
