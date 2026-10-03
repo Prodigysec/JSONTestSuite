@@ -1,6 +1,7 @@
 # Active-interpreter Python JSON modes
 
-Reviewed on 2026-10-04 against local parent `e2cf08a`. The previous C adapter
+Reviewed on 2026-10-04 against local parent `e2cf08a`.
+Local integration commit: `ae488c394b915571a41a4d7cee11847a14213459`. The previous C adapter
 survey selected a historical Python registry command as a control, which logged
 327 unavailable skips. The existing standard-library modes require Python
 2.7.10 or 3.5.2 and remain preserved with their original commands. Direct

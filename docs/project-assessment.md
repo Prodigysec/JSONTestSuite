@@ -640,7 +640,8 @@ integration; issue #140 remains open upstream.
 
 ### 2026-10-04: active Python standard-library modes
 
-The [Python adapter notes](python-json-adapter.md) record two new modes using
+Commit `ae488c3`, documented in the [Python adapter notes](python-json-adapter.md),
+adds two new modes using
 the runner's active interpreter, actual runtime version, explicit UTF-8 decoding,
 and distinct parsing versus file/runtime error codes. The modes preserve native
 constants or reject NaN/Infinity spellings through `parse_constant`. Both ran
