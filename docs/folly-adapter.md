@@ -5,6 +5,7 @@ The adapter adds the Folly parser requested in
 was refreshed on 2026-10-03: it remains open, has no comments, and lists Folly
 alongside the other C++ parsers already represented locally. There is no PR
 revision to integrate. This adapter is a local implementation of that request.
+Local integration commit: `c33b1b3fa09c809d71486466da1dac095595593d`.
 
 The source is Folly `v2025.09.29.00`, commit
 `af67dd1016a6e75785ae8905262d63b441123fb2`. Its source archive SHA-256 is

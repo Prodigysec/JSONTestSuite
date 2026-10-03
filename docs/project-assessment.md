@@ -612,7 +612,8 @@ review findings; all three upstream issues remain open.
 
 ### 2026-10-03: issue #21, Folly
 
-The pinned source-built Folly v2025.09.29.00 adapter supplies the remaining
+Commit `c33b1b3` adds the pinned source-built Folly v2025.09.29.00 adapter,
+which supplies the remaining
 named C++ parser in #21. The [adapter notes](folly-adapter.md) record source
 revisions, dependencies, native extensions, representation limits, and the
 explicit literal-NUL guard needed for whole-input validation. All 327 fixtures
