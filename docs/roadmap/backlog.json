@@ -83,8 +83,12 @@
         "python3 -B tools/check_roadmap.py --task P2-01",
         "git diff --check"
       ],
-      "status": "todo",
-      "parser_ids": []
+      "status": "done",
+      "parser_ids": [],
+      "verification": {
+        "protocol": "Schema, byte manifest, native types, duplicate/getter observations, bounds, and output/CI policy documented",
+        "acceptance": "tools/check_roadmap.py --task P2-01 and git diff --check passed"
+      }
     },
     {
       "id": "P2-02",
