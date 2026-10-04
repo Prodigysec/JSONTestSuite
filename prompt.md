@@ -9,7 +9,7 @@ Do not start part 2 until the roadmap is committed.
 
 ## Inputs
 
-- The document `json_parsers_ranked_by_rfc8259_deviation.docx` (place it at `docs/input/` or tell me the path). If you cannot read .docx directly, convert it to text first (pandoc or python-docx) and keep the converted copy out of version control.
+- The document `json_parsers_ranked_by_rfc8259_deviation.pdf` (place it at `docs/input/` or tell me the path). If you cannot read .pdf directly, convert it to text first and keep the converted copy out of version control.
 - The repo itself. Read these before planning: `README.md`, `AGENTS.md`, `docs/project-assessment.md`, the `programs` dict in `run_tests.py`, `run_transform.py`, `metadata/*.json`, the existing `docs/review-batch-*.md` files (they define the house style for documenting a parser batch), `tests/`, and the Dockerfiles.
 
 ## How to treat the document
