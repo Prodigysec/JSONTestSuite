@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "libraries": [
+    {
+      "library": "fastjson",
+      "version": "1.2.83",
+      "repository": "https://github.com/alibaba/fastjson",
+      "license": "Apache-2.0",
+      "artifacts": [
+        {
+          "filename": "fastjson-1.2.83-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/alibaba/fastjson/1.2.83/fastjson-1.2.83-sources.jar",
+          "sha256": "b5e1d3edeaee731d7dd3676bd7fe3a173659559423f39a960e44278829be80e4"
+        },
+        {
+          "filename": "fastjson-1.2.83.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/alibaba/fastjson/1.2.83/fastjson-1.2.83.jar",
+          "sha256": "641a4d65ab32fbfdccd9c718e3f83ebc4caabdb5e4fe5b3d51527c5fe692631d"
+        },
+        {
+          "filename": "fastjson-1.2.83.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/alibaba/fastjson/1.2.83/fastjson-1.2.83.pom",
+          "sha256": "23c7ea015a3b1e53dce0363a83429e008c36c268af3bf8656c493f8b23c54157"
+        }
+      ],
+      "licenses": [
+        {
+          "preserved": "parsers/features/licenses/fastjson-java.LICENSE",
+          "sha256": "f2ffa5942b316849be283deaeb2912e2e5b5b17e91012bede8210210ff3e91e7",
+          "source_jar_path": "META-INF/LICENSE.txt"
+        },
+        {
+          "preserved": "parsers/features/licenses/fastjson-java.NOTICE",
+          "sha256": "d181b6e18abbf98045b362636561c4ba02fc76f5feb1a14b4bef775de0743f7b",
+          "source_jar_path": "META-INF/NOTICE.txt"
+        }
+      ],
+      "reviewed_source_files": {
+        "com/alibaba/fastjson/JSON.java": "6a08a77aa291411dc2184c763917d77399f1c4c6720df964effb84e085037881",
+        "com/alibaba/fastjson/parser/DefaultJSONParser.java": "0edc1308d005c6cca0b0b099f490cb684c45c19591509821c2286d50cfcd2be1",
+        "com/alibaba/fastjson/parser/JSONScanner.java": "ed58bf325b955eb8e2fda1d7305da0f293a558c3caf8bb19521bed2772b081e4",
+        "com/alibaba/fastjson/parser/JSONLexerBase.java": "f251f5bfcf89b225a732b4a7935368c56fd1b758af6f41f1001a7e23b98dbba1",
+        "com/alibaba/fastjson/parser/Feature.java": "a2988ca1cc47a518526389ea9e7b3053e5aa6daf8fa48f74529f782ab82a8625",
+        "com/alibaba/fastjson/util/IOUtils.java": "e1aa630d97793fe58353fb888bb6fe89ff57e2513bec05b29228a78f49a5afdf"
+      },
+      "source_revision": "Maven Central release source artifact SHA-256 (not an inferred Git revision)"
+    },
+    {
+      "library": "genson",
+      "version": "1.6",
+      "repository": "https://github.com/owlike/genson",
+      "license": "Apache-2.0",
+      "artifacts": [
+        {
+          "filename": "genson-1.6-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/owlike/genson/1.6/genson-1.6-sources.jar",
+          "sha256": "f5e9ca28e6edaff2bcb330af8ba4fde886c9081616c2a23447b9666657c76224"
+        },
+        {
+          "filename": "genson-1.6.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/owlike/genson/1.6/genson-1.6.jar",
+          "sha256": "5f181ce7b9320d2c8812bbbcde09cffcf6104e52ccb9fe3c8dcbb698f7ff70ec"
+        },
+        {
+          "filename": "genson-1.6.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/owlike/genson/1.6/genson-1.6.pom",
+          "sha256": "b9b0d10d33899a110f72c6336b5b1500c6c98b97c2bf4179109c70ea5759d2f8"
+        }
+      ],
+      "licenses": [
+        {
+          "preserved": "parsers/features/licenses/genson-java.LICENSE",
+          "sha256": "c3351e76099c855d81fef2a192c80362ef713759610ad5e0f1d509ed4952e4b0",
+          "source_jar_path": "LICENSE"
+        }
+      ],
+      "reviewed_source_files": {
+        "com/owlike/genson/Genson.java": "f8b44cde7765ad2db239697c809de4a5b760de73066c6306d300e728f280cc8f",
+        "com/owlike/genson/GensonBuilder.java": "6fcaf1bc11ccbfc022ac566f919471eedd5914d1ebdac90618b5e66478e83b41",
+        "com/owlike/genson/EncodingAwareReaderFactory.java": "549224fc45dfd869806538f1d4b6211f9e432ec17e2065fd59d2b4c0924aac64",
+        "com/owlike/genson/stream/JsonReader.java": "c34af9cddb46f5883a5d56c253f37d85a5c5c2c1da6cebe50f39a0da9cd9e8b7"
+      },
+      "source_revision": "Maven Central release source artifact SHA-256 (not an inferred Git revision)",
+      "bundled_dependencies": [
+        {
+          "name": "ASM",
+          "version": "5.0.3",
+          "scope": "shaded upstream artifact",
+          "license": "BSD-3-Clause",
+          "notice": "parsers/features/licenses/asm-5.0.3.LICENSE",
+          "notice_sha256": "3228857be568198506a559d6d975f3a064addac0c302fe938ba61e3f60bc96ef",
+          "source_url": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm/5.0.3/asm-5.0.3.pom",
+          "source_sha256": "7d34653ffe62be7714d2f1969660a17df9ec1b19d8250c4f03db1123c82ba6a0"
+        }
+      ]
+    },
+    {
+      "library": "jsoniter",
+      "version": "0.9.23",
+      "repository": "https://github.com/json-iterator/java",
+      "license": "MIT",
+      "artifacts": [
+        {
+          "filename": "jsoniter-0.9.23-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/jsoniter/jsoniter/0.9.23/jsoniter-0.9.23-sources.jar",
+          "sha256": "c01e68804ad2e5994a2f0731d5bea75ec8ba5d24520bfe661daff3025938169c"
+        },
+        {
+          "filename": "jsoniter-0.9.23.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/jsoniter/jsoniter/0.9.23/jsoniter-0.9.23.jar",
+          "sha256": "1bf306c9ea82ba4f556a92396ea6dac6978371ee5e9b7a60aec681c765846ff2"
+        },
+        {
+          "filename": "jsoniter-0.9.23.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/jsoniter/jsoniter/0.9.23/jsoniter-0.9.23.pom",
+          "sha256": "ac3cc4315accfd48742d67942f8fb3effd420c3664f32527bac535fbc61b33c1"
+        }
+      ],
+      "licenses": [
+        {
+          "preserved": "parsers/features/licenses/jsoniter-java.LICENSE",
+          "sha256": "a2e561d56dae572d309aa8b605a1eb9c891e7d02066a9355ae9ef55600b6e029",
+          "source_url": "https://raw.githubusercontent.com/json-iterator/java/0aff30153d74e05344923a0c22f50582ca881166/LICENSE"
+        }
+      ],
+      "reviewed_source_files": {
+        "com/jsoniter/JsonIterator.java": "263061249ac70b6410675839268284f5bf9d70a7d5ed8dd541b5f0767957f9ff",
+        "com/jsoniter/IterImpl.java": "7dc217231b43c680ac1746a921f9f6a76c0194df4f74ae12bdbde28f5b0f81e4",
+        "com/jsoniter/IterImplForStreaming.java": "26c7e9deb88d6f7eb20f06298dbe8c0ffe0fe31a0a8de0d829d374d571163dea",
+        "com/jsoniter/spi/Config.java": "285578db5fcd2f11a8f101ac2b9c42d00f7d9fd977066902d35d99065ed7f743",
+        "com/jsoniter/spi/DecodingMode.java": "e71d38ea937929e45bc7731b16b30565e507598f228c3e3309a7cd3fed556423"
+      },
+      "source_revision": "Maven Central release source artifact SHA-256 (not an inferred Git revision)"
+    }
+  ],
+  "build_method": "Compile repository observer source with checksum-pinned official release JARs; libraries are published artifacts, not local source builds. Reviewed release sources and POMs are also fetched and verified.",
+  "tested_platform": "Linux x86_64",
+  "bytecode_release": 17
+}

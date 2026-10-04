@@ -1,0 +1,3 @@
+# Preserve upstream Fastjson notice bytes, including CRLF and its final blank line.
+parsers/features/licenses/fastjson-java.LICENSE -text whitespace=cr-at-eol,-blank-at-eof
+parsers/features/licenses/fastjson-java.NOTICE -text whitespace=cr-at-eol,-blank-at-eof

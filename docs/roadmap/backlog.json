@@ -294,20 +294,33 @@
         "docs/review-batch-feature-03.md",
         "pinned adapter builds, registry modes, and observers",
         "per-mode standard corpus and feature audit",
-        "parsers/features/build_batch_03.sh"
+        "parsers/features/build_batch_03.sh",
+        "docs/roadmap/feature-batch-03.json",
+        "parsers/features/java_batch_03/ObserveJavaBatch03.java",
+        "parsers/features/java_batch_03/run.py",
+        "parsers/features/java_batch_03/sources.json",
+        "tools/build_java_feature_batch_03.py",
+        "tests/test_feature_batch_03.py",
+        ".gitattributes"
       ],
       "acceptance_commands": [
         "sh parsers/features/build_batch_03.sh",
-        "python3 -B tools/validate_feature_batch.py P3-03 --output /tmp/jsonsuite-P3-03-audit",
+        "python3 -B tools/validate_feature_batch.py P3-03 --output /tmp/jsonsuite-P3-03-audit --jobs 3",
         "python3 -B tools/check_roadmap.py --task P3-03",
         "python3 -B -m unittest discover -s tests -v"
       ],
-      "status": "todo",
+      "status": "done",
       "parser_ids": [
         "parser-007",
         "parser-008",
         "parser-009"
-      ]
+      ],
+      "verification": {
+        "build": "Three checksum-pinned Maven release source/runtime/POM artifacts and licenses verified; observer compiled with javac 21.0.12.1, --release 17",
+        "audit": "2616/2616 standard pairs; 1000/1000 feature pairs; 366 standard unexpected accepts, 30 standard native crashes, nine feature native crashes; no skips/timeouts/protocol errors",
+        "unit_tests": "148 tests, 22 optional skips, exit 0",
+        "evidence": "docs/roadmap/feature-batch-03.json"
+      }
     },
     {
       "id": "P3-04",
@@ -2950,22 +2963,51 @@
         "S4"
       ],
       "source_url": "https://github.com/alibaba/fastjson",
-      "source_verified": false,
-      "version_to_pin": null,
-      "license": null,
+      "source_verified": true,
+      "version_to_pin": "1.2.83",
+      "license": "Apache-2.0",
       "build_steps": [
-        "Verify primary source, release revision, checksum, license, and API before adding this adapter."
+        "sh parsers/features/build_batch_03.sh",
+        "Pinned official Maven artifacts; observer compiled from repository source; library source reviewed, not locally rebuilt."
       ],
       "priority": 7,
-      "status": "todo",
+      "status": "done",
       "prediction_status": "untested",
-      "coverage": "candidate",
+      "coverage": "integrated-and-tested",
       "modes_to_verify": [
         "default",
         "all documented strict modes",
         "documented lenient modes where present"
       ],
-      "task_id": "P3-03"
+      "task_id": "P3-03",
+      "registry_names": [
+        "Java Fastjson 1.2.83 (default features, SafeMode, whole input)",
+        "Java Fastjson 1.2.83 (extension flags off, SafeMode, whole input)",
+        "Java Fastjson 1.2.83 (AllowComment, SafeMode, whole input)",
+        "Java Fastjson 1.2.83 (UseBigDecimal off, SafeMode, whole input)"
+      ],
+      "platforms": [
+        "Linux x86_64 (tested with OpenJDK 21.0.12.1)"
+      ],
+      "source_verification": {
+        "evidence": "parsers/features/java_batch_03/sources.json",
+        "source_artifact_sha256": "b5e1d3edeaee731d7dd3676bd7fe3a173659559423f39a960e44278829be80e4",
+        "runtime_artifact_sha256": "641a4d65ab32fbfdccd9c718e3f83ebc4caabdb5e4fe5b3d51527c5fe692631d"
+      },
+      "verification": {
+        "evidence": "docs/roadmap/feature-batch-03.json",
+        "native_adapter_tested": true,
+        "coverage_claim": true,
+        "modes": [
+          "Java Fastjson 1.2.83 (default features, SafeMode, whole input)",
+          "Java Fastjson 1.2.83 (extension flags off, SafeMode, whole input)",
+          "Java Fastjson 1.2.83 (AllowComment, SafeMode, whole input)",
+          "Java Fastjson 1.2.83 (UseBigDecimal off, SafeMode, whole input)"
+        ],
+        "standard_pairs": 1308,
+        "feature_pairs": 500,
+        "native_failures": "Retained in audit, not successful coverage or conformance proof."
+      }
     },
     {
       "id": "parser-008",
@@ -2978,22 +3020,49 @@
         "S4"
       ],
       "source_url": "https://github.com/owlike/genson",
-      "source_verified": false,
-      "version_to_pin": null,
-      "license": null,
+      "source_verified": true,
+      "version_to_pin": "1.6",
+      "license": "Apache-2.0",
       "build_steps": [
-        "Verify primary source, release revision, checksum, license, and API before adding this adapter."
+        "sh parsers/features/build_batch_03.sh",
+        "Pinned official Maven artifacts; observer compiled from repository source; library source reviewed, not locally rebuilt."
       ],
       "priority": 8,
-      "status": "todo",
+      "status": "done",
       "prediction_status": "untested",
-      "coverage": "candidate",
+      "coverage": "integrated-and-tested",
       "modes_to_verify": [
         "default",
         "all documented strict modes",
         "documented lenient modes where present"
       ],
-      "task_id": "P3-03"
+      "task_id": "P3-03",
+      "registry_names": [
+        "Java Genson 1.6 (default, native encoding detection, whole input)",
+        "Java Genson 1.6 (default, explicit native UTF-8 API, whole input)",
+        "Java Genson 1.6 (strict double conversion, explicit native UTF-8 API, whole input)"
+      ],
+      "platforms": [
+        "Linux x86_64 (tested with OpenJDK 21.0.12.1)"
+      ],
+      "source_verification": {
+        "evidence": "parsers/features/java_batch_03/sources.json",
+        "source_artifact_sha256": "f5e9ca28e6edaff2bcb330af8ba4fde886c9081616c2a23447b9666657c76224",
+        "runtime_artifact_sha256": "5f181ce7b9320d2c8812bbbcde09cffcf6104e52ccb9fe3c8dcbb698f7ff70ec"
+      },
+      "verification": {
+        "evidence": "docs/roadmap/feature-batch-03.json",
+        "native_adapter_tested": true,
+        "coverage_claim": true,
+        "modes": [
+          "Java Genson 1.6 (default, native encoding detection, whole input)",
+          "Java Genson 1.6 (default, explicit native UTF-8 API, whole input)",
+          "Java Genson 1.6 (strict double conversion, explicit native UTF-8 API, whole input)"
+        ],
+        "standard_pairs": 981,
+        "feature_pairs": 375,
+        "native_failures": "Retained in audit, not successful coverage or conformance proof."
+      }
     },
     {
       "id": "parser-009",
@@ -3006,22 +3075,46 @@
         "S4"
       ],
       "source_url": "https://github.com/json-iterator/java",
-      "source_verified": false,
-      "version_to_pin": null,
-      "license": null,
+      "source_verified": true,
+      "version_to_pin": "0.9.23",
+      "license": "MIT",
       "build_steps": [
-        "Verify primary source, release revision, checksum, license, and API before adding this adapter."
+        "sh parsers/features/build_batch_03.sh",
+        "Pinned official Maven artifacts; observer compiled from repository source; library source reviewed, not locally rebuilt."
       ],
       "priority": 9,
-      "status": "todo",
+      "status": "done",
       "prediction_status": "untested",
-      "coverage": "candidate",
+      "coverage": "integrated-and-tested",
       "modes_to_verify": [
         "default",
         "all documented strict modes",
         "documented lenient modes where present"
       ],
-      "task_id": "P3-03"
+      "task_id": "P3-03",
+      "registry_names": [
+        "Java jsoniter 0.9.23 (generic read, default reflection serializer, whole input)"
+      ],
+      "platforms": [
+        "Linux x86_64 (tested with OpenJDK 21.0.12.1)"
+      ],
+      "source_verification": {
+        "evidence": "parsers/features/java_batch_03/sources.json",
+        "source_artifact_sha256": "c01e68804ad2e5994a2f0731d5bea75ec8ba5d24520bfe661daff3025938169c",
+        "runtime_artifact_sha256": "1bf306c9ea82ba4f556a92396ea6dac6978371ee5e9b7a60aec681c765846ff2",
+        "commit": "42e8df1ae1b553d070a6667f49cf63c6904ead5f"
+      },
+      "verification": {
+        "evidence": "docs/roadmap/feature-batch-03.json",
+        "native_adapter_tested": true,
+        "coverage_claim": true,
+        "modes": [
+          "Java jsoniter 0.9.23 (generic read, default reflection serializer, whole input)"
+        ],
+        "standard_pairs": 327,
+        "feature_pairs": 125,
+        "native_failures": "Retained in audit, not successful coverage or conformance proof."
+      }
     },
     {
       "id": "parser-010",

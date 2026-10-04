@@ -63,7 +63,7 @@ engine evidence. Alternative controls are discovery leads rather than false cove
 | P3-01 | 3 | Integrate goccy/go-json, bytedance/sonic, json-iterator/go | P2-04 | done |
 | P3-02 | 3 | Review batch 02 native API and source-version barriers | P3-01 | done |
 | P3-02-ADAPTERS | 3 | Integrate buger/jsonparser, francoispqt/gojay, json-smart | P3-02 | done |
-| P3-03 | 3 | Integrate Fastjson 1.x, Genson, jsoniter Java | P3-02-ADAPTERS | todo |
+| P3-03 | 3 | Integrate Fastjson 1.x, Genson, jsoniter Java | P3-02-ADAPTERS | done |
 | P3-04 | 3 | Integrate Groovy JsonSlurper, Utf8Json, Jayrock.Json | P3-03 | todo |
 | P3-05 | 3 | Integrate Manatee.Json, Ruby pure JSON, simdjson_ruby | P3-04 | todo |
 | P3-06 | 3 | Integrate python-rapidjson, ijson, json-stream | P3-05 | todo |
@@ -1458,3 +1458,13 @@ and 1375 feature observations. The 580 standard discrepancies remain findings;
 no crashes, timeouts or skips occurred. Two completed integration batches now
 cover six libraries in 23 modes. Phase 3 continues with P3-03. See
 [batch 02 review](../review-batch-feature-02.md) and its tracked evidence.
+
+Batch 03 complete: Fastjson 1.2.83, Genson 1.6 and jsoniter Java 0.9.23 in
+eight modes. Source-reviewed, checksum-pinned official release artifacts are
+used; the observer is compiled locally. All 2616 standard and 1000 feature
+outcomes are recorded, including 366 unexpected standard acceptances, 30
+standard native crashes and nine feature native crashes. There are no skips,
+timeouts or protocol errors. Full suite: 148 tests, 22 optional skips. Three
+integration batches now cover nine libraries in 31 modes; native failures are
+findings, not successful outcomes. See [batch 03 review](../review-batch-feature-03.md).
+Phase 3 continues with P3-04: Groovy JsonSlurper, Utf8Json and Jayrock.Json.
