@@ -61,8 +61,9 @@ engine evidence. Alternative controls are discovery leads rather than false cove
 | P2-03 | 2 | Implement filtered, parallel, bounded observation runner | P2-02 | done |
 | P2-04 | 2 | Add Python and Node observations and record a feature baseline | P2-03 | done |
 | P3-01 | 3 | Integrate goccy/go-json, bytedance/sonic, json-iterator/go | P2-04 | done |
-| P3-02 | 3 | Integrate buger/jsonparser, francoispqt/gojay, json-smart | P3-01 | todo |
-| P3-03 | 3 | Integrate Fastjson 1.x, Genson, jsoniter Java | P3-02 | todo |
+| P3-02 | 3 | Review batch 02 native API and source-version barriers | P3-01 | done |
+| P3-02-ADAPTERS | 3 | Integrate buger/jsonparser, francoispqt/gojay, json-smart | P3-02 | todo |
+| P3-03 | 3 | Integrate Fastjson 1.x, Genson, jsoniter Java | P3-02-ADAPTERS | todo |
 | P3-04 | 3 | Integrate Groovy JsonSlurper, Utf8Json, Jayrock.Json | P3-03 | todo |
 | P3-05 | 3 | Integrate Manatee.Json, Ruby pure JSON, simdjson_ruby | P3-04 | todo |
 | P3-06 | 3 | Integrate python-rapidjson, ijson, json-stream | P3-05 | todo |
@@ -248,14 +249,14 @@ python3 -B -m unittest discover -s tests -v
 git diff --check
 ```
 
-### P3-02 — Integrate buger/jsonparser, francoispqt/gojay, json-smart
+### P3-02-ADAPTERS — Integrate buger/jsonparser, francoispqt/gojay, json-smart
 
 Deliverables: `docs/review-batch-feature-02.md`; `pinned adapter builds, registry modes, and observers`; `per-mode standard corpus and feature audit`.
 
 ```sh
 sh parsers/features/build_batch_02.sh
-python3 -B tools/validate_feature_batch.py P3-02 --output /tmp/jsonsuite-P3-02-audit
-python3 -B tools/check_roadmap.py --task P3-02
+python3 -B tools/validate_feature_batch.py P3-02-ADAPTERS --output /tmp/jsonsuite-P3-02-audit
+python3 -B tools/check_roadmap.py --task P3-02-ADAPTERS
 python3 -B -m unittest discover -s tests -v
 python3 -B -m unittest discover -s tests -v
 git diff --check
@@ -1426,3 +1427,21 @@ this distinguishes NUL from end of input without modifying bytes or values.
 `22ff22` for a stored malformed string byte. Add exact serializer-byte fields
 to prevent envelope replacement from hiding this observation; validate the
 fields and repeat the audit. Earlier output is diagnostic, not final evidence.
+
+### P3-02 — Review batch 02 native API and source-version barriers
+
+Deliverables: `docs/review-batch-feature-02-source-review.md`,
+`docs/roadmap/feature-batch-02-sources.json`, `tools/review_feature_batch_02_sources.py`.
+
+```sh
+python3 -B tools/review_feature_batch_02_sources.py
+python3 -B tools/check_roadmap.py --task P3-02
+python3 -B -m unittest discover -s tests -v
+git diff --check
+```
+
+2026-10-04, P3-02 amendment: source review found gojay's generic API
+delegates to stdlib, jsonparser now exposes strict/lenient presets, and the
+json-smart v2.6.0 tag has a SNAPSHOT POM plus trailing-data flags. Split the
+source/API review from integration, immediately followed by P3-02-ADAPTERS;
+retain all candidates and priority. Source verification never means coverage.

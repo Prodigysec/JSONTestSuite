@@ -213,10 +213,40 @@
     },
     {
       "id": "P3-02",
-      "title": "Integrate buger/jsonparser, francoispqt/gojay, json-smart",
+      "title": "Review batch 02 native API and source-version barriers",
       "phase": 3,
       "dependencies": [
         "P3-01"
+      ],
+      "deliverables": [
+        "docs/review-batch-feature-02-source-review.md",
+        "docs/roadmap/feature-batch-02-sources.json",
+        "tools/review_feature_batch_02_sources.py"
+      ],
+      "acceptance_commands": [
+        "python3 -B tools/review_feature_batch_02_sources.py",
+        "python3 -B tools/check_roadmap.py --task P3-02",
+        "python3 -B -m unittest discover -s tests -v",
+        "git diff --check"
+      ],
+      "status": "done",
+      "parser_ids": [
+        "parser-004",
+        "parser-005",
+        "parser-006"
+      ],
+      "verification": {
+        "source_check": "Three exact commit archives, eleven reviewed files, three preserved licenses and five API findings verified",
+        "unit_tests": "131 tests, 22 optional skips, exit 0",
+        "coverage": "Reviewed source only; integration and native tests pending in P3-02-ADAPTERS"
+      }
+    },
+    {
+      "id": "P3-02-ADAPTERS",
+      "title": "Integrate buger/jsonparser, francoispqt/gojay, json-smart",
+      "phase": 3,
+      "dependencies": [
+        "P3-02"
       ],
       "deliverables": [
         "docs/review-batch-feature-02.md",
@@ -226,8 +256,8 @@
       ],
       "acceptance_commands": [
         "sh parsers/features/build_batch_02.sh",
-        "python3 -B tools/validate_feature_batch.py P3-02 --output /tmp/jsonsuite-P3-02-audit",
-        "python3 -B tools/check_roadmap.py --task P3-02",
+        "python3 -B tools/validate_feature_batch.py P3-02-ADAPTERS --output /tmp/jsonsuite-P3-02-audit",
+        "python3 -B tools/check_roadmap.py --task P3-02-ADAPTERS",
         "python3 -B -m unittest discover -s tests -v"
       ],
       "status": "todo",
@@ -242,7 +272,7 @@
       "title": "Integrate Fastjson 1.x, Genson, jsoniter Java",
       "phase": 3,
       "dependencies": [
-        "P3-02"
+        "P3-02-ADAPTERS"
       ],
       "deliverables": [
         "docs/review-batch-feature-03.md",
@@ -2737,11 +2767,12 @@
         "S5"
       ],
       "source_url": "https://github.com/buger/jsonparser",
-      "source_verified": false,
-      "version_to_pin": null,
-      "license": null,
+      "source_verified": true,
+      "version_to_pin": "v1.6.1",
+      "license": "MIT",
       "build_steps": [
-        "Verify primary source, release revision, checksum, license, and API before adding this adapter."
+        "Inspect the pinned native APIs and enforce complete-text framing without decoding via another library.",
+        "Build an isolated source adapter and capture standard/feature audits in P3-02-ADAPTERS."
       ],
       "priority": 4,
       "status": "todo",
@@ -2752,7 +2783,17 @@
         "all documented strict modes",
         "documented lenient modes where present"
       ],
-      "task_id": "P3-02"
+      "task_id": "P3-02-ADAPTERS",
+      "source_verification": {
+        "commit": "5663ba4b4f9836695ac8a47d213dd3052583abf9",
+        "archive_sha256": "fa9703e36f11ab0976e8986f8cb7ab9402542ae3dbc6e930c9c4fbe13c4a74ef",
+        "evidence": "docs/roadmap/feature-batch-02-sources.json"
+      },
+      "verification": {
+        "source_review": "docs/roadmap/feature-batch-02-sources.json",
+        "native_adapter_tested": false,
+        "coverage_claim": false
+      }
     },
     {
       "id": "parser-005",
@@ -2764,11 +2805,12 @@
         "S5"
       ],
       "source_url": "https://github.com/francoispqt/gojay",
-      "source_verified": false,
-      "version_to_pin": null,
-      "license": null,
+      "source_verified": true,
+      "version_to_pin": "v1.2.13",
+      "license": "MIT",
       "build_steps": [
-        "Verify primary source, release revision, checksum, license, and API before adding this adapter."
+        "Inspect the pinned native APIs and enforce complete-text framing without decoding via another library.",
+        "Build an isolated source adapter and capture standard/feature audits in P3-02-ADAPTERS."
       ],
       "priority": 5,
       "status": "todo",
@@ -2779,7 +2821,17 @@
         "all documented strict modes",
         "documented lenient modes where present"
       ],
-      "task_id": "P3-02"
+      "task_id": "P3-02-ADAPTERS",
+      "source_verification": {
+        "commit": "1398296d938f9fae26750ddc2fe356b6d897f799",
+        "archive_sha256": "f6fcc1359befd64c08a504510cb2875e376a3f765ad418db259607d04580d65c",
+        "evidence": "docs/roadmap/feature-batch-02-sources.json"
+      },
+      "verification": {
+        "source_review": "docs/roadmap/feature-batch-02-sources.json",
+        "native_adapter_tested": false,
+        "coverage_claim": false
+      }
     },
     {
       "id": "parser-006",
@@ -2791,11 +2843,12 @@
         "S18"
       ],
       "source_url": "https://github.com/netplex/json-smart-v2",
-      "source_verified": false,
-      "version_to_pin": null,
-      "license": null,
+      "source_verified": true,
+      "version_to_pin": "v2.6.0 source revision (POM 2.6.0-SNAPSHOT)",
+      "license": "Apache-2.0",
       "build_steps": [
-        "Verify primary source, release revision, checksum, license, and API before adding this adapter."
+        "Inspect the pinned native APIs and enforce complete-text framing without decoding via another library.",
+        "Build an isolated source adapter and capture standard/feature audits in P3-02-ADAPTERS."
       ],
       "priority": 6,
       "status": "todo",
@@ -2806,7 +2859,17 @@
         "all documented strict modes",
         "documented lenient modes where present"
       ],
-      "task_id": "P3-02"
+      "task_id": "P3-02-ADAPTERS",
+      "source_verification": {
+        "commit": "ebf7cf8cf0dccef246cd1ed0d052074d787a2de4",
+        "archive_sha256": "d6d9907ca2134b99360f24fda2bb5ffa702c60e1a9a4a97258f4323f399f1b24",
+        "evidence": "docs/roadmap/feature-batch-02-sources.json"
+      },
+      "verification": {
+        "source_review": "docs/roadmap/feature-batch-02-sources.json",
+        "native_adapter_tested": false,
+        "coverage_claim": false
+      }
     },
     {
       "id": "parser-007",
@@ -14034,6 +14097,12 @@
       "task_id": "P3-01",
       "reason": "Sonic ConfigDefault serialized stored invalid UTF-8 byte 0xff as raw 22ff22; the JSON envelope otherwise replaced that byte, concealing serializer behavior.",
       "change": "Extend observations with serialized_invalid_utf8 and serialized_bytes_hex, validate/retain them, and rerun the batch after regression coverage. Previous pre-extension audit remains diagnostic only."
+    },
+    {
+      "date": "2026-10-04",
+      "task_id": "P3-02",
+      "reason": "Source review disproved the implicit generic-adapter assumption: gojay DecodeInterface delegates to stdlib; new jsonparser modes and json-smart tag/POM and trailing-data flags need explicit handling.",
+      "change": "Split P3-02 into a verified source/API review followed immediately by P3-02-ADAPTERS integration. Preserve priority and all three candidates; source review is not coverage. Native gojay integration must avoid generic stdlib delegation."
     }
   ]
 }

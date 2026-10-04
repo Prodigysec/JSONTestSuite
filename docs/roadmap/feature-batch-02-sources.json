@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "scope": "Reviewed source identities and API findings only; not registered/tested parser coverage",
+  "sources": [
+    {
+      "repository": "buger/jsonparser",
+      "tag": "v1.6.1",
+      "commit": "5663ba4b4f9836695ac8a47d213dd3052583abf9",
+      "archive_sha256": "fa9703e36f11ab0976e8986f8cb7ab9402542ae3dbc6e930c9c4fbe13c4a74ef",
+      "source_url": "https://github.com/buger/jsonparser",
+      "license_files": [
+        "LICENSE"
+      ],
+      "reviewed_files": {
+        "LICENSE": "632b59709152e1b5bfd3e2794848bcd2f4c70e3e175646726dbf53439ea1dbe1",
+        "go.mod": "587c18b3f32f8b7dcd3fccc82a5f5520ea624c037c85d597b2eb5d958063a1b5",
+        "config.go": "795f7e30dade96fd331dcfcab964bb43dbca4c21625270c162e4182b6d28ba6e",
+        "parser.go": "0800906b82a1443ff7de964105d010025888fe988049b4ee166f0bc687cf1a03"
+      },
+      "findings": [
+        {
+          "id": "explicit-configurations",
+          "file": "config.go",
+          "required_fragments": [
+            "var DefaultConfig = Config{}",
+            "var Lenient = Config{",
+            "AllowSingleQuotes",
+            "AllowUnknownEscapes"
+          ]
+        }
+      ],
+      "preserved_license": "parsers/features/licenses/jsonparser.LICENSE",
+      "license": "MIT"
+    },
+    {
+      "repository": "francoispqt/gojay",
+      "tag": "v1.2.13",
+      "commit": "1398296d938f9fae26750ddc2fe356b6d897f799",
+      "archive_sha256": "f6fcc1359befd64c08a504510cb2875e376a3f765ad418db259607d04580d65c",
+      "source_url": "https://github.com/francoispqt/gojay",
+      "license_files": [
+        "LICENSE"
+      ],
+      "reviewed_files": {
+        "LICENSE": "4e9fc4c749d560e8329be521d0e7c373521b368f96eaeb00d2fedfb5a31f1f2b",
+        "go.mod": "5b9715b493c22818519daf96d282a3ea477a950ff8d50ea6af9349f2cfedacaf",
+        "decode_interface.go": "aae695b05e09eb50cf1261c515fdc2b7a68b1413544d1dfeb4011994ede33f82",
+        "decode.go": "b1f533328fed827ba1e22125d9d69dfbb6328f5855397a17067ec651ceb37dc0"
+      },
+      "findings": [
+        {
+          "id": "generic-stdlib-delegation",
+          "file": "decode_interface.go",
+          "required_fragments": [
+            "import \"encoding/json\"",
+            "json.Unmarshal(object, i)"
+          ]
+        },
+        {
+          "id": "typed-native-targets",
+          "file": "decode.go",
+          "required_fragments": [
+            "func Unmarshal(data []byte, v interface{}) error",
+            "switch vt := v.(type)"
+          ]
+        }
+      ],
+      "preserved_license": "parsers/features/licenses/gojay.LICENSE",
+      "license": "MIT"
+    },
+    {
+      "repository": "netplex/json-smart-v2",
+      "tag": "v2.6.0",
+      "commit": "ebf7cf8cf0dccef246cd1ed0d052074d787a2de4",
+      "archive_sha256": "d6d9907ca2134b99360f24fda2bb5ffa702c60e1a9a4a97258f4323f399f1b24",
+      "source_url": "https://github.com/netplex/json-smart-v2",
+      "license_files": [
+        "LICENSE"
+      ],
+      "reviewed_files": {
+        "LICENSE": "c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+        "json-smart/pom.xml": "8a7c6952dbc8c2c4f4366491b42aae1a430d19fa1b3e0a4f3e69971831f9ef58",
+        "json-smart/src/main/java/net/minidev/json/parser/JSONParser.java": "77a72897cd63cd0bb6855a62a44ae8111f5be3e0a607d9733e257381bf741551"
+      },
+      "findings": [
+        {
+          "id": "tag-pom-discrepancy",
+          "file": "json-smart/pom.xml",
+          "required_fragments": [
+            "<version>2.6.0-SNAPSHOT</version>"
+          ]
+        },
+        {
+          "id": "whole-input-mode-flags",
+          "file": "json-smart/src/main/java/net/minidev/json/parser/JSONParser.java",
+          "required_fragments": [
+            "ACCEPT_TAILLING_DATA",
+            "MODE_PERMISSIVE_WITH_INCOMPLETE",
+            "MODE_STRICTEST",
+            "MODE_RFC4627"
+          ]
+        }
+      ],
+      "preserved_license": "parsers/features/licenses/json-smart-v2.LICENSE",
+      "license": "Apache-2.0"
+    }
+  ]
+}
