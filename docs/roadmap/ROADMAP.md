@@ -55,7 +55,7 @@ engine evidence. Alternative controls are discovery leads rather than false cove
 | ID | Phase | Task | Dependencies | Status |
 | --- | ---: | --- | --- | --- |
 | P0-01 | 0 | Record registry, Appendix A reconciliation, environments, and baseline |  | done |
-| P1-01 | 1 | Validate split catalog, source tags, exclusions, and first Go pins | P0-01 | todo |
+| P1-01 | 1 | Validate split catalog, source tags, exclusions, and first Go pins | P0-01 | done |
 | P2-01 | 2 | Specify observation protocol and neutral normalization | P1-01 | todo |
 | P2-02 | 2 | Add exact-byte convenience probes and manifest | P2-01 | todo |
 | P2-03 | 2 | Implement filtered, parallel, bounded observation runner | P2-02 | todo |
@@ -240,6 +240,8 @@ git diff --check
 Deliverables: `docs/review-batch-feature-01.md`; `pinned adapter builds, registry modes, and observers`; `per-mode standard corpus and feature audit`.
 
 ```sh
+sh parsers/features/build_batch_01.sh
+python3 -B tools/validate_feature_batch.py P3-01 --output /tmp/jsonsuite-P3-01-audit
 python3 -B tools/check_roadmap.py --task P3-01
 python3 -B -m unittest discover -s tests -v
 python3 -B -m unittest discover -s tests -v
@@ -251,6 +253,8 @@ git diff --check
 Deliverables: `docs/review-batch-feature-02.md`; `pinned adapter builds, registry modes, and observers`; `per-mode standard corpus and feature audit`.
 
 ```sh
+sh parsers/features/build_batch_02.sh
+python3 -B tools/validate_feature_batch.py P3-02 --output /tmp/jsonsuite-P3-02-audit
 python3 -B tools/check_roadmap.py --task P3-02
 python3 -B -m unittest discover -s tests -v
 python3 -B -m unittest discover -s tests -v
@@ -262,6 +266,8 @@ git diff --check
 Deliverables: `docs/review-batch-feature-03.md`; `pinned adapter builds, registry modes, and observers`; `per-mode standard corpus and feature audit`.
 
 ```sh
+sh parsers/features/build_batch_03.sh
+python3 -B tools/validate_feature_batch.py P3-03 --output /tmp/jsonsuite-P3-03-audit
 python3 -B tools/check_roadmap.py --task P3-03
 python3 -B -m unittest discover -s tests -v
 python3 -B -m unittest discover -s tests -v
@@ -273,6 +279,8 @@ git diff --check
 Deliverables: `docs/review-batch-feature-04.md`; `pinned adapter builds, registry modes, and observers`; `per-mode standard corpus and feature audit`.
 
 ```sh
+sh parsers/features/build_batch_04.sh
+python3 -B tools/validate_feature_batch.py P3-04 --output /tmp/jsonsuite-P3-04-audit
 python3 -B tools/check_roadmap.py --task P3-04
 python3 -B -m unittest discover -s tests -v
 python3 -B -m unittest discover -s tests -v
@@ -284,6 +292,8 @@ git diff --check
 Deliverables: `docs/review-batch-feature-05.md`; `pinned adapter builds, registry modes, and observers`; `per-mode standard corpus and feature audit`.
 
 ```sh
+sh parsers/features/build_batch_05.sh
+python3 -B tools/validate_feature_batch.py P3-05 --output /tmp/jsonsuite-P3-05-audit
 python3 -B tools/check_roadmap.py --task P3-05
 python3 -B -m unittest discover -s tests -v
 python3 -B -m unittest discover -s tests -v
@@ -295,6 +305,8 @@ git diff --check
 Deliverables: `docs/review-batch-feature-06.md`; `pinned adapter builds, registry modes, and observers`; `per-mode standard corpus and feature audit`.
 
 ```sh
+sh parsers/features/build_batch_06.sh
+python3 -B tools/validate_feature_batch.py P3-06 --output /tmp/jsonsuite-P3-06-audit
 python3 -B tools/check_roadmap.py --task P3-06
 python3 -B -m unittest discover -s tests -v
 python3 -B -m unittest discover -s tests -v
@@ -306,6 +318,8 @@ git diff --check
 Deliverables: `docs/review-batch-feature-07.md`; `pinned adapter builds, registry modes, and observers`; `per-mode standard corpus and feature audit`.
 
 ```sh
+sh parsers/features/build_batch_07.sh
+python3 -B tools/validate_feature_batch.py P3-07 --output /tmp/jsonsuite-P3-07-audit
 python3 -B tools/check_roadmap.py --task P3-07
 python3 -B -m unittest discover -s tests -v
 python3 -B -m unittest discover -s tests -v
@@ -317,6 +331,8 @@ git diff --check
 Deliverables: `docs/review-batch-feature-08.md`; `pinned adapter builds, registry modes, and observers`; `per-mode standard corpus and feature audit`.
 
 ```sh
+sh parsers/features/build_batch_08.sh
+python3 -B tools/validate_feature_batch.py P3-08 --output /tmp/jsonsuite-P3-08-audit
 python3 -B tools/check_roadmap.py --task P3-08
 python3 -B -m unittest discover -s tests -v
 python3 -B -m unittest discover -s tests -v
@@ -328,6 +344,8 @@ git diff --check
 Deliverables: `docs/review-batch-feature-09.md`; `pinned adapter builds, registry modes, and observers`; `per-mode standard corpus and feature audit`.
 
 ```sh
+sh parsers/features/build_batch_09.sh
+python3 -B tools/validate_feature_batch.py P3-09 --output /tmp/jsonsuite-P3-09-audit
 python3 -B tools/check_roadmap.py --task P3-09
 python3 -B -m unittest discover -s tests -v
 python3 -B -m unittest discover -s tests -v
@@ -339,6 +357,8 @@ git diff --check
 Deliverables: `docs/review-batch-feature-10.md`; `pinned adapter builds, registry modes, and observers`; `per-mode standard corpus and feature audit`.
 
 ```sh
+sh parsers/features/build_batch_10.sh
+python3 -B tools/validate_feature_batch.py P3-10 --output /tmp/jsonsuite-P3-10-audit
 python3 -B tools/check_roadmap.py --task P3-10
 python3 -B -m unittest discover -s tests -v
 python3 -B -m unittest discover -s tests -v
@@ -350,6 +370,8 @@ git diff --check
 Deliverables: `docs/review-batch-feature-11.md`; `pinned adapter builds, registry modes, and observers`; `per-mode standard corpus and feature audit`.
 
 ```sh
+sh parsers/features/build_batch_11.sh
+python3 -B tools/validate_feature_batch.py P3-11 --output /tmp/jsonsuite-P3-11-audit
 python3 -B tools/check_roadmap.py --task P3-11
 python3 -B -m unittest discover -s tests -v
 python3 -B -m unittest discover -s tests -v
@@ -361,6 +383,8 @@ git diff --check
 Deliverables: `docs/review-batch-feature-12.md`; `pinned adapter builds, registry modes, and observers`; `per-mode standard corpus and feature audit`.
 
 ```sh
+sh parsers/features/build_batch_12.sh
+python3 -B tools/validate_feature_batch.py P3-12 --output /tmp/jsonsuite-P3-12-audit
 python3 -B tools/check_roadmap.py --task P3-12
 python3 -B -m unittest discover -s tests -v
 python3 -B -m unittest discover -s tests -v
@@ -372,6 +396,8 @@ git diff --check
 Deliverables: `docs/review-batch-feature-13.md`; `pinned adapter builds, registry modes, and observers`; `per-mode standard corpus and feature audit`.
 
 ```sh
+sh parsers/features/build_batch_13.sh
+python3 -B tools/validate_feature_batch.py P3-13 --output /tmp/jsonsuite-P3-13-audit
 python3 -B tools/check_roadmap.py --task P3-13
 python3 -B -m unittest discover -s tests -v
 python3 -B -m unittest discover -s tests -v
@@ -1363,4 +1389,19 @@ git diff --check
 Phase 0 completed: recorded 123 registry modes, the 327/26 fixture counts,
 six scoped image IDs, and the successful 99-test baseline (22 optional skips).
 The PDF inventory predates 29 registry modes and overlaps existing Folly and
-platform entries. No new parser coverage is claimed. Phases 1–5 are pending.
+platform entries. No new parser coverage is claimed. Phase 1 completed the split catalog and
+first Go source verification: three pins, 101 tests with 22 optional skips.
+Phases 2–5 remain pending.
+
+## Amendments
+
+2026-10-04, P1-01: QJson remains an unresolved library identity rather than
+verified existing coverage; the existing Qt adapter uses QJsonDocument. Source
+URLs for unresolved names point to the document's discovery source, not an
+invented library repository. M-only rows retain null URLs. Concrete library
+URLs and pins must be verified before integration.
+
+2026-10-04, P1-01: batch acceptance now includes its concrete build script and
+`tools/validate_feature_batch.py` corpus/probe audit. P2-04 provides that helper.
+A document check alone cannot mark an adapter integrated; failed setup remains
+an explicit untested disposition with its reason and no claimed coverage.

@@ -54,14 +54,20 @@
       "deliverables": [
         "tools/check_roadmap.py",
         "docs/roadmap/backlog.json",
-        "docs/roadmap/catalog-review.md"
+        "docs/roadmap/catalog-review.md",
+        "tests/test_roadmap.py"
       ],
       "acceptance_commands": [
         "python3 -B tools/check_roadmap.py",
         "python3 -B -m unittest discover -s tests -v"
       ],
-      "status": "todo",
-      "parser_ids": []
+      "status": "done",
+      "parser_ids": [],
+      "verification": {
+        "roadmap_check": "108 ordered tasks and 405 parser leads validated; predecessors checked",
+        "unit_tests": "101 tests, 22 optional skips, exit 0",
+        "source_review": "Three release commits, license files, go.mod requirements, and archive SHA-256 pins recorded; no builds/results claimed"
+      }
     },
     {
       "id": "P2-01",
@@ -129,7 +135,8 @@
         "parsers/observe_python_features.py",
         "parsers/observe_node_features.js",
         "docs/review-batch-feature-baseline.md",
-        "tests/test_feature_observers.py"
+        "tests/test_feature_observers.py",
+        "tools/validate_feature_batch.py"
       ],
       "acceptance_commands": [
         "python3 -B -m unittest discover -s tests -p test_feature_observers.py -v",
@@ -148,9 +155,12 @@
       "deliverables": [
         "docs/review-batch-feature-01.md",
         "pinned adapter builds, registry modes, and observers",
-        "per-mode standard corpus and feature audit"
+        "per-mode standard corpus and feature audit",
+        "parsers/features/build_batch_01.sh"
       ],
       "acceptance_commands": [
+        "sh parsers/features/build_batch_01.sh",
+        "python3 -B tools/validate_feature_batch.py P3-01 --output /tmp/jsonsuite-P3-01-audit",
         "python3 -B tools/check_roadmap.py --task P3-01",
         "python3 -B -m unittest discover -s tests -v"
       ],
@@ -171,9 +181,12 @@
       "deliverables": [
         "docs/review-batch-feature-02.md",
         "pinned adapter builds, registry modes, and observers",
-        "per-mode standard corpus and feature audit"
+        "per-mode standard corpus and feature audit",
+        "parsers/features/build_batch_02.sh"
       ],
       "acceptance_commands": [
+        "sh parsers/features/build_batch_02.sh",
+        "python3 -B tools/validate_feature_batch.py P3-02 --output /tmp/jsonsuite-P3-02-audit",
         "python3 -B tools/check_roadmap.py --task P3-02",
         "python3 -B -m unittest discover -s tests -v"
       ],
@@ -194,9 +207,12 @@
       "deliverables": [
         "docs/review-batch-feature-03.md",
         "pinned adapter builds, registry modes, and observers",
-        "per-mode standard corpus and feature audit"
+        "per-mode standard corpus and feature audit",
+        "parsers/features/build_batch_03.sh"
       ],
       "acceptance_commands": [
+        "sh parsers/features/build_batch_03.sh",
+        "python3 -B tools/validate_feature_batch.py P3-03 --output /tmp/jsonsuite-P3-03-audit",
         "python3 -B tools/check_roadmap.py --task P3-03",
         "python3 -B -m unittest discover -s tests -v"
       ],
@@ -217,9 +233,12 @@
       "deliverables": [
         "docs/review-batch-feature-04.md",
         "pinned adapter builds, registry modes, and observers",
-        "per-mode standard corpus and feature audit"
+        "per-mode standard corpus and feature audit",
+        "parsers/features/build_batch_04.sh"
       ],
       "acceptance_commands": [
+        "sh parsers/features/build_batch_04.sh",
+        "python3 -B tools/validate_feature_batch.py P3-04 --output /tmp/jsonsuite-P3-04-audit",
         "python3 -B tools/check_roadmap.py --task P3-04",
         "python3 -B -m unittest discover -s tests -v"
       ],
@@ -240,9 +259,12 @@
       "deliverables": [
         "docs/review-batch-feature-05.md",
         "pinned adapter builds, registry modes, and observers",
-        "per-mode standard corpus and feature audit"
+        "per-mode standard corpus and feature audit",
+        "parsers/features/build_batch_05.sh"
       ],
       "acceptance_commands": [
+        "sh parsers/features/build_batch_05.sh",
+        "python3 -B tools/validate_feature_batch.py P3-05 --output /tmp/jsonsuite-P3-05-audit",
         "python3 -B tools/check_roadmap.py --task P3-05",
         "python3 -B -m unittest discover -s tests -v"
       ],
@@ -263,9 +285,12 @@
       "deliverables": [
         "docs/review-batch-feature-06.md",
         "pinned adapter builds, registry modes, and observers",
-        "per-mode standard corpus and feature audit"
+        "per-mode standard corpus and feature audit",
+        "parsers/features/build_batch_06.sh"
       ],
       "acceptance_commands": [
+        "sh parsers/features/build_batch_06.sh",
+        "python3 -B tools/validate_feature_batch.py P3-06 --output /tmp/jsonsuite-P3-06-audit",
         "python3 -B tools/check_roadmap.py --task P3-06",
         "python3 -B -m unittest discover -s tests -v"
       ],
@@ -286,9 +311,12 @@
       "deliverables": [
         "docs/review-batch-feature-07.md",
         "pinned adapter builds, registry modes, and observers",
-        "per-mode standard corpus and feature audit"
+        "per-mode standard corpus and feature audit",
+        "parsers/features/build_batch_07.sh"
       ],
       "acceptance_commands": [
+        "sh parsers/features/build_batch_07.sh",
+        "python3 -B tools/validate_feature_batch.py P3-07 --output /tmp/jsonsuite-P3-07-audit",
         "python3 -B tools/check_roadmap.py --task P3-07",
         "python3 -B -m unittest discover -s tests -v"
       ],
@@ -309,9 +337,12 @@
       "deliverables": [
         "docs/review-batch-feature-08.md",
         "pinned adapter builds, registry modes, and observers",
-        "per-mode standard corpus and feature audit"
+        "per-mode standard corpus and feature audit",
+        "parsers/features/build_batch_08.sh"
       ],
       "acceptance_commands": [
+        "sh parsers/features/build_batch_08.sh",
+        "python3 -B tools/validate_feature_batch.py P3-08 --output /tmp/jsonsuite-P3-08-audit",
         "python3 -B tools/check_roadmap.py --task P3-08",
         "python3 -B -m unittest discover -s tests -v"
       ],
@@ -332,9 +363,12 @@
       "deliverables": [
         "docs/review-batch-feature-09.md",
         "pinned adapter builds, registry modes, and observers",
-        "per-mode standard corpus and feature audit"
+        "per-mode standard corpus and feature audit",
+        "parsers/features/build_batch_09.sh"
       ],
       "acceptance_commands": [
+        "sh parsers/features/build_batch_09.sh",
+        "python3 -B tools/validate_feature_batch.py P3-09 --output /tmp/jsonsuite-P3-09-audit",
         "python3 -B tools/check_roadmap.py --task P3-09",
         "python3 -B -m unittest discover -s tests -v"
       ],
@@ -355,9 +389,12 @@
       "deliverables": [
         "docs/review-batch-feature-10.md",
         "pinned adapter builds, registry modes, and observers",
-        "per-mode standard corpus and feature audit"
+        "per-mode standard corpus and feature audit",
+        "parsers/features/build_batch_10.sh"
       ],
       "acceptance_commands": [
+        "sh parsers/features/build_batch_10.sh",
+        "python3 -B tools/validate_feature_batch.py P3-10 --output /tmp/jsonsuite-P3-10-audit",
         "python3 -B tools/check_roadmap.py --task P3-10",
         "python3 -B -m unittest discover -s tests -v"
       ],
@@ -378,9 +415,12 @@
       "deliverables": [
         "docs/review-batch-feature-11.md",
         "pinned adapter builds, registry modes, and observers",
-        "per-mode standard corpus and feature audit"
+        "per-mode standard corpus and feature audit",
+        "parsers/features/build_batch_11.sh"
       ],
       "acceptance_commands": [
+        "sh parsers/features/build_batch_11.sh",
+        "python3 -B tools/validate_feature_batch.py P3-11 --output /tmp/jsonsuite-P3-11-audit",
         "python3 -B tools/check_roadmap.py --task P3-11",
         "python3 -B -m unittest discover -s tests -v"
       ],
@@ -401,9 +441,12 @@
       "deliverables": [
         "docs/review-batch-feature-12.md",
         "pinned adapter builds, registry modes, and observers",
-        "per-mode standard corpus and feature audit"
+        "per-mode standard corpus and feature audit",
+        "parsers/features/build_batch_12.sh"
       ],
       "acceptance_commands": [
+        "sh parsers/features/build_batch_12.sh",
+        "python3 -B tools/validate_feature_batch.py P3-12 --output /tmp/jsonsuite-P3-12-audit",
         "python3 -B tools/check_roadmap.py --task P3-12",
         "python3 -B -m unittest discover -s tests -v"
       ],
@@ -424,9 +467,12 @@
       "deliverables": [
         "docs/review-batch-feature-13.md",
         "pinned adapter builds, registry modes, and observers",
-        "per-mode standard corpus and feature audit"
+        "per-mode standard corpus and feature audit",
+        "parsers/features/build_batch_13.sh"
       ],
       "acceptance_commands": [
+        "sh parsers/features/build_batch_13.sh",
+        "python3 -B tools/validate_feature_batch.py P3-13 --output /tmp/jsonsuite-P3-13-audit",
         "python3 -B tools/check_roadmap.py --task P3-13",
         "python3 -B -m unittest discover -s tests -v"
       ],
@@ -2489,11 +2535,12 @@
         "S6"
       ],
       "source_url": "https://github.com/goccy/go-json",
-      "source_verified": false,
-      "version_to_pin": null,
-      "license": null,
+      "source_verified": true,
+      "version_to_pin": "v0.11.2",
+      "license": "MIT",
       "build_steps": [
-        "Verify primary source, release revision, checksum, license, and API before adding this adapter."
+        "Pin github.com/goccy/go-json v0.11.2 in go.mod; retain go.sum and license notices.",
+        "Build the adapter with a compatible pinned Go toolchain after inspecting library APIs."
       ],
       "priority": 1,
       "status": "todo",
@@ -2504,7 +2551,15 @@
         "all documented strict modes",
         "documented lenient modes where present"
       ],
-      "task_id": "P3-01"
+      "task_id": "P3-01",
+      "source_verification": {
+        "release_url": "https://github.com/goccy/go-json/releases/tag/v0.11.2",
+        "commit": "3ce7333e2c03dcb8801817bf516c60545154a66c",
+        "archive_sha256": "6355434354cf637f224a7019df27a19b926e34bffef358464ddd7bb88a388831"
+      },
+      "platforms": [
+        "Linux amd64 (planned verification)"
+      ]
     },
     {
       "id": "parser-002",
@@ -2516,11 +2571,12 @@
         "S6"
       ],
       "source_url": "https://github.com/bytedance/sonic",
-      "source_verified": false,
-      "version_to_pin": null,
-      "license": null,
+      "source_verified": true,
+      "version_to_pin": "v1.15.4",
+      "license": "Apache-2.0",
       "build_steps": [
-        "Verify primary source, release revision, checksum, license, and API before adding this adapter."
+        "Pin github.com/bytedance/sonic v1.15.4 in go.mod; retain go.sum and license notices.",
+        "Build the adapter with a compatible pinned Go toolchain after inspecting library APIs."
       ],
       "priority": 2,
       "status": "todo",
@@ -2531,7 +2587,15 @@
         "all documented strict modes",
         "documented lenient modes where present"
       ],
-      "task_id": "P3-01"
+      "task_id": "P3-01",
+      "source_verification": {
+        "release_url": "https://github.com/bytedance/sonic/releases/tag/v1.15.4",
+        "commit": "f1003e13e7899a6e536181fa66e986c4f29db5d5",
+        "archive_sha256": "5ba746b88da5ac47766a5d3700e90e54a4be46318c228e3a1cb6ac6f2431ca4f"
+      },
+      "platforms": [
+        "Linux amd64 (planned verification)"
+      ]
     },
     {
       "id": "parser-003",
@@ -2543,11 +2607,12 @@
         "S6"
       ],
       "source_url": "https://github.com/json-iterator/go",
-      "source_verified": false,
-      "version_to_pin": null,
-      "license": null,
+      "source_verified": true,
+      "version_to_pin": "v1.1.12",
+      "license": "MIT",
       "build_steps": [
-        "Verify primary source, release revision, checksum, license, and API before adding this adapter."
+        "Pin github.com/json-iterator/go v1.1.12 in go.mod; retain go.sum and license notices.",
+        "Build the adapter with a compatible pinned Go toolchain after inspecting library APIs."
       ],
       "priority": 3,
       "status": "todo",
@@ -2558,7 +2623,15 @@
         "all documented strict modes",
         "documented lenient modes where present"
       ],
-      "task_id": "P3-01"
+      "task_id": "P3-01",
+      "source_verification": {
+        "release_url": "https://github.com/json-iterator/go/releases/tag/v1.1.12",
+        "commit": "024077e996b048517130b21ea6bf12aa23055d3d",
+        "archive_sha256": "4eefadce6d55a35b8531912d482f53b6ef8bf790dd7667870324e713d22e202c"
+      },
+      "platforms": [
+        "Linux amd64 (planned verification)"
+      ]
     },
     {
       "id": "parser-004",
@@ -3638,7 +3711,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -3653,7 +3726,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D01"
+      "task_id": "P3-D01",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-044",
@@ -3664,7 +3738,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -3679,7 +3753,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D02"
+      "task_id": "P3-D02",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-045",
@@ -3690,7 +3765,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -3705,7 +3780,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D02"
+      "task_id": "P3-D02",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-046",
@@ -3716,7 +3792,7 @@
       "document_sources": [
         "S18"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/netplex/json-smart-v2",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -3731,7 +3807,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D02"
+      "task_id": "P3-D02",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-047",
@@ -3742,7 +3819,7 @@
       "document_sources": [
         "S18"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/netplex/json-smart-v2",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -3757,7 +3834,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D02"
+      "task_id": "P3-D02",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-048",
@@ -3768,7 +3846,7 @@
       "document_sources": [
         "S18"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/netplex/json-smart-v2",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -3783,7 +3861,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D03"
+      "task_id": "P3-D03",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-049",
@@ -3794,7 +3873,7 @@
       "document_sources": [
         "S18"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/netplex/json-smart-v2",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -3809,7 +3888,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D03"
+      "task_id": "P3-D03",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-050",
@@ -3820,7 +3900,7 @@
       "document_sources": [
         "S18"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/netplex/json-smart-v2",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -3835,7 +3915,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D03"
+      "task_id": "P3-D03",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-051",
@@ -3846,7 +3927,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -3861,7 +3942,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D03"
+      "task_id": "P3-D03",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-052",
@@ -3872,7 +3954,7 @@
       "document_sources": [
         "S6"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/go-json-experiment/jsonbench",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -3887,7 +3969,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D04"
+      "task_id": "P3-D04",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-053",
@@ -3898,7 +3981,7 @@
       "document_sources": [
         "S7"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/TkTech/json_benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -3913,7 +3996,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D04"
+      "task_id": "P3-D04",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-054",
@@ -3925,7 +4009,7 @@
         "S2",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -3940,7 +4024,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D04"
+      "task_id": "P3-D04",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-055",
@@ -3952,7 +4037,7 @@
         "S2",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -3967,7 +4052,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D04"
+      "task_id": "P3-D04",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-056",
@@ -3978,7 +4064,7 @@
       "document_sources": [
         "S5"
       ],
-      "source_url": null,
+      "source_url": "https://bishopfox.com/blog/json-interoperability-vulnerabilities",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -3993,7 +4079,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D05"
+      "task_id": "P3-D05",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-057",
@@ -4005,7 +4092,7 @@
         "S15",
         "S5"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/colinodell/json5",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4020,7 +4107,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D05"
+      "task_id": "P3-D05",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-058",
@@ -4032,7 +4120,7 @@
         "S15",
         "S5"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/colinodell/json5",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4047,7 +4135,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D05"
+      "task_id": "P3-D05",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-059",
@@ -4059,7 +4148,7 @@
         "S15",
         "S5"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/colinodell/json5",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4074,7 +4163,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D05"
+      "task_id": "P3-D05",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-060",
@@ -4085,7 +4175,7 @@
       "document_sources": [
         "S5"
       ],
-      "source_url": null,
+      "source_url": "https://bishopfox.com/blog/json-interoperability-vulnerabilities",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4100,7 +4190,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D06"
+      "task_id": "P3-D06",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-061",
@@ -4126,7 +4217,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D06"
+      "task_id": "P3-D06",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-062",
@@ -4137,7 +4229,7 @@
       "document_sources": [
         "S19"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/burningtree/awesome-json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4152,7 +4244,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D06"
+      "task_id": "P3-D06",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-063",
@@ -4163,7 +4256,7 @@
       "document_sources": [
         "S19"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/burningtree/awesome-json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4178,7 +4271,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D06"
+      "task_id": "P3-D06",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-064",
@@ -4204,7 +4298,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D07"
+      "task_id": "P3-D07",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-065",
@@ -4215,7 +4310,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4230,7 +4325,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D07"
+      "task_id": "P3-D07",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-066",
@@ -4241,7 +4337,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4256,7 +4352,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D07"
+      "task_id": "P3-D07",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-067",
@@ -4267,7 +4364,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4282,7 +4379,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D07"
+      "task_id": "P3-D07",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-068",
@@ -4293,7 +4391,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4308,7 +4406,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D08"
+      "task_id": "P3-D08",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-069",
@@ -4319,7 +4418,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4334,7 +4433,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D08"
+      "task_id": "P3-D08",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-070",
@@ -4345,7 +4445,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4360,7 +4460,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D08"
+      "task_id": "P3-D08",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-071",
@@ -4371,7 +4472,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4386,7 +4487,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D08"
+      "task_id": "P3-D08",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-072",
@@ -4397,7 +4499,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4412,7 +4514,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D09"
+      "task_id": "P3-D09",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-073",
@@ -4423,7 +4526,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4438,7 +4541,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D09"
+      "task_id": "P3-D09",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-074",
@@ -4449,7 +4553,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4464,7 +4568,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D09"
+      "task_id": "P3-D09",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-075",
@@ -4475,7 +4580,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4490,7 +4595,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D09"
+      "task_id": "P3-D09",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-076",
@@ -4501,7 +4607,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4516,7 +4622,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D10"
+      "task_id": "P3-D10",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-077",
@@ -4527,7 +4634,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4542,7 +4649,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D10"
+      "task_id": "P3-D10",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-078",
@@ -4553,7 +4661,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4568,7 +4676,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D10"
+      "task_id": "P3-D10",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-079",
@@ -4579,7 +4688,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4594,7 +4703,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D10"
+      "task_id": "P3-D10",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-080",
@@ -4605,7 +4715,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4620,7 +4730,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D11"
+      "task_id": "P3-D11",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-081",
@@ -4631,7 +4742,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4646,7 +4757,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D11"
+      "task_id": "P3-D11",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-082",
@@ -4657,7 +4769,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4672,7 +4784,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D11"
+      "task_id": "P3-D11",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-083",
@@ -4683,7 +4796,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4698,7 +4811,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D11"
+      "task_id": "P3-D11",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-084",
@@ -4709,7 +4823,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4724,7 +4838,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D12"
+      "task_id": "P3-D12",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-085",
@@ -4735,7 +4850,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4750,7 +4865,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D12"
+      "task_id": "P3-D12",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-086",
@@ -4761,7 +4877,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4776,7 +4892,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D12"
+      "task_id": "P3-D12",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-087",
@@ -4787,7 +4904,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4802,7 +4919,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D12"
+      "task_id": "P3-D12",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-088",
@@ -4813,7 +4931,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4828,7 +4946,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D13"
+      "task_id": "P3-D13",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-089",
@@ -4839,7 +4958,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4854,7 +4973,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D13"
+      "task_id": "P3-D13",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-090",
@@ -4865,7 +4985,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4880,7 +5000,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D13"
+      "task_id": "P3-D13",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-091",
@@ -4891,7 +5012,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4906,7 +5027,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D13"
+      "task_id": "P3-D13",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-092",
@@ -4917,7 +5039,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4932,7 +5054,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D14"
+      "task_id": "P3-D14",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-093",
@@ -4943,7 +5066,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4958,7 +5081,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D14"
+      "task_id": "P3-D14",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-094",
@@ -4969,7 +5093,7 @@
       "document_sources": [
         "S2"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -4984,7 +5108,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D14"
+      "task_id": "P3-D14",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-095",
@@ -4995,7 +5120,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5010,7 +5135,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D14"
+      "task_id": "P3-D14",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-096",
@@ -5021,7 +5147,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5036,7 +5162,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D15"
+      "task_id": "P3-D15",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-097",
@@ -5047,7 +5174,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5062,7 +5189,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D15"
+      "task_id": "P3-D15",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-098",
@@ -5073,7 +5201,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5088,7 +5216,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D15"
+      "task_id": "P3-D15",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-099",
@@ -5099,7 +5228,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5109,13 +5238,14 @@
       "priority": 1098,
       "status": "todo",
       "prediction_status": "untested",
-      "coverage": "registered",
+      "coverage": "identity-unresolved",
       "modes_to_verify": [
         "default",
         "all documented strict modes"
       ],
-      "reconciliation": "Qt JSON registry entry already present; verify exact QJson identity before claiming equivalence.",
-      "task_id": "P3-D15"
+      "reconciliation": "The Qt adapter uses QJsonDocument; this does not establish equivalence to a separate QJson library.",
+      "task_id": "P3-D15",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-100",
@@ -5126,7 +5256,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5141,7 +5271,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D16"
+      "task_id": "P3-D16",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-101",
@@ -5152,7 +5283,7 @@
       "document_sources": [
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5167,7 +5298,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D16"
+      "task_id": "P3-D16",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-102",
@@ -5180,7 +5312,7 @@
         "S2",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5195,7 +5327,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D16"
+      "task_id": "P3-D16",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-103",
@@ -5208,7 +5341,7 @@
         "S2",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5223,7 +5356,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D16"
+      "task_id": "P3-D16",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-104",
@@ -5236,7 +5370,7 @@
         "S2",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5251,7 +5385,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D17"
+      "task_id": "P3-D17",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-105",
@@ -5264,7 +5399,7 @@
         "S2",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5279,7 +5414,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D17"
+      "task_id": "P3-D17",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-106",
@@ -5292,7 +5428,7 @@
         "S2",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5308,7 +5444,8 @@
         "all documented strict modes"
       ],
       "reconciliation": "Already registered as C++ Folly v2025.09.29.00; obtain observations, do not add a duplicate adapter.",
-      "task_id": "P3-D17"
+      "task_id": "P3-D17",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-107",
@@ -5321,7 +5458,7 @@
         "S2",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5336,7 +5473,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D17"
+      "task_id": "P3-D17",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-108",
@@ -5349,7 +5487,7 @@
         "S2",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5364,7 +5502,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D18"
+      "task_id": "P3-D18",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-109",
@@ -5377,7 +5516,7 @@
         "S2",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5392,7 +5531,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D18"
+      "task_id": "P3-D18",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-110",
@@ -5405,7 +5545,7 @@
         "S18",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/fabienrenaud/java-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5420,7 +5560,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D18"
+      "task_id": "P3-D18",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-111",
@@ -5433,7 +5574,7 @@
         "S18",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/fabienrenaud/java-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5448,7 +5589,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D18"
+      "task_id": "P3-D18",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-112",
@@ -5461,7 +5603,7 @@
         "S18",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/fabienrenaud/java-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5476,7 +5618,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D19"
+      "task_id": "P3-D19",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-113",
@@ -5489,7 +5632,7 @@
         "S18",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/fabienrenaud/java-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5504,7 +5647,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D19"
+      "task_id": "P3-D19",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-114",
@@ -5517,7 +5661,7 @@
         "S18",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/fabienrenaud/java-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5532,7 +5676,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D19"
+      "task_id": "P3-D19",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-115",
@@ -5545,7 +5690,7 @@
         "S18",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/fabienrenaud/java-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5560,7 +5705,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D19"
+      "task_id": "P3-D19",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-116",
@@ -5573,7 +5719,7 @@
         "S18",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/fabienrenaud/java-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5588,7 +5734,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D20"
+      "task_id": "P3-D20",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-117",
@@ -5601,7 +5748,7 @@
         "S18",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/fabienrenaud/java-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5616,7 +5763,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D20"
+      "task_id": "P3-D20",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-118",
@@ -5629,7 +5777,7 @@
         "S18",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/fabienrenaud/java-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5644,7 +5792,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D20"
+      "task_id": "P3-D20",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-119",
@@ -5657,7 +5806,7 @@
         "S18",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/fabienrenaud/java-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5672,7 +5821,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D20"
+      "task_id": "P3-D20",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-120",
@@ -5685,7 +5835,7 @@
         "S18",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/fabienrenaud/java-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5700,7 +5850,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D21"
+      "task_id": "P3-D21",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-121",
@@ -5713,7 +5864,7 @@
         "S18",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/fabienrenaud/java-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5728,7 +5879,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D21"
+      "task_id": "P3-D21",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-122",
@@ -5741,7 +5893,7 @@
         "S5",
         "S4"
       ],
-      "source_url": null,
+      "source_url": "https://arxiv.org/pdf/2104.14323",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5756,7 +5908,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D21"
+      "task_id": "P3-D21",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-123",
@@ -5769,7 +5922,7 @@
         "S5",
         "S4"
       ],
-      "source_url": null,
+      "source_url": "https://arxiv.org/pdf/2104.14323",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5784,7 +5937,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D21"
+      "task_id": "P3-D21",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-124",
@@ -5797,7 +5951,7 @@
         "S5",
         "S4"
       ],
-      "source_url": null,
+      "source_url": "https://arxiv.org/pdf/2104.14323",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5812,7 +5966,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D22"
+      "task_id": "P3-D22",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-125",
@@ -5825,7 +5980,7 @@
         "S5",
         "S4"
       ],
-      "source_url": null,
+      "source_url": "https://arxiv.org/pdf/2104.14323",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5840,7 +5995,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D22"
+      "task_id": "P3-D22",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-126",
@@ -5852,7 +6008,7 @@
         "S16",
         "S4"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5867,7 +6023,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D22"
+      "task_id": "P3-D22",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-127",
@@ -5879,7 +6036,7 @@
         "S16",
         "S4"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5894,7 +6051,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D22"
+      "task_id": "P3-D22",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-128",
@@ -5906,7 +6064,7 @@
         "S16",
         "S4"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5921,7 +6079,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D23"
+      "task_id": "P3-D23",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-129",
@@ -5933,7 +6092,7 @@
         "S16",
         "S4"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5948,7 +6107,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D23"
+      "task_id": "P3-D23",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-130",
@@ -5960,7 +6120,7 @@
         "S1",
         "S17"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -5975,7 +6135,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D23"
+      "task_id": "P3-D23",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-131",
@@ -5987,7 +6148,7 @@
         "S1",
         "S17"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6002,7 +6163,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D23"
+      "task_id": "P3-D23",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-132",
@@ -6014,7 +6176,7 @@
         "S1",
         "S17"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6029,7 +6191,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D24"
+      "task_id": "P3-D24",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-133",
@@ -6041,7 +6204,7 @@
         "S1",
         "S17"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6056,7 +6219,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D24"
+      "task_id": "P3-D24",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-134",
@@ -6068,7 +6232,7 @@
         "S1",
         "S17"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6083,7 +6247,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D24"
+      "task_id": "P3-D24",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-135",
@@ -6095,7 +6260,7 @@
         "S1",
         "S17"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6110,7 +6275,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D24"
+      "task_id": "P3-D24",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-136",
@@ -6122,7 +6288,7 @@
         "S1",
         "S17"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6137,7 +6303,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D25"
+      "task_id": "P3-D25",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-137",
@@ -6149,7 +6316,7 @@
         "S1",
         "S17"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6164,7 +6331,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D25"
+      "task_id": "P3-D25",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-138",
@@ -6176,7 +6344,7 @@
         "S1",
         "S17"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6191,7 +6359,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D25"
+      "task_id": "P3-D25",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-139",
@@ -6203,7 +6372,7 @@
         "S1",
         "S17"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6218,7 +6387,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D25"
+      "task_id": "P3-D25",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-140",
@@ -6230,7 +6400,7 @@
         "S1",
         "S17"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6245,7 +6415,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D26"
+      "task_id": "P3-D26",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-141",
@@ -6257,7 +6428,7 @@
         "S1",
         "S17"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6272,7 +6443,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D26"
+      "task_id": "P3-D26",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-142",
@@ -6284,7 +6456,7 @@
         "S1",
         "S17"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6299,7 +6471,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D26"
+      "task_id": "P3-D26",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-143",
@@ -6311,7 +6484,7 @@
         "S1",
         "S17"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6326,7 +6499,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D26"
+      "task_id": "P3-D26",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-144",
@@ -6338,7 +6512,7 @@
         "S1",
         "S17"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6353,7 +6527,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D27"
+      "task_id": "P3-D27",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-145",
@@ -6364,7 +6539,7 @@
       "document_sources": [
         "S16"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6379,7 +6554,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D27"
+      "task_id": "P3-D27",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-146",
@@ -6390,7 +6566,7 @@
       "document_sources": [
         "S16"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6405,7 +6581,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D27"
+      "task_id": "P3-D27",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-147",
@@ -6416,7 +6593,7 @@
       "document_sources": [
         "S16"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6431,7 +6608,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D27"
+      "task_id": "P3-D27",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-148",
@@ -6442,7 +6620,7 @@
       "document_sources": [
         "S16"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6457,7 +6635,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D28"
+      "task_id": "P3-D28",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-149",
@@ -6468,7 +6647,7 @@
       "document_sources": [
         "S16"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6483,7 +6662,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D28"
+      "task_id": "P3-D28",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-150",
@@ -6494,7 +6674,7 @@
       "document_sources": [
         "S16"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6509,7 +6689,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D28"
+      "task_id": "P3-D28",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-151",
@@ -6520,7 +6701,7 @@
       "document_sources": [
         "S16"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6535,7 +6716,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D28"
+      "task_id": "P3-D28",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-152",
@@ -6546,7 +6728,7 @@
       "document_sources": [
         "S16"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6561,7 +6743,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D29"
+      "task_id": "P3-D29",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-153",
@@ -6572,7 +6755,7 @@
       "document_sources": [
         "S16"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6587,7 +6770,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D29"
+      "task_id": "P3-D29",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-154",
@@ -6598,7 +6782,7 @@
       "document_sources": [
         "S16"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6613,7 +6797,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D29"
+      "task_id": "P3-D29",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-155",
@@ -6624,7 +6809,7 @@
       "document_sources": [
         "S16"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6639,7 +6824,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D29"
+      "task_id": "P3-D29",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-156",
@@ -6650,7 +6836,7 @@
       "document_sources": [
         "S16"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6665,7 +6851,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D30"
+      "task_id": "P3-D30",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-157",
@@ -6676,7 +6863,7 @@
       "document_sources": [
         "S16"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6691,7 +6878,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D30"
+      "task_id": "P3-D30",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-158",
@@ -6702,7 +6890,7 @@
       "document_sources": [
         "S16"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6717,7 +6905,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D30"
+      "task_id": "P3-D30",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-159",
@@ -6728,7 +6917,7 @@
       "document_sources": [
         "S16"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6743,7 +6932,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D30"
+      "task_id": "P3-D30",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-160",
@@ -6769,7 +6959,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D31"
+      "task_id": "P3-D31",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-161",
@@ -6795,7 +6986,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D31"
+      "task_id": "P3-D31",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-162",
@@ -6821,7 +7013,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D31"
+      "task_id": "P3-D31",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-163",
@@ -6834,7 +7027,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/AmirHJabari/JsonBenchmark.Net",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6849,7 +7042,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D31"
+      "task_id": "P3-D31",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-164",
@@ -6862,7 +7056,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/AmirHJabari/JsonBenchmark.Net",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6877,7 +7071,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D32"
+      "task_id": "P3-D32",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-165",
@@ -6890,7 +7085,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/AmirHJabari/JsonBenchmark.Net",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6905,7 +7100,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D32"
+      "task_id": "P3-D32",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-166",
@@ -6918,7 +7114,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/AmirHJabari/JsonBenchmark.Net",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6933,7 +7129,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D32"
+      "task_id": "P3-D32",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-167",
@@ -6946,7 +7143,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/AmirHJabari/JsonBenchmark.Net",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6961,7 +7158,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D32"
+      "task_id": "P3-D32",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-168",
@@ -6974,7 +7172,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/AmirHJabari/JsonBenchmark.Net",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -6989,7 +7187,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D33"
+      "task_id": "P3-D33",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-169",
@@ -7002,7 +7201,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/AmirHJabari/JsonBenchmark.Net",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7017,7 +7216,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D33"
+      "task_id": "P3-D33",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-170",
@@ -7030,7 +7230,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/AmirHJabari/JsonBenchmark.Net",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7045,7 +7245,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D33"
+      "task_id": "P3-D33",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-171",
@@ -7058,7 +7259,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/AmirHJabari/JsonBenchmark.Net",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7073,7 +7274,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D33"
+      "task_id": "P3-D33",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-172",
@@ -7086,7 +7288,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/AmirHJabari/JsonBenchmark.Net",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7101,7 +7303,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D34"
+      "task_id": "P3-D34",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-173",
@@ -7114,7 +7317,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/AmirHJabari/JsonBenchmark.Net",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7129,7 +7332,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D34"
+      "task_id": "P3-D34",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-174",
@@ -7142,7 +7346,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/AmirHJabari/JsonBenchmark.Net",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7157,7 +7361,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D34"
+      "task_id": "P3-D34",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-175",
@@ -7170,7 +7375,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/AmirHJabari/JsonBenchmark.Net",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7185,7 +7390,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D34"
+      "task_id": "P3-D34",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-176",
@@ -7198,7 +7404,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/AmirHJabari/JsonBenchmark.Net",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7213,7 +7419,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D35"
+      "task_id": "P3-D35",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-177",
@@ -7226,7 +7433,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/AmirHJabari/JsonBenchmark.Net",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7241,7 +7448,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D35"
+      "task_id": "P3-D35",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-178",
@@ -7254,7 +7462,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/AmirHJabari/JsonBenchmark.Net",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7269,7 +7477,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D35"
+      "task_id": "P3-D35",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-179",
@@ -7282,7 +7491,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/AmirHJabari/JsonBenchmark.Net",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7297,7 +7506,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D35"
+      "task_id": "P3-D35",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-180",
@@ -7323,7 +7533,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D36"
+      "task_id": "P3-D36",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-181",
@@ -7349,7 +7560,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D36"
+      "task_id": "P3-D36",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-182",
@@ -7360,7 +7572,7 @@
       "document_sources": [
         "S6"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/go-json-experiment/jsonbench",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7375,7 +7587,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D36"
+      "task_id": "P3-D36",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-183",
@@ -7386,7 +7599,7 @@
       "document_sources": [
         "S6"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/go-json-experiment/jsonbench",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7401,7 +7614,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D36"
+      "task_id": "P3-D36",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-184",
@@ -7414,7 +7628,7 @@
         "S19",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/go-json-experiment/jsonbench",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7429,7 +7643,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D37"
+      "task_id": "P3-D37",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-185",
@@ -7442,7 +7657,7 @@
         "S19",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/go-json-experiment/jsonbench",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7457,7 +7672,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D37"
+      "task_id": "P3-D37",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-186",
@@ -7470,7 +7686,7 @@
         "S19",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/go-json-experiment/jsonbench",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7485,7 +7701,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D37"
+      "task_id": "P3-D37",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-187",
@@ -7498,7 +7715,7 @@
         "S19",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/go-json-experiment/jsonbench",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7513,7 +7730,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D37"
+      "task_id": "P3-D37",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-188",
@@ -7526,7 +7744,7 @@
         "S19",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/go-json-experiment/jsonbench",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7541,7 +7759,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D38"
+      "task_id": "P3-D38",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-189",
@@ -7554,7 +7773,7 @@
         "S19",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/go-json-experiment/jsonbench",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7569,7 +7788,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D38"
+      "task_id": "P3-D38",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-190",
@@ -7582,7 +7802,7 @@
         "S8",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7597,7 +7817,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D38"
+      "task_id": "P3-D38",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-191",
@@ -7610,7 +7831,7 @@
         "S8",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7625,7 +7846,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D38"
+      "task_id": "P3-D38",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-192",
@@ -7638,7 +7860,7 @@
         "S8",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7653,7 +7875,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D39"
+      "task_id": "P3-D39",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-193",
@@ -7666,7 +7889,7 @@
         "S8",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7681,7 +7904,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D39"
+      "task_id": "P3-D39",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-194",
@@ -7694,7 +7918,7 @@
         "S8",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7709,7 +7933,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D39"
+      "task_id": "P3-D39",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-195",
@@ -7722,7 +7947,7 @@
         "S8",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7737,7 +7962,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D39"
+      "task_id": "P3-D39",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-196",
@@ -7750,7 +7976,7 @@
         "S8",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7765,7 +7991,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D40"
+      "task_id": "P3-D40",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-197",
@@ -7778,7 +8005,7 @@
         "S8",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7793,7 +8020,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D40"
+      "task_id": "P3-D40",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-198",
@@ -7806,7 +8034,7 @@
         "S8",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7821,7 +8049,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D40"
+      "task_id": "P3-D40",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-199",
@@ -7834,7 +8063,7 @@
         "S8",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7849,7 +8078,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D40"
+      "task_id": "P3-D40",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-200",
@@ -7862,7 +8092,7 @@
         "S8",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7877,7 +8107,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D41"
+      "task_id": "P3-D41",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-201",
@@ -7890,7 +8121,7 @@
         "S8",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7905,7 +8136,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D41"
+      "task_id": "P3-D41",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-202",
@@ -7917,7 +8149,7 @@
         "S7",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/TkTech/json_benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7932,7 +8164,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D41"
+      "task_id": "P3-D41",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-203",
@@ -7944,7 +8177,7 @@
         "S7",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/TkTech/json_benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7959,7 +8192,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D41"
+      "task_id": "P3-D41",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-204",
@@ -7971,7 +8205,7 @@
         "S7",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/TkTech/json_benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -7986,7 +8220,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D42"
+      "task_id": "P3-D42",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-205",
@@ -7999,7 +8234,7 @@
         "S19",
         "S10"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8014,7 +8249,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D42"
+      "task_id": "P3-D42",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-206",
@@ -8027,7 +8263,7 @@
         "S19",
         "S10"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8042,7 +8278,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D42"
+      "task_id": "P3-D42",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-207",
@@ -8055,7 +8292,7 @@
         "S19",
         "S10"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8070,7 +8307,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D42"
+      "task_id": "P3-D42",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-208",
@@ -8083,7 +8321,7 @@
         "S19",
         "S10"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8098,7 +8336,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D43"
+      "task_id": "P3-D43",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-209",
@@ -8111,7 +8350,7 @@
         "S19",
         "S10"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8126,7 +8365,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D43"
+      "task_id": "P3-D43",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-210",
@@ -8139,7 +8379,7 @@
         "S19",
         "S10"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8154,7 +8394,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D43"
+      "task_id": "P3-D43",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-211",
@@ -8167,7 +8408,7 @@
         "S19",
         "S10"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8182,7 +8423,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D43"
+      "task_id": "P3-D43",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-212",
@@ -8195,7 +8437,7 @@
         "S19",
         "S10"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8210,7 +8452,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D44"
+      "task_id": "P3-D44",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-213",
@@ -8223,7 +8466,7 @@
         "S19",
         "S10"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8238,7 +8481,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D44"
+      "task_id": "P3-D44",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-214",
@@ -8250,7 +8494,7 @@
         "S10",
         "S5"
       ],
-      "source_url": null,
+      "source_url": "https://www.npmjs.com/package/stream-json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8265,7 +8509,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D44"
+      "task_id": "P3-D44",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-215",
@@ -8277,7 +8522,7 @@
         "S10",
         "S5"
       ],
-      "source_url": null,
+      "source_url": "https://www.npmjs.com/package/stream-json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8292,7 +8537,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D44"
+      "task_id": "P3-D44",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-216",
@@ -8304,7 +8550,7 @@
         "S10",
         "S5"
       ],
-      "source_url": null,
+      "source_url": "https://www.npmjs.com/package/stream-json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8319,7 +8565,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D45"
+      "task_id": "P3-D45",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-217",
@@ -8331,7 +8578,7 @@
         "S10",
         "S5"
       ],
-      "source_url": null,
+      "source_url": "https://www.npmjs.com/package/stream-json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8346,7 +8593,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D45"
+      "task_id": "P3-D45",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-218",
@@ -8358,7 +8606,7 @@
         "S10",
         "S5"
       ],
-      "source_url": null,
+      "source_url": "https://www.npmjs.com/package/stream-json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8373,7 +8621,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D45"
+      "task_id": "P3-D45",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-219",
@@ -8385,7 +8634,7 @@
         "S10",
         "S5"
       ],
-      "source_url": null,
+      "source_url": "https://www.npmjs.com/package/stream-json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8400,7 +8649,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D45"
+      "task_id": "P3-D45",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-220",
@@ -8412,7 +8662,7 @@
         "S5",
         "S19"
       ],
-      "source_url": null,
+      "source_url": "https://bishopfox.com/blog/json-interoperability-vulnerabilities",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8427,7 +8677,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D46"
+      "task_id": "P3-D46",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-221",
@@ -8439,7 +8690,7 @@
         "S5",
         "S19"
       ],
-      "source_url": null,
+      "source_url": "https://bishopfox.com/blog/json-interoperability-vulnerabilities",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8454,7 +8705,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D46"
+      "task_id": "P3-D46",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-222",
@@ -8466,7 +8718,7 @@
         "S5",
         "S19"
       ],
-      "source_url": null,
+      "source_url": "https://bishopfox.com/blog/json-interoperability-vulnerabilities",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8481,7 +8733,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D46"
+      "task_id": "P3-D46",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-223",
@@ -8493,7 +8746,7 @@
         "S5",
         "S19"
       ],
-      "source_url": null,
+      "source_url": "https://bishopfox.com/blog/json-interoperability-vulnerabilities",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8508,7 +8761,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D46"
+      "task_id": "P3-D46",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-224",
@@ -8534,7 +8788,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D47"
+      "task_id": "P3-D47",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-225",
@@ -8546,7 +8801,7 @@
         "S14",
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/tilo/smarter_json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8561,7 +8816,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D47"
+      "task_id": "P3-D47",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-226",
@@ -8573,7 +8829,7 @@
         "S14",
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/tilo/smarter_json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8588,7 +8844,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D47"
+      "task_id": "P3-D47",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-227",
@@ -8600,7 +8857,7 @@
         "S14",
         "S1"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/tilo/smarter_json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8615,7 +8872,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D47"
+      "task_id": "P3-D47",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-228",
@@ -8627,7 +8885,7 @@
         "S5",
         "S12"
       ],
-      "source_url": null,
+      "source_url": "https://bishopfox.com/blog/json-interoperability-vulnerabilities",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8642,7 +8900,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D48"
+      "task_id": "P3-D48",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-229",
@@ -8654,7 +8913,7 @@
         "S5",
         "S12"
       ],
-      "source_url": null,
+      "source_url": "https://bishopfox.com/blog/json-interoperability-vulnerabilities",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8669,7 +8928,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D48"
+      "task_id": "P3-D48",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-230",
@@ -8681,7 +8941,7 @@
         "S5",
         "S12"
       ],
-      "source_url": null,
+      "source_url": "https://bishopfox.com/blog/json-interoperability-vulnerabilities",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8696,7 +8956,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D48"
+      "task_id": "P3-D48",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-231",
@@ -8708,7 +8969,7 @@
         "S1",
         "S12"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8723,7 +8984,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D48"
+      "task_id": "P3-D48",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-232",
@@ -8735,7 +8997,7 @@
         "S1",
         "S12"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8750,7 +9012,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D49"
+      "task_id": "P3-D49",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-233",
@@ -8762,7 +9025,7 @@
         "S1",
         "S12"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8777,7 +9040,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D49"
+      "task_id": "P3-D49",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-234",
@@ -8788,7 +9052,7 @@
       "document_sources": [
         "S12"
       ],
-      "source_url": null,
+      "source_url": "https://hexdocs.pm/exneus/readme.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8803,7 +9067,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D49"
+      "task_id": "P3-D49",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-235",
@@ -8814,7 +9079,7 @@
       "document_sources": [
         "S12"
       ],
-      "source_url": null,
+      "source_url": "https://hexdocs.pm/exneus/readme.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8829,7 +9094,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D49"
+      "task_id": "P3-D49",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-236",
@@ -8840,7 +9106,7 @@
       "document_sources": [
         "S12"
       ],
-      "source_url": null,
+      "source_url": "https://hexdocs.pm/exneus/readme.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8855,7 +9121,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D50"
+      "task_id": "P3-D50",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-237",
@@ -8867,7 +9134,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://swiftpackageindex.com/keywords/json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8882,7 +9149,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D50"
+      "task_id": "P3-D50",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-238",
@@ -8894,7 +9162,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://swiftpackageindex.com/keywords/json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8909,7 +9177,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D50"
+      "task_id": "P3-D50",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-239",
@@ -8921,7 +9190,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://swiftpackageindex.com/keywords/json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8936,7 +9205,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D50"
+      "task_id": "P3-D50",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-240",
@@ -8948,7 +9218,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://swiftpackageindex.com/keywords/json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8963,7 +9233,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D51"
+      "task_id": "P3-D51",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-241",
@@ -8975,7 +9246,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://swiftpackageindex.com/keywords/json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -8990,7 +9261,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D51"
+      "task_id": "P3-D51",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-242",
@@ -9002,7 +9274,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://swiftpackageindex.com/keywords/json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9017,7 +9289,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D51"
+      "task_id": "P3-D51",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-243",
@@ -9029,7 +9302,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://swiftpackageindex.com/keywords/json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9044,7 +9317,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D51"
+      "task_id": "P3-D51",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-244",
@@ -9056,7 +9330,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://swiftpackageindex.com/keywords/json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9071,7 +9345,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D52"
+      "task_id": "P3-D52",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-245",
@@ -9083,7 +9358,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://swiftpackageindex.com/keywords/json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9098,7 +9373,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D52"
+      "task_id": "P3-D52",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-246",
@@ -9110,7 +9386,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://swiftpackageindex.com/keywords/json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9125,7 +9401,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D52"
+      "task_id": "P3-D52",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-247",
@@ -9137,7 +9414,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://swiftpackageindex.com/keywords/json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9152,7 +9429,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D52"
+      "task_id": "P3-D52",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-248",
@@ -9164,7 +9442,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://swiftpackageindex.com/keywords/json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9179,7 +9457,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D53"
+      "task_id": "P3-D53",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-249",
@@ -9192,7 +9471,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9207,7 +9486,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D53"
+      "task_id": "P3-D53",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-250",
@@ -9220,7 +9500,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9235,7 +9515,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D53"
+      "task_id": "P3-D53",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-251",
@@ -9248,7 +9529,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9263,7 +9544,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D53"
+      "task_id": "P3-D53",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-252",
@@ -9274,7 +9556,7 @@
       "document_sources": [
         "S11"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/winterstream/wjson",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9289,7 +9571,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D54"
+      "task_id": "P3-D54",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-253",
@@ -9300,7 +9583,7 @@
       "document_sources": [
         "S11"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/winterstream/wjson",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9315,7 +9598,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D54"
+      "task_id": "P3-D54",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-254",
@@ -9342,7 +9626,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "M-no-independent-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-255",
@@ -9368,7 +9654,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D54"
+      "task_id": "P3-D54",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-256",
@@ -9394,7 +9681,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D54"
+      "task_id": "P3-D54",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-257",
@@ -9420,7 +9708,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D55"
+      "task_id": "P3-D55",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-258",
@@ -9432,7 +9721,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9447,7 +9736,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D55"
+      "task_id": "P3-D55",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-259",
@@ -9459,7 +9749,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9474,7 +9764,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D55"
+      "task_id": "P3-D55",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-260",
@@ -9486,7 +9777,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9501,7 +9792,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D55"
+      "task_id": "P3-D55",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-261",
@@ -9513,7 +9805,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9528,7 +9820,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D56"
+      "task_id": "P3-D56",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-262",
@@ -9540,7 +9833,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9555,7 +9848,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D56"
+      "task_id": "P3-D56",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-263",
@@ -9581,7 +9875,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D56"
+      "task_id": "P3-D56",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-264",
@@ -9607,7 +9902,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D56"
+      "task_id": "P3-D56",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-265",
@@ -9633,7 +9929,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D57"
+      "task_id": "P3-D57",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-266",
@@ -9659,7 +9956,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D57"
+      "task_id": "P3-D57",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-267",
@@ -9685,7 +9983,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D57"
+      "task_id": "P3-D57",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-268",
@@ -9711,7 +10010,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D57"
+      "task_id": "P3-D57",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-269",
@@ -9737,7 +10037,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D58"
+      "task_id": "P3-D58",
+      "source_url_kind": "M-no-independent-source"
     },
     {
       "id": "parser-270",
@@ -9749,7 +10050,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9764,7 +10065,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D58"
+      "task_id": "P3-D58",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-271",
@@ -9776,7 +10078,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9791,7 +10093,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D58"
+      "task_id": "P3-D58",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-272",
@@ -9803,7 +10106,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9818,7 +10121,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D58"
+      "task_id": "P3-D58",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-273",
@@ -9830,7 +10134,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9845,7 +10149,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D59"
+      "task_id": "P3-D59",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-274",
@@ -9857,7 +10162,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9872,7 +10177,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D59"
+      "task_id": "P3-D59",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-275",
@@ -9884,7 +10190,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9899,7 +10205,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D59"
+      "task_id": "P3-D59",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-276",
@@ -9911,7 +10218,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9926,7 +10233,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D59"
+      "task_id": "P3-D59",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-277",
@@ -9939,7 +10247,7 @@
         "S3",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9954,7 +10262,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D60"
+      "task_id": "P3-D60",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-278",
@@ -9967,7 +10276,7 @@
         "S3",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -9982,7 +10291,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D60"
+      "task_id": "P3-D60",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-279",
@@ -9995,7 +10305,7 @@
         "S3",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10010,7 +10320,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D60"
+      "task_id": "P3-D60",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-280",
@@ -10023,7 +10334,7 @@
         "S3",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10039,7 +10350,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-281",
@@ -10051,7 +10364,7 @@
         "S3",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10066,7 +10379,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D60"
+      "task_id": "P3-D60",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-282",
@@ -10078,7 +10392,7 @@
         "S3",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10094,7 +10408,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-283",
@@ -10106,7 +10422,7 @@
         "S3",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10122,7 +10438,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-284",
@@ -10134,7 +10452,7 @@
         "S3",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10149,7 +10467,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D61"
+      "task_id": "P3-D61",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-285",
@@ -10161,7 +10480,7 @@
         "S3",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10176,7 +10495,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D61"
+      "task_id": "P3-D61",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-286",
@@ -10188,7 +10508,7 @@
         "S3",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10203,7 +10523,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D61"
+      "task_id": "P3-D61",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-287",
@@ -10215,7 +10536,7 @@
         "S3",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10231,7 +10552,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-288",
@@ -10243,7 +10566,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10258,7 +10581,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D61"
+      "task_id": "P3-D61",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-289",
@@ -10270,7 +10594,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10285,7 +10609,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D62"
+      "task_id": "P3-D62",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-290",
@@ -10297,7 +10622,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10312,7 +10637,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D62"
+      "task_id": "P3-D62",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-291",
@@ -10324,7 +10650,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10339,7 +10665,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D62"
+      "task_id": "P3-D62",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-292",
@@ -10351,7 +10678,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10366,7 +10693,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D62"
+      "task_id": "P3-D62",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-293",
@@ -10378,7 +10706,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10393,7 +10721,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D63"
+      "task_id": "P3-D63",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-294",
@@ -10405,7 +10734,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10420,7 +10749,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D63"
+      "task_id": "P3-D63",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-295",
@@ -10432,7 +10762,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10447,7 +10777,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D63"
+      "task_id": "P3-D63",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-296",
@@ -10459,7 +10790,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10474,7 +10805,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D63"
+      "task_id": "P3-D63",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-297",
@@ -10486,7 +10818,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10501,7 +10833,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D64"
+      "task_id": "P3-D64",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-298",
@@ -10513,7 +10846,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10528,7 +10861,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D64"
+      "task_id": "P3-D64",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-299",
@@ -10540,7 +10874,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10555,7 +10889,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D64"
+      "task_id": "P3-D64",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-300",
@@ -10567,7 +10902,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10582,7 +10917,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D64"
+      "task_id": "P3-D64",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-301",
@@ -10594,7 +10930,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10609,7 +10945,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D65"
+      "task_id": "P3-D65",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-302",
@@ -10621,7 +10958,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10636,7 +10973,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D65"
+      "task_id": "P3-D65",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-303",
@@ -10648,7 +10986,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10663,7 +11001,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D65"
+      "task_id": "P3-D65",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-304",
@@ -10675,7 +11014,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10690,7 +11029,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D65"
+      "task_id": "P3-D65",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-305",
@@ -10702,7 +11042,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10717,7 +11057,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D66"
+      "task_id": "P3-D66",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-306",
@@ -10729,7 +11070,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10744,7 +11085,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D66"
+      "task_id": "P3-D66",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-307",
@@ -10756,7 +11098,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10771,7 +11113,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D66"
+      "task_id": "P3-D66",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-308",
@@ -10783,7 +11126,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10798,7 +11141,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D66"
+      "task_id": "P3-D66",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-309",
@@ -10810,7 +11154,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10825,7 +11169,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D67"
+      "task_id": "P3-D67",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-310",
@@ -10837,7 +11182,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10852,7 +11197,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D67"
+      "task_id": "P3-D67",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-311",
@@ -10864,7 +11210,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10879,7 +11225,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D67"
+      "task_id": "P3-D67",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-312",
@@ -10891,7 +11238,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10906,7 +11253,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D67"
+      "task_id": "P3-D67",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-313",
@@ -10918,7 +11266,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10933,7 +11281,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D68"
+      "task_id": "P3-D68",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-314",
@@ -10945,7 +11294,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10960,7 +11309,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D68"
+      "task_id": "P3-D68",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-315",
@@ -10972,7 +11322,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -10987,7 +11337,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D68"
+      "task_id": "P3-D68",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-316",
@@ -10999,7 +11350,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11014,7 +11365,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D68"
+      "task_id": "P3-D68",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-317",
@@ -11026,7 +11378,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11041,7 +11393,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D69"
+      "task_id": "P3-D69",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-318",
@@ -11053,7 +11406,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11068,7 +11421,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D69"
+      "task_id": "P3-D69",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-319",
@@ -11080,7 +11434,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11095,7 +11449,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D69"
+      "task_id": "P3-D69",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-320",
@@ -11107,7 +11462,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11122,7 +11477,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D69"
+      "task_id": "P3-D69",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-321",
@@ -11134,7 +11490,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11149,7 +11505,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D70"
+      "task_id": "P3-D70",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-322",
@@ -11161,7 +11518,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11176,7 +11533,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D70"
+      "task_id": "P3-D70",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-323",
@@ -11188,7 +11546,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11203,7 +11561,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D70"
+      "task_id": "P3-D70",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-324",
@@ -11215,7 +11574,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11230,7 +11589,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D70"
+      "task_id": "P3-D70",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-325",
@@ -11242,7 +11602,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11257,7 +11617,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D71"
+      "task_id": "P3-D71",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-326",
@@ -11269,7 +11630,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11284,7 +11645,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D71"
+      "task_id": "P3-D71",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-327",
@@ -11296,7 +11658,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11311,7 +11673,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D71"
+      "task_id": "P3-D71",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-328",
@@ -11323,7 +11686,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11338,7 +11701,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D71"
+      "task_id": "P3-D71",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-329",
@@ -11350,7 +11714,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11365,7 +11729,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D72"
+      "task_id": "P3-D72",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-330",
@@ -11377,7 +11742,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11392,7 +11757,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D72"
+      "task_id": "P3-D72",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-331",
@@ -11404,7 +11770,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11419,7 +11785,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D72"
+      "task_id": "P3-D72",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-332",
@@ -11431,7 +11798,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11446,7 +11813,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D72"
+      "task_id": "P3-D72",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-333",
@@ -11458,7 +11826,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11473,7 +11841,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D73"
+      "task_id": "P3-D73",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-334",
@@ -11485,7 +11854,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11500,7 +11869,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D73"
+      "task_id": "P3-D73",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-335",
@@ -11512,7 +11882,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11527,7 +11897,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D73"
+      "task_id": "P3-D73",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-336",
@@ -11539,7 +11910,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11554,7 +11925,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D73"
+      "task_id": "P3-D73",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-337",
@@ -11566,7 +11938,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11581,7 +11953,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D74"
+      "task_id": "P3-D74",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-338",
@@ -11593,7 +11966,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11608,7 +11981,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D74"
+      "task_id": "P3-D74",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-339",
@@ -11620,7 +11994,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11635,7 +12009,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D74"
+      "task_id": "P3-D74",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-340",
@@ -11647,7 +12022,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11662,7 +12037,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D74"
+      "task_id": "P3-D74",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-341",
@@ -11674,7 +12050,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11689,7 +12065,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D75"
+      "task_id": "P3-D75",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-342",
@@ -11701,7 +12078,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11716,7 +12093,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D75"
+      "task_id": "P3-D75",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-343",
@@ -11728,7 +12106,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11743,7 +12121,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D75"
+      "task_id": "P3-D75",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-344",
@@ -11755,7 +12134,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11770,7 +12149,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D75"
+      "task_id": "P3-D75",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-345",
@@ -11782,7 +12162,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11797,7 +12177,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D76"
+      "task_id": "P3-D76",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-346",
@@ -11809,7 +12190,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11824,7 +12205,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D76"
+      "task_id": "P3-D76",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-347",
@@ -11836,7 +12218,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11851,7 +12233,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D76"
+      "task_id": "P3-D76",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-348",
@@ -11863,7 +12246,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11878,7 +12261,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D76"
+      "task_id": "P3-D76",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-349",
@@ -11890,7 +12274,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11905,7 +12289,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D77"
+      "task_id": "P3-D77",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-350",
@@ -11917,7 +12302,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11932,7 +12317,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D77"
+      "task_id": "P3-D77",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-351",
@@ -11944,7 +12330,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11959,7 +12345,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D77"
+      "task_id": "P3-D77",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-352",
@@ -11971,7 +12358,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -11986,7 +12373,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D77"
+      "task_id": "P3-D77",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-353",
@@ -11998,7 +12386,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12013,7 +12401,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D78"
+      "task_id": "P3-D78",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-354",
@@ -12025,7 +12414,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12040,7 +12429,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D78"
+      "task_id": "P3-D78",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-355",
@@ -12052,7 +12442,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12067,7 +12457,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D78"
+      "task_id": "P3-D78",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-356",
@@ -12079,7 +12470,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12094,7 +12485,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D78"
+      "task_id": "P3-D78",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-357",
@@ -12106,7 +12498,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12121,7 +12513,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D79"
+      "task_id": "P3-D79",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-358",
@@ -12133,7 +12526,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12148,7 +12541,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D79"
+      "task_id": "P3-D79",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-359",
@@ -12160,7 +12554,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12175,7 +12569,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D79"
+      "task_id": "P3-D79",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-360",
@@ -12187,7 +12582,7 @@
         "S1",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12202,7 +12597,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D79"
+      "task_id": "P3-D79",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-361",
@@ -12214,7 +12610,7 @@
         "S7",
         "S3"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/TkTech/json_benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12230,7 +12626,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-362",
@@ -12242,7 +12640,7 @@
         "S7",
         "S3"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/TkTech/json_benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12258,7 +12656,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-363",
@@ -12270,7 +12670,7 @@
         "S7",
         "S3"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/TkTech/json_benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12286,7 +12686,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-364",
@@ -12297,7 +12699,7 @@
       "document_sources": [
         "S12"
       ],
-      "source_url": null,
+      "source_url": "https://hexdocs.pm/exneus/readme.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12312,7 +12714,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D80"
+      "task_id": "P3-D80",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-365",
@@ -12323,7 +12726,7 @@
       "document_sources": [
         "S12"
       ],
-      "source_url": null,
+      "source_url": "https://hexdocs.pm/exneus/readme.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12338,7 +12741,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D80"
+      "task_id": "P3-D80",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-366",
@@ -12350,7 +12754,7 @@
         "S10",
         "S5"
       ],
-      "source_url": null,
+      "source_url": "https://www.npmjs.com/package/stream-json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12365,7 +12769,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D80"
+      "task_id": "P3-D80",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-367",
@@ -12377,7 +12782,7 @@
         "S10",
         "S5"
       ],
-      "source_url": null,
+      "source_url": "https://www.npmjs.com/package/stream-json",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12392,7 +12797,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D80"
+      "task_id": "P3-D80",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-368",
@@ -12404,7 +12810,7 @@
         "S2",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12419,7 +12825,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D81"
+      "task_id": "P3-D81",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-369",
@@ -12431,7 +12838,7 @@
         "S2",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/miloyip/nativejson-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12446,7 +12853,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D81"
+      "task_id": "P3-D81",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-370",
@@ -12459,7 +12867,7 @@
         "S4",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12474,7 +12882,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D81"
+      "task_id": "P3-D81",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-371",
@@ -12487,7 +12896,7 @@
         "S4",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12502,7 +12911,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D81"
+      "task_id": "P3-D81",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-372",
@@ -12515,7 +12925,7 @@
         "S4",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://www.json.org/json-en.html",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12530,7 +12940,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D82"
+      "task_id": "P3-D82",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-373",
@@ -12541,7 +12952,7 @@
       "document_sources": [
         "S16"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12556,7 +12967,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D82"
+      "task_id": "P3-D82",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-374",
@@ -12567,7 +12979,7 @@
       "document_sources": [
         "S16"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/REASY/scala-json-benchmark",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12582,7 +12994,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D82"
+      "task_id": "P3-D82",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-375",
@@ -12594,7 +13007,7 @@
         "S20",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/Prodigysec/JSONTestSuite",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12609,7 +13022,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D82"
+      "task_id": "P3-D82",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-376",
@@ -12621,7 +13035,7 @@
         "S20",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/Prodigysec/JSONTestSuite",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12636,7 +13050,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D83"
+      "task_id": "P3-D83",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-377",
@@ -12648,7 +13063,7 @@
         "S20",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://github.com/Prodigysec/JSONTestSuite",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12663,7 +13078,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D83"
+      "task_id": "P3-D83",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-378",
@@ -12674,7 +13090,7 @@
       "document_sources": [
         "S3"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12689,7 +13105,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D83"
+      "task_id": "P3-D83",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-379",
@@ -12700,7 +13117,7 @@
       "document_sources": [
         "S3"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12715,7 +13132,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D83"
+      "task_id": "P3-D83",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-380",
@@ -12726,7 +13144,7 @@
       "document_sources": [
         "S3"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12741,7 +13159,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D84"
+      "task_id": "P3-D84",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-381",
@@ -12754,7 +13173,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12770,7 +13189,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-382",
@@ -12783,7 +13204,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12799,7 +13220,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-383",
@@ -12812,7 +13235,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12828,7 +13251,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-384",
@@ -12841,7 +13266,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12857,7 +13282,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-385",
@@ -12870,7 +13297,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12886,7 +13313,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-386",
@@ -12899,7 +13328,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12915,7 +13344,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-387",
@@ -12928,7 +13359,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12944,7 +13375,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-388",
@@ -12957,7 +13390,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -12973,7 +13406,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-389",
@@ -12986,7 +13421,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -13001,7 +13436,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D84"
+      "task_id": "P3-D84",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-390",
@@ -13014,7 +13450,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -13029,7 +13465,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D84"
+      "task_id": "P3-D84",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-391",
@@ -13042,7 +13479,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -13057,7 +13494,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D84"
+      "task_id": "P3-D84",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-392",
@@ -13070,7 +13508,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -13085,7 +13523,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D85"
+      "task_id": "P3-D85",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-393",
@@ -13098,7 +13537,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -13113,7 +13552,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D85"
+      "task_id": "P3-D85",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-394",
@@ -13126,7 +13566,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -13141,7 +13581,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D85"
+      "task_id": "P3-D85",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-395",
@@ -13154,7 +13595,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -13170,7 +13611,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-396",
@@ -13183,7 +13626,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -13199,7 +13642,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-397",
@@ -13212,7 +13657,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -13228,7 +13673,9 @@
         "all documented strict modes"
       ],
       "disposition": "excluded-pure-wrapper",
-      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed."
+      "exclusion_reason": "Document recommends skipping pure engine wrappers; no independent parser or conformance observation claimed.",
+      "source_url_kind": "document-discovery-source",
+      "exclusion_source": "Input PDF sections 5 and 7 recommend skipping pure wrappers of represented engines; excluded from integration, not measured."
     },
     {
       "id": "parser-398",
@@ -13241,7 +13688,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -13256,7 +13703,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D85"
+      "task_id": "P3-D85",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-399",
@@ -13269,7 +13717,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -13284,7 +13732,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D86"
+      "task_id": "P3-D86",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-400",
@@ -13297,7 +13746,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -13312,7 +13761,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D86"
+      "task_id": "P3-D86",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-401",
@@ -13325,7 +13775,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -13340,7 +13790,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D86"
+      "task_id": "P3-D86",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-402",
@@ -13353,7 +13804,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -13368,7 +13819,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D86"
+      "task_id": "P3-D86",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-403",
@@ -13381,7 +13833,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -13396,7 +13848,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D87"
+      "task_id": "P3-D87",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-404",
@@ -13409,7 +13862,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -13424,7 +13877,8 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D87"
+      "task_id": "P3-D87",
+      "source_url_kind": "document-discovery-source"
     },
     {
       "id": "parser-405",
@@ -13437,7 +13891,7 @@
         "S13",
         "M"
       ],
-      "source_url": null,
+      "source_url": "https://simdjson.org/software/",
       "source_verified": false,
       "version_to_pin": null,
       "license": null,
@@ -13452,8 +13906,22 @@
         "default",
         "all documented strict modes"
       ],
-      "task_id": "P3-D87"
+      "task_id": "P3-D87",
+      "source_url_kind": "document-discovery-source"
     }
   ],
-  "amendments": []
+  "amendments": [
+    {
+      "date": "2026-10-04",
+      "task": "P1-01",
+      "change": "Separate QJson identity from registered Qt QJsonDocument; discovery URLs identify source listings, not verified library repos.",
+      "reason": "Ground-truth source inspection does not prove that the QJson lead names the existing Qt backend."
+    },
+    {
+      "date": "2026-10-04",
+      "task": "P1-01",
+      "change": "Add explicit per-batch build and corpus/probe audit commands; provide the batch audit helper during P2-04.",
+      "reason": "A task deliverable/document check alone is insufficient to verify a parser integration. This refines acceptance without starting adapters before the harness."
+    }
+  ]
 }
