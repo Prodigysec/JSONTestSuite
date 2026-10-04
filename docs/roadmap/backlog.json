@@ -182,20 +182,34 @@
         "docs/review-batch-feature-01.md",
         "pinned adapter builds, registry modes, and observers",
         "per-mode standard corpus and feature audit",
-        "parsers/features/build_batch_01.sh"
+        "parsers/features/build_batch_01.sh",
+        "parsers/features/go_batch_01/main.go",
+        "parsers/features/go_batch_01/go.mod",
+        "parsers/features/go_batch_01/go.sum",
+        "parsers/features/go_batch_01/sources.json",
+        "parsers/features/registry.py",
+        "tools/build_go_feature_batch.py",
+        "tests/test_feature_go_batch_01.py",
+        "docs/roadmap/feature-batch-01.json"
       ],
       "acceptance_commands": [
         "sh parsers/features/build_batch_01.sh",
-        "python3 -B tools/validate_feature_batch.py P3-01 --output /tmp/jsonsuite-P3-01-audit",
+        "python3 -B tools/validate_feature_batch.py P3-01 --output /tmp/jsonsuite-P3-01-audit --jobs 3",
         "python3 -B tools/check_roadmap.py --task P3-01",
         "python3 -B -m unittest discover -s tests -v"
       ],
-      "status": "todo",
+      "status": "done",
       "parser_ids": [
         "parser-001",
         "parser-002",
         "parser-003"
-      ]
+      ],
+      "verification": {
+        "build": "Go 1.25.1 linux/amd64; three pinned primary modules and licenses verified",
+        "audit": "3924/3924 standard pairs; 1500/1500 feature pairs; 42 standard discrepancies retained; no runtime failures/skips",
+        "unit_tests": "131 tests, 22 optional skips, exit 0",
+        "evidence": "docs/roadmap/feature-batch-01.json"
+      }
     },
     {
       "id": "P3-02",
@@ -2569,9 +2583,9 @@
         "Build the adapter with a compatible pinned Go toolchain after inspecting library APIs."
       ],
       "priority": 1,
-      "status": "todo",
+      "status": "done",
       "prediction_status": "untested",
-      "coverage": "candidate",
+      "coverage": "integrated-and-tested",
       "modes_to_verify": [
         "default",
         "all documented strict modes",
@@ -2585,7 +2599,21 @@
       },
       "platforms": [
         "Linux amd64 (planned verification)"
-      ]
+      ],
+      "registry_names": [
+        "Go goccy/go-json v0.11.2 (default)",
+        "Go goccy/go-json v0.11.2 (UseNumber)"
+      ],
+      "verification": {
+        "evidence": "docs/roadmap/feature-batch-01.json",
+        "modes": [
+          "Go goccy/go-json v0.11.2 (default)",
+          "Go goccy/go-json v0.11.2 (UseNumber)"
+        ],
+        "platform": "Linux x86_64, Go 1.25.1",
+        "standard_pairs": 654,
+        "feature_pairs": 250
+      }
     },
     {
       "id": "parser-002",
@@ -2605,9 +2633,9 @@
         "Build the adapter with a compatible pinned Go toolchain after inspecting library APIs."
       ],
       "priority": 2,
-      "status": "todo",
+      "status": "done",
       "prediction_status": "untested",
-      "coverage": "candidate",
+      "coverage": "integrated-and-tested",
       "modes_to_verify": [
         "default",
         "all documented strict modes",
@@ -2621,7 +2649,29 @@
       },
       "platforms": [
         "Linux amd64 (planned verification)"
-      ]
+      ],
+      "registry_names": [
+        "Go sonic v1.15.4 (ConfigDefault)",
+        "Go sonic v1.15.4 (ConfigStd)",
+        "Go sonic v1.15.4 (ConfigFastest)",
+        "Go sonic v1.15.4 (ValidateString + UseUnicodeErrors)",
+        "Go sonic v1.15.4 (UseNumber)",
+        "Go sonic v1.15.4 (UseInt64)"
+      ],
+      "verification": {
+        "evidence": "docs/roadmap/feature-batch-01.json",
+        "modes": [
+          "Go sonic v1.15.4 (ConfigDefault)",
+          "Go sonic v1.15.4 (ConfigStd)",
+          "Go sonic v1.15.4 (ConfigFastest)",
+          "Go sonic v1.15.4 (ValidateString + UseUnicodeErrors)",
+          "Go sonic v1.15.4 (UseNumber)",
+          "Go sonic v1.15.4 (UseInt64)"
+        ],
+        "platform": "Linux x86_64, Go 1.25.1",
+        "standard_pairs": 1962,
+        "feature_pairs": 750
+      }
     },
     {
       "id": "parser-003",
@@ -2641,9 +2691,9 @@
         "Build the adapter with a compatible pinned Go toolchain after inspecting library APIs."
       ],
       "priority": 3,
-      "status": "todo",
+      "status": "done",
       "prediction_status": "untested",
-      "coverage": "candidate",
+      "coverage": "integrated-and-tested",
       "modes_to_verify": [
         "default",
         "all documented strict modes",
@@ -2657,7 +2707,25 @@
       },
       "platforms": [
         "Linux amd64 (planned verification)"
-      ]
+      ],
+      "registry_names": [
+        "Go json-iterator/go v1.1.12 (ConfigDefault)",
+        "Go json-iterator/go v1.1.12 (ConfigCompatibleWithStandardLibrary)",
+        "Go json-iterator/go v1.1.12 (ConfigFastest)",
+        "Go json-iterator/go v1.1.12 (UseNumber)"
+      ],
+      "verification": {
+        "evidence": "docs/roadmap/feature-batch-01.json",
+        "modes": [
+          "Go json-iterator/go v1.1.12 (ConfigDefault)",
+          "Go json-iterator/go v1.1.12 (ConfigCompatibleWithStandardLibrary)",
+          "Go json-iterator/go v1.1.12 (ConfigFastest)",
+          "Go json-iterator/go v1.1.12 (UseNumber)"
+        ],
+        "platform": "Linux x86_64, Go 1.25.1",
+        "standard_pairs": 1308,
+        "feature_pairs": 500
+      }
     },
     {
       "id": "parser-004",
@@ -13948,6 +14016,24 @@
       "task": "P1-01",
       "change": "Add explicit per-batch build and corpus/probe audit commands; provide the batch audit helper during P2-04.",
       "reason": "A task deliverable/document check alone is insufficient to verify a parser integration. This refines acceptance without starting adapters before the harness."
+    },
+    {
+      "date": "2026-10-04",
+      "task_id": "P3-01",
+      "reason": "json-iterator/go v1.1.12 native Unmarshal treats trailing NUL as end of input; reproduced acceptance of null\\0false, 0\\0, and object\\0garbage in every pinned Config preset.",
+      "change": "Use the same native configuration NewDecoder.Decode and inspect Buffered plus unread bytes for one-text framing; only RFC whitespace may follow. Retain native value decoding and document the adaptation. No fixture expectation changes."
+    },
+    {
+      "date": "2026-10-04",
+      "task_id": "P3-01",
+      "reason": "The initial json-iterator Decoder.Buffered framing approach returned stale numeric bytes at EOF and incorrectly rejected scalar 0; focused smoke tests caught it. Preliminary audit was interrupted and is not result evidence.",
+      "change": "Use the same native configuration BorrowIterator/ReadVal and WhatIsNext, accepting only a genuine io.EOF. This preserves scalar and number policies while distinguishing NUL from EOF."
+    },
+    {
+      "date": "2026-10-04",
+      "task_id": "P3-01",
+      "reason": "Sonic ConfigDefault serialized stored invalid UTF-8 byte 0xff as raw 22ff22; the JSON envelope otherwise replaced that byte, concealing serializer behavior.",
+      "change": "Extend observations with serialized_invalid_utf8 and serialized_bytes_hex, validate/retain them, and rerun the batch after regression coverage. Previous pre-extension audit remains diagnostic only."
     }
   ]
 }

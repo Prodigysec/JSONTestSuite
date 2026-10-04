@@ -47,7 +47,7 @@ def batch_names(task_id, backlog):
     if task is None:
         raise ValueError('Unknown roadmap task: '+task_id)
     if task_id == 'P2-04':
-        return sorted(name for name, mode in run_tests.programs.items() if mode.get('observation_commands'))
+        return sorted(name for name, mode in run_tests.programs.items() if name.startswith('Python stdlib ') or name=='Node.js V8 JSON.parse (strict UTF-8)')
     entries = [parser for parser in backlog['parsers'] if parser['id'] in task['parser_ids']]
     names = []
     for parser in entries:
@@ -111,10 +111,14 @@ def validate_batch(task_id, output, jobs=1):
     for name in names:
         source_paths.extend(Path(part) for part in run_tests.programs[name].get('observation_commands',[])
                             if part.endswith(('.py','.js')) and Path(part).is_file())
+        source_paths.extend(Path(part) for part in run_tests.programs[name].get('observation_source_files',[]))
+    build_paths={Path(part) for name in names for part in run_tests.programs[name].get('observation_build_artifacts',[])
+                 if Path(part).is_file()}
+    build_hashes={str(path.relative_to(ROOT)):hashlib.sha256(path.read_bytes()).hexdigest() for path in sorted(build_paths)}
     source_hashes = {str(path.relative_to(ROOT)):hashlib.sha256(path.read_bytes()).hexdigest()
                      for path in sorted(set(source_paths))}
     audit = dict(schema_version=1, task_id=task_id, revision=revision, dirty_worktree=dirty,
-                 source_hashes=source_hashes, selected_parsers=names,
+                 source_hashes=source_hashes, build_artifact_hashes=build_hashes, selected_parsers=names,
                  standard_planned_pairs=len(names)*len(fixtures), standard_recorded_pairs=sum(sum(c.values()) for c in counts.values()),
                  standard_counts=counts, standard_ci_failures=standard_ci_failures, feature_summary=features,
                  corpus=corpus, registry_commands={name:run_tests.programs[name]['commands'] for name in names},

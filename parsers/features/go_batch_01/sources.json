@@ -1,0 +1,43 @@
+{
+  "go_version": "go1.25.1",
+  "toolchain_archive": "go1.25.1.linux-amd64.tar.gz",
+  "toolchain_sha256": "7716a0d940a0f6ae8e1f3b3f4f36299dc53e31b16840dbd171254312c41ca12e",
+  "modules": [
+    {
+      "module": "github.com/goccy/go-json",
+      "version": "v0.11.2",
+      "license_file": "parsers/features/licenses/goccy-go-json.LICENSE",
+      "license_sha256": "a707cd425201945d57500566c47c74dc9fb8cd02ef91b9a761abddeb2401e6a7",
+      "repository": "goccy/go-json",
+      "tag": "v0.11.2",
+      "commit": "3ce7333e2c03dcb8801817bf516c60545154a66c",
+      "archive_sha256": "6355434354cf637f224a7019df27a19b926e34bffef358464ddd7bb88a388831",
+      "release_url": "https://github.com/goccy/go-json/releases/tag/v0.11.2",
+      "source_url": "https://github.com/goccy/go-json"
+    },
+    {
+      "module": "github.com/bytedance/sonic",
+      "version": "v1.15.4",
+      "license_file": "parsers/features/licenses/bytedance-sonic.LICENSE",
+      "license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "repository": "bytedance/sonic",
+      "tag": "v1.15.4",
+      "commit": "f1003e13e7899a6e536181fa66e986c4f29db5d5",
+      "archive_sha256": "5ba746b88da5ac47766a5d3700e90e54a4be46318c228e3a1cb6ac6f2431ca4f",
+      "release_url": "https://github.com/bytedance/sonic/releases/tag/v1.15.4",
+      "source_url": "https://github.com/bytedance/sonic"
+    },
+    {
+      "module": "github.com/json-iterator/go",
+      "version": "v1.1.12",
+      "license_file": "parsers/features/licenses/json-iterator-go.LICENSE",
+      "license_sha256": "3247931083f058b00760a3c32a9ca0962c05e4d562ad2ffcc1753451fa8d4486",
+      "repository": "json-iterator/go",
+      "tag": "v1.1.12",
+      "commit": "024077e996b048517130b21ea6bf12aa23055d3d",
+      "archive_sha256": "4eefadce6d55a35b8531912d482f53b6ef8bf790dd7667870324e713d22e202c",
+      "release_url": "https://github.com/json-iterator/go/releases/tag/v1.1.12",
+      "source_url": "https://github.com/json-iterator/go"
+    }
+  ]
+}

@@ -60,7 +60,7 @@ engine evidence. Alternative controls are discovery leads rather than false cove
 | P2-02 | 2 | Add exact-byte convenience probes and manifest | P2-01 | done |
 | P2-03 | 2 | Implement filtered, parallel, bounded observation runner | P2-02 | done |
 | P2-04 | 2 | Add Python and Node observations and record a feature baseline | P2-03 | done |
-| P3-01 | 3 | Integrate goccy/go-json, bytedance/sonic, json-iterator/go | P2-04 | todo |
+| P3-01 | 3 | Integrate goccy/go-json, bytedance/sonic, json-iterator/go | P2-04 | done |
 | P3-02 | 3 | Integrate buger/jsonparser, francoispqt/gojay, json-smart | P3-01 | todo |
 | P3-03 | 3 | Integrate Fastjson 1.x, Genson, jsoniter Java | P3-02 | todo |
 | P3-04 | 3 | Integrate Groovy JsonSlurper, Utf8Json, Jayrock.Json | P3-03 | todo |
@@ -241,7 +241,7 @@ Deliverables: `docs/review-batch-feature-01.md`; `pinned adapter builds, registr
 
 ```sh
 sh parsers/features/build_batch_01.sh
-python3 -B tools/validate_feature_batch.py P3-01 --output /tmp/jsonsuite-P3-01-audit
+python3 -B tools/validate_feature_batch.py P3-01 --output /tmp/jsonsuite-P3-01-audit --jobs 3
 python3 -B tools/check_roadmap.py --task P3-01
 python3 -B -m unittest discover -s tests -v
 python3 -B -m unittest discover -s tests -v
@@ -1409,3 +1409,20 @@ URLs and pins must be verified before integration.
 `tools/validate_feature_batch.py` corpus/probe audit. P2-04 provides that helper.
 A document check alone cannot mark an adapter integrated; failed setup remains
 an explicit untested disposition with its reason and no claimed coverage.
+
+2026-10-04, P3-01: json-iterator/go v1.1.12 native `Unmarshal` treats
+trailing NUL as end of input (reproduced with `null\0false`, `0\0`,
+and object/NUL/garbage). Adapt its observer and acceptance wrapper to native
+`NewDecoder.Decode` plus `Buffered`/unread-byte complete-text framing. Only
+RFC whitespace may remain; input bytes and existing expectations are preserved.
+
+2026-10-04, P3-01 framing refinement: native stream `Decoder.Buffered`
+returned stale numeric bytes at EOF and failed the scalar `0` regression.
+Discard the preliminary audit. Use the configuration's native byte iterator
+(`BorrowIterator`, `ReadVal`, `WhatIsNext`) and require actual `io.EOF`;
+this distinguishes NUL from end of input without modifying bytes or values.
+
+2026-10-04, P3-01 byte serialization: Sonic ConfigDefault emits native
+`22ff22` for a stored malformed string byte. Add exact serializer-byte fields
+to prevent envelope replacement from hiding this observation; validate the
+fields and repeat the audit. Earlier output is diagnostic, not final evidence.

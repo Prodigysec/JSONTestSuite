@@ -162,3 +162,20 @@ Completeness must never be reported as coverage, conformance, or runtime success
 Review notes explain each discrepancy and identify skipped or crashed modes.
 The helper records the actual registry commands, copied corpus hashes, source
 hashes, revision and dirty-worktree provenance.
+
+Go adapter extension (P3-01): native Go strings can contain invalid UTF-8.
+Their UTF-16 projection is accompanied by `invalid_native_utf8_hex` whenever
+the stored bytes are invalid, so replacement runes cannot hide native bytes.
+Object entries/getter records similarly retain `invalid_native_key_utf8_hex`.
+These fields participate in value comparison. Go map traversal order is recorded
+as encountered, with `stable_object_order: false`; it does not imply source
+insertion order. Number-preserving modes report native `json.Number` tokens as
+`number-lexeme`, without inventing an integer/decimal conversion.
+
+Native serialization can itself emit invalid UTF-8. Such records include
+`serialized_invalid_utf8: true` and exact `serialized_bytes_hex`; `serialized`
+is then only a Unicode display projection, not the original native bytes.
+The runner validates the flag against the hex bytes and retains both fields.
+Sonic ConfigDefault was directly observed serializing stored 0xff as `22ff22`.
+Comparisons must use the raw bytes in this case, preserving the distinction
+from a serializer that outputs U+FFFD or an escaped replacement character.

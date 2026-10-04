@@ -177,3 +177,11 @@ class FeatureRunnerTests(unittest.TestCase):
         self.assertEqual(runner.duplicate_winners(probe,record)[0]['winner'], 'missing')
         record['status'] = 'reject'
         self.assertEqual(runner.duplicate_winners(probe,record)[0]['winner'], 'unknown')
+
+    def test_invalid_serialization_bytes_are_validated_and_retained(self):
+        record=dict(ACCEPT,serialized='"replacement"',serialized_invalid_utf8=True,serialized_bytes_hex='22ff22')
+        raw=(json.dumps(record)+'\n').encode()
+        self.assertEqual(runner.decode_observation(raw,0)['serialized_bytes_hex'],'22ff22')
+        for changes in ({'serialized_bytes_hex':'226122'},{'serialized_bytes_hex':'not hex'},{'serialized_bytes_hex':None}):
+            with self.subTest(changes=changes),self.assertRaises(ValueError):
+                runner.decode_observation((json.dumps(dict(record,**changes))+'\n').encode(),0)

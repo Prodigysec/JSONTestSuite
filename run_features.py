@@ -165,6 +165,16 @@ def decode_observation(raw, exit_code):
         raise ValueError('Capabilities must be boolean')
     if data['serialized'] is not None and not isinstance(data['serialized'], str):
         raise ValueError('Serialized observation must be text or null')
+    if data.get('serialized_invalid_utf8'):
+        if data['serialized_invalid_utf8'] is not True or not isinstance(data.get('serialized_bytes_hex'), str):
+            raise ValueError('Invalid UTF-8 serialization requires exact native bytes')
+        native_bytes = bytes.fromhex(data['serialized_bytes_hex'])
+        try:
+            native_bytes.decode('utf-8', 'strict')
+        except UnicodeError:
+            pass
+        else:
+            raise ValueError('Invalid-UTF-8 serialization flag contradicts its bytes')
     if data['status'] == 'accept':
         if not isinstance(data['parsed_value_type'], str):
             raise ValueError('Accepted observations require native type')
@@ -199,6 +209,7 @@ def duplicate_winners(probe, record):
                         if type(expected) is int:
                             import struct
                             if value == {'type':'integer', 'decimal':str(expected)} or (
+                                value.get('type') == 'number-lexeme' and value.get('text') == str(expected)) or (
                                 value.get('type') == 'float' and value.get('format') == 'binary64' and
                                 value.get('bits') == struct.pack('>d', float(expected)).hex()):
                                 winner = label
@@ -251,7 +262,8 @@ def observe_parser(name, mode, probes, probe_root, setup_failure=None):
                     data = decode_observation(result['stdout'], result['exit_code'])
                     # Only protocol fields come from the observer; harness identity/provenance cannot be spoofed.
                     for field in ('status', 'parsed_value_type', 'normalized', 'key_observations', 'serialized',
-                                  'capabilities', 'detail', 'serialization_error', 'getter_serialized', 'version'):
+                                  'capabilities', 'detail', 'serialization_error', 'getter_serialized', 'version',
+                                  'serialized_invalid_utf8', 'serialized_bytes_hex'):
                         if field in data:
                             record[field] = data[field]
                     if not isinstance(record['version'], str) or not record['version']:

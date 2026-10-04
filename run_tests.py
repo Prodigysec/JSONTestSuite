@@ -697,6 +697,9 @@ programs = {
        }
 }
 
+from parsers.features.registry import go_batch_01_programs
+programs.update(go_batch_01_programs(PARSERS_DIR))
+
 STATUS_LABELS = {
     "EXPECTED_RESULT": "expected result",
     "SHOULD_HAVE_PASSED": "parsing should have succeeded but failed",
