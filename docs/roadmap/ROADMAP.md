@@ -57,7 +57,7 @@ engine evidence. Alternative controls are discovery leads rather than false cove
 | P0-01 | 0 | Record registry, Appendix A reconciliation, environments, and baseline |  | done |
 | P1-01 | 1 | Validate split catalog, source tags, exclusions, and first Go pins | P0-01 | done |
 | P2-01 | 2 | Specify observation protocol and neutral normalization | P1-01 | done |
-| P2-02 | 2 | Add exact-byte convenience probes and manifest | P2-01 | todo |
+| P2-02 | 2 | Add exact-byte convenience probes and manifest | P2-01 | done |
 | P2-03 | 2 | Implement filtered, parallel, bounded observation runner | P2-02 | todo |
 | P2-04 | 2 | Add Python and Node observations and record a feature baseline | P2-03 | todo |
 | P3-01 | 3 | Integrate goccy/go-json, bytedance/sonic, json-iterator/go | P2-04 | todo |

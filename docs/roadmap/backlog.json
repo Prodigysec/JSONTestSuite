@@ -101,14 +101,21 @@
         "test_features/",
         "metadata/convenience-features.json",
         "tools/check_feature_manifest.py",
-        "tests/test_feature_manifest.py"
+        "tests/test_feature_manifest.py",
+        "tools/build_feature_probes.py",
+        "docs/feature-probes.md"
       ],
       "acceptance_commands": [
         "python3 -B tools/check_feature_manifest.py",
         "python3 -B -m unittest discover -s tests -p test_feature_manifest.py -v"
       ],
-      "status": "todo",
-      "parser_ids": []
+      "status": "done",
+      "parser_ids": [],
+      "verification": {
+        "manifest": "125 exact-byte probes, ten categories; hashes, lengths, and path containment checked",
+        "focused_tests": "3 tests, exit 0",
+        "unit_tests": "104 tests, 22 optional skips, exit 0"
+      }
     },
     {
       "id": "P2-03",
