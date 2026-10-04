@@ -142,3 +142,15 @@ neutral typed normalization, duplicate/getter evidence, deterministic bounded
 execution, output isolation, and evidence-driven analysis. No probes or new
 parser adapters were added in this design task. Nothing was inferred from the
 PDF's heuristic or external measured rankings.
+
+P2-03 implementation: `run_features.py` validates the manifest and exact-name
+filter before creating a fresh directory, serializes bounded setup, and schedules
+parsers concurrently with deterministic records. POSIX pipes/process groups are
+the tested platform. Stdout is capped at 2 MiB and stderr diagnostics at 8 KiB;
+stdin is written while draining both output streams. Setup has a 120-second
+budget. Missing observer/version fields, invalid typed trees, extra JSON lines,
+and inconsistent status/exit codes are protocol crashes. CI rejects skips,
+crashes, and timeouts; native rejection or extension acceptance remains evidence.
+The summary includes setup commands/status and observation/manifest hashes.
+Ten controlled regressions cover failure recovery, isolation, raw bytes, bounded
+output, descendants, concurrency, and getter-based duplicate decisions.

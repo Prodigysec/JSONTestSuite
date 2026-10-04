@@ -132,8 +132,14 @@
         "python3 -B -m unittest discover -s tests -p test_feature_runner.py -v",
         "python3 -B run_features.py --help"
       ],
-      "status": "todo",
-      "parser_ids": []
+      "status": "done",
+      "parser_ids": [],
+      "verification": {
+        "focused_tests": "10 controlled tests passed; filtering, isolation, setup, stdin, protocol errors, timeout recovery, process groups, output bounds and overlap",
+        "unit_tests": "114 tests, 22 optional skips, exit 0",
+        "cli_help": "run_features.py --help, exit 0",
+        "corpus": "Python nonfinite-constants-rejected mode: 327/327 audited rows in a disposable copy, no crashes/timeouts/skips"
+      }
     },
     {
       "id": "P2-04",
