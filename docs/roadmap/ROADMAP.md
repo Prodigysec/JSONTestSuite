@@ -59,7 +59,7 @@ engine evidence. Alternative controls are discovery leads rather than false cove
 | P2-01 | 2 | Specify observation protocol and neutral normalization | P1-01 | done |
 | P2-02 | 2 | Add exact-byte convenience probes and manifest | P2-01 | done |
 | P2-03 | 2 | Implement filtered, parallel, bounded observation runner | P2-02 | done |
-| P2-04 | 2 | Add Python and Node observations and record a feature baseline | P2-03 | todo |
+| P2-04 | 2 | Add Python and Node observations and record a feature baseline | P2-03 | done |
 | P3-01 | 3 | Integrate goccy/go-json, bytedance/sonic, json-iterator/go | P2-04 | todo |
 | P3-02 | 3 | Integrate buger/jsonparser, francoispqt/gojay, json-smart | P3-01 | todo |
 | P3-03 | 3 | Integrate Fastjson 1.x, Genson, jsoniter Java | P3-02 | todo |
@@ -226,7 +226,7 @@ git diff --check
 
 ### P2-04 — Add Python and Node observations and record a feature baseline
 
-Deliverables: `parsers/observe_python_features.py`; `parsers/observe_node_features.js`; `docs/review-batch-feature-baseline.md`; `tests/test_feature_observers.py`.
+Deliverables: `parsers/observe_python_features.py`; `parsers/observe_node_features.js`; `docs/review-batch-feature-baseline.md`; `tests/test_feature_observers.py`; `tools/validate_feature_batch.py`; `docs/roadmap/feature-baseline.json`.
 
 ```sh
 python3 -B -m unittest discover -s tests -p test_feature_observers.py -v
@@ -1391,7 +1391,11 @@ six scoped image IDs, and the successful 99-test baseline (22 optional skips).
 The PDF inventory predates 29 registry modes and overlaps existing Folly and
 platform entries. No new parser coverage is claimed. Phase 1 completed the split catalog and
 first Go source verification: three pins, 101 tests with 22 optional skips.
-Phases 2–5 remain pending.
+Phase 2 completed: 125 separate probes, bounded parallel observer runner, native
+Python/Node observers, and reusable batch audit; 981 standard and 375 feature
+pairs recorded without runtime failures. Three default Python constant-extension
+discrepancies remain explicit. Full suite: 122 tests, 22 optional skips.
+Phases 3–5 remain pending.
 
 ## Amendments
 

@@ -158,7 +158,8 @@ programs = {
    "Node.js V8 JSON.parse (strict UTF-8)":
        {
            "url":"https://nodejs.org/",
-           "commands":["node", os.path.join(PARSERS_DIR, "test_node_json_utf8.js")]
+           "commands":["node", os.path.join(PARSERS_DIR, "test_node_json_utf8.js")],
+           "observation_commands":["node", os.path.join(PARSERS_DIR, "observe_node_features.js")]
        },
    "C++ V8 10.2.154.26 (libnode 18.20.4)":
        {
@@ -193,12 +194,14 @@ programs = {
    "Python stdlib %s (%s, UTF-8, default constants)" % (platform.python_version(), platform.python_implementation()):
        {
            "url":"https://docs.python.org/3/library/json.html",
-           "commands":[sys.executable, os.path.join(PARSERS_DIR, "test_python_json.py")]
+           "commands":[sys.executable, os.path.join(PARSERS_DIR, "test_python_json.py")],
+           "observation_commands":[sys.executable, "-B", os.path.join(PARSERS_DIR, "observe_python_features.py")]
        },
    "Python stdlib %s (%s, UTF-8, nonfinite constants rejected)" % (platform.python_version(), platform.python_implementation()):
        {
            "url":"https://docs.python.org/3/library/json.html",
-           "commands":[sys.executable, os.path.join(PARSERS_DIR, "test_python_json.py"), "--reject-nonfinite"]
+           "commands":[sys.executable, os.path.join(PARSERS_DIR, "test_python_json.py"), "--reject-nonfinite"],
+           "observation_commands":[sys.executable, "-B", os.path.join(PARSERS_DIR, "observe_python_features.py"), "--reject-nonfinite"]
        },
    "Python 2.7.10":
        {

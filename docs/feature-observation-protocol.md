@@ -154,3 +154,11 @@ crashes, and timeouts; native rejection or extension acceptance remains evidence
 The summary includes setup commands/status and observation/manifest hashes.
 Ten controlled regressions cover failure recovery, isolation, raw bytes, bounded
 output, descendants, concurrency, and getter-based duplicate decisions.
+
+P2-04 audit verdict clarification: `tools/validate_feature_batch.py` returns 0
+when every standard and feature pair is accounted for. Its `audit.json` exposes
+standard CI discrepancies and the feature runner's separate CI verdict.
+Completeness must never be reported as coverage, conformance, or runtime success.
+Review notes explain each discrepancy and identify skipped or crashed modes.
+The helper records the actual registry commands, copied corpus hashes, source
+hashes, revision and dirty-worktree provenance.

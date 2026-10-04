@@ -153,14 +153,23 @@
         "parsers/observe_node_features.js",
         "docs/review-batch-feature-baseline.md",
         "tests/test_feature_observers.py",
-        "tools/validate_feature_batch.py"
+        "tools/validate_feature_batch.py",
+        "docs/roadmap/feature-baseline.json"
       ],
       "acceptance_commands": [
         "python3 -B -m unittest discover -s tests -p test_feature_observers.py -v",
         "python3 -B tools/check_roadmap.py --task P2-04"
       ],
-      "status": "todo",
-      "parser_ids": []
+      "status": "done",
+      "parser_ids": [],
+      "verification": {
+        "focused_tests": "8 tests, exit 0",
+        "unit_tests": "122 tests, 22 optional skips, exit 0",
+        "baseline_audit": "981/981 standard pairs, 375/375 feature pairs, no crashes/timeouts/skips/protocol failures; default Python has 3 documented constant-extension discrepancies",
+        "feature_ci_verdict": 0,
+        "audit_path": "docs/roadmap/feature-baseline.json",
+        "raw_output_directory": "/tmp/jsonsuite-P2-04-baseline-v2"
+      }
     },
     {
       "id": "P3-01",
