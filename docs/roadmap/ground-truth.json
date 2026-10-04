@@ -1,0 +1,1895 @@
+{
+  "schema_version": 1,
+  "observed_revision": "ecd68e21e3c627df7ab84a084a2061b572f12e38",
+  "date": "2026-10-04",
+  "platform": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+  "python_version": "3.12.3",
+  "input_pdf": {
+    "path": "json_parsers_ranked_by_rfc8259_deviation.pdf",
+    "sha256": "db80c17c94105d306af1c2995b2676635b800033a7cc8eedc6a33a4f72d656b2"
+  },
+  "registry_count": 123,
+  "registry": [
+    {
+      "name": ".NET Newtonsoft.Json 13.0.2",
+      "source_url": "http://www.newtonsoft.com/json",
+      "commands": [
+        "dotnet",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_dotnet_newtonsoft/bin/Release/net5.0/app.dll"
+      ],
+      "setup": [
+        "dotnet",
+        "build",
+        "--configuration",
+        "Release",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_dotnet_newtonsoft/app.csproj"
+      ],
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": ".NET System.Text.Json 5.0.0",
+      "source_url": "https://docs.microsoft.com/en-us/dotnet/api/system.text.json",
+      "commands": [
+        "dotnet",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_dotnet_system_text_json/bin/Release/net5.0/app.dll"
+      ],
+      "setup": [
+        "dotnet",
+        "build",
+        "--configuration",
+        "Release",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_dotnet_system_text_json/app.csproj"
+      ],
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Awk JSON.awk gawk",
+      "source_url": "https://github.com/step-/JSON.awk",
+      "commands": [
+        "/usr/bin/gawk",
+        "-f",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_JSON.awk/JSON.awk"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/gawk",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Bash JSON.sh 2016-08-12",
+      "source_url": "https://github.com/dominictarr/JSON.sh",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_Bash_JSON/JSON.sh"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_Bash_JSON/JSON.sh",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C ConcreteServer",
+      "source_url": " https://github.com/RaphaelPrevost/ConcreteServer",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_ConcreteServer/json_checker"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_ConcreteServer/json_checker",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C JSON Checker",
+      "source_url": "http://www.json.org/JSON_checker/",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/jsonChecker"
+      ],
+      "setup": [
+        "make",
+        "-C",
+        "/home/deploy/apps/tmp/JSONTestSuite",
+        "parsers/.build/jsonChecker"
+      ],
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/jsonChecker",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C JSON Checker 2",
+      "source_url": "",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_jsonChecker2/bin/jsonChecker2"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_jsonChecker2/bin/jsonChecker2",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C JSON Checker 20161111",
+      "source_url": "https://github.com/douglascrockford/JSON-c",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_jsonChecker20161111/bin/jsonChecker20161111"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_jsonChecker20161111/bin/jsonChecker20161111",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C JSON Parser by udp",
+      "source_url": "https://github.com/udp/json-parser",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json-parser/bin/test_json-parser"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json-parser/bin/test_json-parser",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C JSON-C",
+      "source_url": "https://github.com/json-c/json-c",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json-c/bin/test_json-c"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json-c/bin/test_json-c",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C YAJL 2.1.0",
+      "source_url": "https://github.com/lloyd/yajl",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/yajl-c/test_yajl_c"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/yajl-c/test_yajl_c",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C amjson 1e282121",
+      "source_url": "https://github.com/amwales-888/amjson",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/amjson/test_amjson"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/amjson/test_amjson",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C cJSON 1.7.3",
+      "source_url": "https://github.com/DaveGamble/cJSON",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/test_cJSON_1_7_3"
+      ],
+      "setup": [
+        "make",
+        "-C",
+        "/home/deploy/apps/tmp/JSONTestSuite",
+        "parsers/.build/test_cJSON_1_7_3"
+      ],
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/test_cJSON_1_7_3",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C cJSON 20160806",
+      "source_url": "https://github.com/DaveGamble/cJSON",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_cJSON_20160806/bin/test_cJSON"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_cJSON_20160806/bin/test_cJSON",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C ccan",
+      "source_url": "",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/test_ccan"
+      ],
+      "setup": [
+        "make",
+        "-C",
+        "/home/deploy/apps/tmp/JSONTestSuite",
+        "parsers/.build/test_ccan"
+      ],
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/test_ccan",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C jansson",
+      "source_url": "",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_jansson/bin/test_jansson"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_jansson/bin/test_jansson",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C jsmn",
+      "source_url": "https://github.com/zserge/jsmn",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/test_jsmn"
+      ],
+      "setup": [
+        "make",
+        "-C",
+        "/home/deploy/apps/tmp/JSONTestSuite",
+        "parsers/.build/test_jsmn"
+      ],
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/test_jsmn",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C libfyaml 0.9.6 (JSON force, streaming)",
+      "source_url": "https://github.com/pantoniou/libfyaml",
+      "commands": [
+        "sh",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_libfyaml_0_9_6/run.sh"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/sh",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C pdjson 20170325",
+      "source_url": "https://github.com/skeeto/pdjson",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_pdjson/bin/test_pdjson"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_pdjson/bin/test_pdjson",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C++ Folly v2025.09.29.00 parseJson (native defaults, NUL guard)",
+      "source_url": "https://github.com/facebook/folly",
+      "commands": [
+        "/usr/bin/python3",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_folly.py"
+      ],
+      "setup": [
+        "docker",
+        "image",
+        "inspect",
+        "--format",
+        "{{.Id}}",
+        "jsonsuite-folly:local"
+      ],
+      "resolved_first_executable": "/usr/bin/python3",
+      "resolved_setup_executable": "/usr/bin/docker",
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C++ JSON Spirit c7245a39",
+      "source_url": "https://github.com/cierelabs/json_spirit",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/json-spirit/test_json_spirit"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/json-spirit/test_json_spirit",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C++ JSONpp 0.1.1",
+      "source_url": "https://github.com/mikami-w/jsonpp",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_jsonpp_0_1_1/.build/test_jsonpp"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_jsonpp_0_1_1/.build/test_jsonpp",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C++ RapidJSON 20170724",
+      "source_url": "https://github.com/miloyip/rapidjson",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_rapidjson_20170724/bin/test_rapidjson"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_rapidjson_20170724/bin/test_rapidjson",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C++ V8 10.2.154.26 (libnode 18.20.4)",
+      "source_url": "https://v8.dev/",
+      "commands": [
+        "/usr/bin/python3",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_v8_native.py"
+      ],
+      "setup": [
+        "docker",
+        "image",
+        "inspect",
+        "--format",
+        "{{.Id}}",
+        "jsonsuite-v8:local"
+      ],
+      "resolved_first_executable": "/usr/bin/python3",
+      "resolved_setup_executable": "/usr/bin/docker",
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C++ nlohmann JSON 20190718",
+      "source_url": "https://github.com/nlohmann/json",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_nlohmann_json_20190718/bin/test_nlohmann_json"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_nlohmann_json_20190718/bin/test_nlohmann_json",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C++ picojson 111c9be5",
+      "source_url": "https://github.com/kazuho/picojson",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/picojson/test_picojson"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/picojson/test_picojson",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C++ sajson 20170724",
+      "source_url": "https://github.com/chadaustin/sajson",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_sajson_20170724/bin/test_sajson"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_sajson_20170724/bin/test_sajson",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "C++ simdjson 5.0.1 DOM",
+      "source_url": "https://github.com/simdjson/simdjson",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/simdjson/test_simdjson"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/simdjson/test_simdjson",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Chromium 154.0.8037.92 JSON.parse (headless)",
+      "source_url": "https://www.chromium.org/",
+      "commands": [
+        "python3",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_chromium.py"
+      ],
+      "setup": [
+        "docker",
+        "image",
+        "inspect",
+        "--format",
+        "{{.Id}}",
+        "jsonsuite-chromium:local"
+      ],
+      "resolved_first_executable": "/usr/bin/python3",
+      "resolved_setup_executable": "/usr/bin/docker",
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Clojure data.json 1.0.0",
+      "source_url": "https://github.com/clojure/data.json",
+      "commands": [
+        "sh",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_clojure_data_json/run.sh",
+        "1.0.0"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/sh",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Clojure data.json 2.2.0",
+      "source_url": "https://github.com/clojure/data.json",
+      "commands": [
+        "sh",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_clojure_data_json/run.sh",
+        "2.2.0"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/sh",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Crystal",
+      "source_url": "https://github.com/crystal-lang/crystal",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json_cr"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Elixir ExJSON",
+      "source_url": "https://github.com/guedes/exjson",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_elixir_exjson/test_elixir_exjson"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_elixir_exjson/test_elixir_exjson",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Elixir Jason",
+      "source_url": "https://github.com/michalmuskala/jason",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_elixir_jason/test_elixir_jason"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Elixir Json",
+      "source_url": "https://github.com/cblage/elixir-json",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_elixir_json/test_elixir_json"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_elixir_json/test_elixir_json",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Elixir Poison",
+      "source_url": "https://github.com/devinus/poison",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_elixir_poison/test_elixir_poison"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_elixir_poison/test_elixir_poison",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Erlang Euneus",
+      "source_url": "https://github.com/williamthome/euneus",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_erlang_euneus/test_erlang_euneus"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_erlang_euneus/test_erlang_euneus",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Firefox ESR 153.4.0 JSON.parse (headless)",
+      "source_url": "https://www.mozilla.org/firefox/",
+      "commands": [
+        "/usr/bin/python3",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_firefox.py"
+      ],
+      "setup": [
+        "docker",
+        "image",
+        "inspect",
+        "--format",
+        "{{.Id}}",
+        "jsonsuite-firefox:local"
+      ],
+      "resolved_first_executable": "/usr/bin/python3",
+      "resolved_setup_executable": "/usr/bin/docker",
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Free Pascal fcl-json",
+      "source_url": "",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_fpc/test_json"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_fpc/test_json",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Go 1.7.1",
+      "source_url": "",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_go/test_json"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_go/test_json",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Haskell Aeson 0.11.2.1",
+      "source_url": "https://github.com/bos/aeson",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_haskell-aeson/testaeson"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_haskell-aeson/testaeson",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Java Actson 1.2.0",
+      "source_url": "https://github.com/michel-kraemer/actson",
+      "commands": [
+        "/usr/bin/java",
+        "-jar",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_java_actson_1_2_0/TestJSONParsing.jar"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Java BFO v1",
+      "source_url": "https://github.com/faceless2/json",
+      "commands": [
+        "/usr/bin/java",
+        "-jar",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_java_bfo/TestJSONParsing.jar"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Java Jackson 2.8.4",
+      "source_url": "",
+      "commands": [
+        "/usr/bin/java",
+        "-jar",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_java_jackson_2_8_4/TestJSONParsing.jar"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Java JsonTree 0.5",
+      "source_url": "",
+      "commands": [
+        "/usr/bin/java",
+        "-jar",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_java_json_tree/TestJSONParsing.jar"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Java Mergebase Java2Json 2019.09.09",
+      "source_url": "https://github.com/mergebase/Java2Json",
+      "commands": [
+        "/usr/bin/java",
+        "-jar",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_java_mergebase_json_2019_09_09/TestJSONParsing.jar"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Java com.leastfixedpoint.json 1.0",
+      "source_url": "",
+      "commands": [
+        "/usr/bin/java",
+        "-jar",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_java_com_leastfixedpoint_json_1_0/TestJSONParsing.jar"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Java fastjson2 2.0.53 (native mode)",
+      "source_url": "https://github.com/alibaba/fastjson2",
+      "commands": [
+        "java",
+        "-cp",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_java_fastjson2_2_0_53/.build/classes:/home/deploy/apps/tmp/JSONTestSuite/parsers/test_java_fastjson2_2_0_53/.build/fastjson2-2.0.53.jar",
+        "TestJSONParsing"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Java gson 2.7",
+      "source_url": "",
+      "commands": [
+        "/usr/bin/java",
+        "-jar",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_java_gson_2_7/TestJSONParsing.jar"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Java json-simple 1.1.1",
+      "source_url": "",
+      "commands": [
+        "/usr/bin/java",
+        "-jar",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_java_simple_json_1_1_1/TestJSONParsing.jar"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Java nanojson 1.0",
+      "source_url": "",
+      "commands": [
+        "/usr/bin/java",
+        "-jar",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_java_nanojson_1_0/TestJSONParsing.jar"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Java nanojson 1.1",
+      "source_url": "",
+      "commands": [
+        "/usr/bin/java",
+        "-jar",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_java_nanojson_1_1/TestJSONParsing.jar"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Java opack 0.2.1 (UTF-8)",
+      "source_url": "https://github.com/realtimetech-solution/opack",
+      "commands": [
+        "java",
+        "-cp",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_java_opack_0_2_1/.build/classes",
+        "TestJSONParsing"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Java org.json 2016-08-15",
+      "source_url": "https://github.com/stleary/JSON-java",
+      "commands": [
+        "/usr/bin/java",
+        "-jar",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_java_org_json_2016_08/TestJSONParsing.jar"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "JavaScript",
+      "source_url": "",
+      "commands": [
+        "/usr/local/bin/node",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json.js"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "JavaScriptCore 2.50.6 JSON.parse (strict UTF-8)",
+      "source_url": "https://webkit.org/",
+      "commands": [
+        "python3",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_jsc.py"
+      ],
+      "setup": [
+        "docker",
+        "image",
+        "inspect",
+        "--format",
+        "{{.Id}}",
+        "jsonsuite-jsc:local"
+      ],
+      "resolved_first_executable": "/usr/bin/python3",
+      "resolved_setup_executable": "/usr/bin/docker",
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Lua JSON 20160916.19",
+      "source_url": "http://regex.info/blog/lua/json",
+      "commands": [
+        "/usr/local/bin/lua",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_Lua_JSON/test_JSON.lua"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Lua dkjson",
+      "source_url": "http://dkolf.de/src/dkjson-lua.fsl/home",
+      "commands": [
+        "/usr/local/bin/lua",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_dkjson.lua"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Nim",
+      "source_url": "http://nim-lang.org",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_nim/test_json"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_nim/test_json",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Node.js V8 JSON.parse (strict UTF-8)",
+      "source_url": "https://nodejs.org/",
+      "commands": [
+        "node",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_node_json_utf8.js"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/.nvm/versions/node/v24.21.0/bin/node",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "OCaml Orsetto",
+      "source_url": "https://bitbucket.org/jhw/orsetto",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_ocaml_orsetto/test_orsetto_json"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_ocaml_orsetto/test_orsetto_json",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "OCaml Yojson",
+      "source_url": "https://github.com/mjambon/yojson",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_ocaml-yojson/testyojson"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Obj-C Apple NSJSONSerialization",
+      "source_url": "",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_ObjCNSJSONSerializer/bin/test_ObjCNSJSONSerializer"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_ObjCNSJSONSerializer/bin/test_ObjCNSJSONSerializer",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Obj-C JSONKit",
+      "source_url": "",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_JSONKit/bin/test-JSONKit"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_JSONKit/bin/test-JSONKit",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Obj-C SBJSON 4.0.3",
+      "source_url": "https://github.com/stig/json-framework",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_SBJSON_4_0_3/bin/test_sbjson"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Obj-C SBJSON 4.0.4",
+      "source_url": "https://github.com/stig/json-framework",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_SBJSON_4_0_4/bin/test_sbjson"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Obj-C SBJson 5.0.0",
+      "source_url": "https://github.com/stig/json-framework",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_SBJson_5_0_0/bin/test_sbjson"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Obj-C TouchJSON",
+      "source_url": "https://github.com/TouchCode/TouchJSON",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_TouchJSON/bin/test_TouchJSON"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_TouchJSON/bin/test_TouchJSON",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "PHP 5.5.36",
+      "source_url": "",
+      "commands": [
+        "/usr/bin/php",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json.php"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "PHP 7.4.33 Docker",
+      "source_url": "https://www.php.net/manual/en/function.json-decode.php",
+      "commands": [
+        "docker",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--pull",
+        "never",
+        "--mount",
+        "type=bind,src=/home/deploy/apps/tmp/JSONTestSuite,dst=/home/deploy/apps/tmp/JSONTestSuite,readonly",
+        "php@sha256:620a6b9f4d4feef2210026172570465e9d0c1de79766418d3affd09190a7fda5",
+        "php",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json.php"
+      ],
+      "setup": [
+        "docker",
+        "image",
+        "inspect",
+        "--format",
+        "{{.Id}}",
+        "php@sha256:620a6b9f4d4feef2210026172570465e9d0c1de79766418d3affd09190a7fda5"
+      ],
+      "resolved_first_executable": "/usr/bin/docker",
+      "resolved_setup_executable": "/usr/bin/docker",
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "PHP 8.3.27 Docker",
+      "source_url": "https://www.php.net/manual/en/function.json-decode.php",
+      "commands": [
+        "docker",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--pull",
+        "never",
+        "--mount",
+        "type=bind,src=/home/deploy/apps/tmp/JSONTestSuite,dst=/home/deploy/apps/tmp/JSONTestSuite,readonly",
+        "php@sha256:01224f5f2e75fa43a326797d7b80552ca0bcfb37f60cbb81efdf63956b4d3fe4",
+        "php",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json.php"
+      ],
+      "setup": [
+        "docker",
+        "image",
+        "inspect",
+        "--format",
+        "{{.Id}}",
+        "php@sha256:01224f5f2e75fa43a326797d7b80552ca0bcfb37f60cbb81efdf63956b4d3fe4"
+      ],
+      "resolved_first_executable": "/usr/bin/docker",
+      "resolved_setup_executable": "/usr/bin/docker",
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Perl Cpanel::JSON::XS",
+      "source_url": "https://metacpan.org/pod/Cpanel::JSON::XS",
+      "commands": [
+        "/usr/bin/perl",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_cpanel_json_xs.pl"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/perl",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Perl JSON::PP",
+      "source_url": "https://metacpan.org/pod/JSON::PP",
+      "commands": [
+        "/usr/bin/perl",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json_pp.pl"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/perl",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Perl JSON::Parse",
+      "source_url": "https://metacpan.org/pod/JSON::Parse",
+      "commands": [
+        "/usr/bin/perl",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json_parse.pl"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/perl",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Perl JSON::SL",
+      "source_url": "https://metacpan.org/pod/JSON::SL",
+      "commands": [
+        "/usr/bin/perl",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json_sl.pl"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/perl",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Perl JSON::Tiny",
+      "source_url": "https://metacpan.org/pod/JSON::Tiny",
+      "commands": [
+        "/usr/bin/perl",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json_tiny.pl"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/perl",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Perl JSON::XS",
+      "source_url": "https://metacpan.org/pod/JSON::XS",
+      "commands": [
+        "/usr/bin/perl",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json_xs.pl"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/perl",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Perl MarpaX::ESLIF::ECMA404",
+      "source_url": "http://metacpan.org/pod/MarpaX::ESLIF::ECMA404",
+      "commands": [
+        "/usr/bin/perl",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_marpax_eslif_ecma404.pl"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/perl",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Perl Mojo::JSON",
+      "source_url": "http://metacpan.org/pod/Mojo::JSON",
+      "commands": [
+        "/usr/bin/perl",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_mojo_json.pl"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/perl",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Perl Pegex::JSON",
+      "source_url": "http://metacpan.org/pod/Pegex::JSON",
+      "commands": [
+        "/usr/bin/perl",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_pegex_json.pl"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/perl",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "PostgreSQL 16 JSONB UTF8",
+      "source_url": "https://www.postgresql.org/docs/16/datatype-json.html",
+      "commands": [
+        "/usr/bin/python3",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_postgres_jsonb.py"
+      ],
+      "setup": [
+        "/usr/bin/python3",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_postgres_jsonb.py",
+        "--check"
+      ],
+      "resolved_first_executable": "/usr/bin/python3",
+      "resolved_setup_executable": "/usr/bin/python3",
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Python 2.7.10",
+      "source_url": "",
+      "commands": [
+        "/usr/bin/python",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json.py"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Python 3.5.2",
+      "source_url": "",
+      "commands": [
+        "/usr/bin/env",
+        "python3.5",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json.py"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Python cjson 1.10",
+      "source_url": "https://pypi.python.org/pypi/python-cjson",
+      "commands": [
+        "/usr/bin/python",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_cjson.py"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Python demjson 2.2.4",
+      "source_url": "https://pypi.python.org/pypi/demjson",
+      "commands": [
+        "/usr/bin/python",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_demjson.py"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Python demjson 2.2.4 (jsonlint)",
+      "source_url": "https://pypi.python.org/pypi/demjson",
+      "commands": [
+        "/usr/bin/env",
+        "jsonlint",
+        "--quiet",
+        "--strict",
+        "--allow=non-portable,duplicate-keys,zero-byte"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Python demjson 2.2.4 (py3)",
+      "source_url": "https://pypi.python.org/pypi/demjson",
+      "commands": [
+        "/usr/bin/env",
+        "python3.5",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_demjson.py"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Python jsoncgx 1.1 (comments off)",
+      "source_url": "https://github.com/cigix/jsoncgx",
+      "commands": [
+        "python3",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_jsoncgx_1_1/TestJSONParsing.py",
+        "off"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/python3",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Python jsoncgx 1.1 (comments on)",
+      "source_url": "https://github.com/cigix/jsoncgx",
+      "commands": [
+        "python3",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_jsoncgx_1_1/TestJSONParsing.py",
+        "on"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/python3",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Python simplejson 3.10",
+      "source_url": "https://pypi.python.org/pypi/simplejson",
+      "commands": [
+        "/usr/bin/python",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_simplejson.py"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Python stdlib 3.12.3 (CPython, UTF-8, default constants)",
+      "source_url": "https://docs.python.org/3/library/json.html",
+      "commands": [
+        "/usr/bin/python3",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_python_json.py"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/python3",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Python stdlib 3.12.3 (CPython, UTF-8, nonfinite constants rejected)",
+      "source_url": "https://docs.python.org/3/library/json.html",
+      "commands": [
+        "/usr/bin/python3",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_python_json.py",
+        "--reject-nonfinite"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/python3",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Python ujson 1.35",
+      "source_url": "https://pypi.python.org/pypi/ujson",
+      "commands": [
+        "/usr/bin/python",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_ujson.py"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Qt JSON",
+      "source_url": "",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_qt/test_qt"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "R jsonlite",
+      "source_url": "",
+      "commands": [
+        "/usr/local/bin/RScript",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_jsonlite.r"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "R rjson",
+      "source_url": "",
+      "commands": [
+        "/usr/local/bin/RScript",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_rjson.r"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Ruby",
+      "source_url": "",
+      "commands": [
+        "/usr/bin/env",
+        "ruby",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json.rb"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Ruby Oj (compat mode)",
+      "source_url": "https://github.com/ohler55/oj",
+      "commands": [
+        "/usr/bin/env",
+        "ruby",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_oj_compat.rb"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Ruby Oj (strict mode)",
+      "source_url": "https://github.com/ohler55/oj",
+      "commands": [
+        "/usr/bin/env",
+        "ruby",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_oj_strict.rb"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Ruby Yajl",
+      "source_url": "https://github.com/brianmario/yajl-ruby",
+      "commands": [
+        "/usr/bin/env",
+        "ruby",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_yajl.rb"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Ruby regex",
+      "source_url": "",
+      "commands": [
+        "/usr/bin/env",
+        "ruby",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json_re.rb"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Rust json-rust",
+      "source_url": "https://github.com/maciejhirsz/json-rust",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json-rust/target/debug/tj"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json-rust/target/debug/tj",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Rust rustc_serialize::json",
+      "source_url": "https://doc.rust-lang.org/rustc-serialize/rustc_serialize/json/index.html",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json-rustc_serialize/rj/target/debug/rj"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json-rustc_serialize/rj/target/debug/rj",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Rust serde_json 1.0.145",
+      "source_url": "https://github.com/serde-rs/json",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/rust-serde-json/debug/rj"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/rust-serde-json/debug/rj",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "SQLite JSON1 (Python sqlite3)",
+      "source_url": "https://www.sqlite.org/json1.html",
+      "commands": [
+        "/usr/bin/python3",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_sqlite_json.py"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/python3",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Scala Dijon 0.3.0",
+      "source_url": "",
+      "commands": [
+        "/usr/bin/java",
+        "-jar",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_scala_dijon_0.3.0/target/scala-2.13/TestJSONParsing.jar"
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Squeak JSON-tonyg",
+      "source_url": "http://www.squeaksource.com/JSON.html",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_Squeak_JSON_tonyg/Squeak.app/Contents/MacOS/Squeak",
+        "-headless",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_Squeak_JSON_tonyg/Squeak5.1-16549-32bit.image",
+        "test_JSON.st"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_Squeak_JSON_tonyg/Squeak.app/Contents/MacOS/Squeak",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Swift Apple JSONSerialization",
+      "source_url": "",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test-AppleJSONSerialization/bin/test-AppleJSONSerialization"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test-AppleJSONSerialization/bin/test-AppleJSONSerialization",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Swift Foundation 6.1.3 Linux Docker",
+      "source_url": "https://github.com/swiftlang/swift-corelibs-foundation",
+      "commands": [
+        "docker",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--pull",
+        "never",
+        "--mount",
+        "type=bind,src=/home/deploy/apps/tmp/JSONTestSuite,dst=/home/deploy/apps/tmp/JSONTestSuite,readonly",
+        "--entrypoint",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/.build/swift-foundation-linux/test_swift_foundation_linux",
+        "swift@sha256:19792fa7ef68fb0e0ca5763ec3dfd40d6461afca7c081eb689e2e374fa80c0be"
+      ],
+      "setup": [
+        "docker",
+        "image",
+        "inspect",
+        "--format",
+        "{{.Id}}",
+        "swift@sha256:19792fa7ef68fb0e0ca5763ec3dfd40d6461afca7c081eb689e2e374fa80c0be"
+      ],
+      "resolved_first_executable": "/usr/bin/docker",
+      "resolved_setup_executable": "/usr/bin/docker",
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Swift Freddy 2.1.0",
+      "source_url": "",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_Freddy_2_1_0/bin/test_Freddy_2_1_0"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_Freddy_2_1_0/bin/test_Freddy_2_1_0",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Swift Freddy 20160830",
+      "source_url": "",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_Freddy_20160830/bin/test_Freddy"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_Freddy_20160830/bin/test_Freddy",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Swift Freddy 20161018",
+      "source_url": "",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_Freddy_20161018/bin/test_Freddy"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_Freddy_20161018/bin/test_Freddy",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Swift Freddy 20170118",
+      "source_url": "",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_Freddy_20170118/bin/test_Freddy"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_Freddy_20170118/bin/test_Freddy",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Swift JSON 20170522",
+      "source_url": "https://github.com/owensd/json-swift",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json_swift_20170522/bin/json_swift"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_json_swift_20170522/bin/json_swift",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Swift PMJSON 1.1.0",
+      "source_url": "https://github.com/postmates/PMJSON",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_PMJSON_1_1_0/bin/test_PMJSON"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_PMJSON_1_1_0/bin/test_PMJSON",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Swift PMJSON 1.2.0",
+      "source_url": "https://github.com/postmates/PMJSON",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_PMJSON_1_2_0/bin/test_PMJSON"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_PMJSON_1_2_0/bin/test_PMJSON",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Swift PMJSON 1.2.1",
+      "source_url": "https://github.com/postmates/PMJSON",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_PMJSON_1_2_1/bin/test_PMJSON"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_PMJSON_1_2_1/bin/test_PMJSON",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Swift STJSON",
+      "source_url": "",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_STJSON/bin/STJSON"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_STJSON/bin/STJSON",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Tcl rl_json 0.17.6 (strict UTF-8, no comments)",
+      "source_url": "https://github.com/RubyLane/rl_json",
+      "commands": [
+        "python3",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_rl_json_0_17_6/TestJSONParsing.py"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/python3",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "VHDL JSON-for-VHDL 2ab1ebc2 (GHDL 4.1)",
+      "source_url": "https://github.com/Paebbels/JSON-for-VHDL",
+      "commands": [
+        "/usr/bin/python3",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_vhdl_json.py"
+      ],
+      "setup": [
+        "/usr/bin/python3",
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_vhdl_json.py",
+        "--check"
+      ],
+      "resolved_first_executable": "/usr/bin/python3",
+      "resolved_setup_executable": "/usr/bin/python3",
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Xidel Internet Tools",
+      "source_url": "http://www.videlibri.de/xidel.html",
+      "commands": [
+        "/usr/bin/env",
+        "xidel",
+        "--input-format=json-strict",
+        "-e=."
+      ],
+      "setup": null,
+      "resolved_first_executable": null,
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "Zig 0.8.0-dev.1354+081698156",
+      "source_url": "",
+      "commands": [
+        "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_zig/test_json"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/home/deploy/apps/tmp/JSONTestSuite/parsers/test_zig/test_json",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    },
+    {
+      "name": "jq (raw-slurp fromjson)",
+      "source_url": "https://jqlang.org/jq/",
+      "commands": [
+        "jq",
+        "-Rs",
+        "try (fromjson | empty) catch (halt_error(1))"
+      ],
+      "setup": null,
+      "resolved_first_executable": "/usr/bin/jq",
+      "resolved_setup_executable": null,
+      "note": "Resolution alone does not prove library/image/platform availability."
+    }
+  ],
+  "parser_top_level_paths": [
+    ".build",
+    "build_amjson.sh",
+    "build_json_spirit.sh",
+    "build_picojson.sh",
+    "build_rust_serde_json.sh",
+    "build_simdjson.sh",
+    "build_swift_foundation_linux.sh",
+    "build_vhdl_json.sh",
+    "build_yajl_c.sh",
+    "chromium_browser.py",
+    "chromium_probe.html",
+    "firefox_probe.py",
+    "folly",
+    "licenses",
+    "observe_node_transform.js",
+    "read_fixture.h",
+    "test-AppleJSONSerialization",
+    "test_Bash_JSON",
+    "test_ConcreteServer",
+    "test_Freddy_20160830",
+    "test_Freddy_20161018",
+    "test_Freddy_20170118",
+    "test_Freddy_2_1_0",
+    "test_JSON.awk",
+    "test_JSONKit",
+    "test_Lua_JSON",
+    "test_ObjCNSJSONSerializer",
+    "test_PMJSON_1_1_0",
+    "test_PMJSON_1_2_0",
+    "test_PMJSON_1_2_1",
+    "test_SBJSON_4_0_3",
+    "test_SBJSON_4_0_4",
+    "test_SBJson_5_0_0",
+    "test_STJSON",
+    "test_Squeak_JSON_tonyg",
+    "test_TouchJSON",
+    "test_amjson.c",
+    "test_cJSON_1_7_3",
+    "test_cJSON_20160806",
+    "test_ccan_json",
+    "test_chromium.py",
+    "test_cjson.py",
+    "test_clojure_data_json",
+    "test_cpanel_json_xs.pl",
+    "test_demjson.py",
+    "test_dkjson.lua",
+    "test_dotnet_newtonsoft",
+    "test_dotnet_system_text_json",
+    "test_elixir_exjson",
+    "test_elixir_jason",
+    "test_elixir_json",
+    "test_elixir_poison",
+    "test_erlang_euneus",
+    "test_firefox.py",
+    "test_folly.cpp",
+    "test_folly.py",
+    "test_fpc",
+    "test_go",
+    "test_haskell-aeson",
+    "test_jansson",
+    "test_java_actson_1_2_0",
+    "test_java_bfo",
+    "test_java_com_leastfixedpoint_json_1_0",
+    "test_java_fastjson2_2_0_53",
+    "test_java_gson_2_7",
+    "test_java_jackson_2_8_4",
+    "test_java_json_tree",
+    "test_java_mergebase_json_2019_09_09",
+    "test_java_nanojson_1_0",
+    "test_java_nanojson_1_1",
+    "test_java_opack_0_2_1",
+    "test_java_org_json_2016_08",
+    "test_java_simple_json_1_1_1",
+    "test_jsc.js",
+    "test_jsc.py",
+    "test_jsmn",
+    "test_json-c",
+    "test_json-jq.py",
+    "test_json-parser",
+    "test_json-rust",
+    "test_json-rust-serde_json",
+    "test_json-rustc_serialize",
+    "test_json.cr",
+    "test_json.js",
+    "test_json.php",
+    "test_json.py",
+    "test_json.rb",
+    "test_jsonChecker",
+    "test_jsonChecker2",
+    "test_jsonChecker20161111",
+    "test_json_c",
+    "test_json_parse.pl",
+    "test_json_pp.pl",
+    "test_json_re.rb",
+    "test_json_sl.pl",
+    "test_json_spirit.cpp",
+    "test_json_swift_20170522",
+    "test_json_tiny.pl",
+    "test_json_xs.pl",
+    "test_jsoncgx_1_1",
+    "test_jsonlite.r",
+    "test_jsonpp_0_1_1",
+    "test_libfyaml_0_9_6",
+    "test_marpax_eslif_ecma404.pl",
+    "test_mojo_json.pl",
+    "test_nim",
+    "test_nlohmann_json_20190718",
+    "test_node_json_utf8.js",
+    "test_ocaml_orsetto",
+    "test_ocaml_yojson",
+    "test_oj_compat.rb",
+    "test_oj_strict.rb",
+    "test_pdjson",
+    "test_pegex_json.pl",
+    "test_picojson.cpp",
+    "test_postgres_jsonb.py",
+    "test_python_json.py",
+    "test_qt",
+    "test_rapidjson_20170724",
+    "test_rjson.r",
+    "test_rl_json_0_17_6",
+    "test_sajson_20170724",
+    "test_scala_dijon_0.3.0",
+    "test_simdjson.cpp",
+    "test_simplejson.py",
+    "test_sqlite_json.py",
+    "test_swift_foundation_linux.swift",
+    "test_ujson.py",
+    "test_v8_native.cpp",
+    "test_v8_native.py",
+    "test_vhdl_json.py",
+    "test_vhdl_json.vhdl",
+    "test_yajl.rb",
+    "test_yajl_c.c",
+    "test_zig"
+  ],
+  "corpus_counts": {
+    "test_parsing": 327,
+    "test_transform": 26
+  },
+  "host_tools": {
+    "docker": "/usr/bin/docker",
+    "go": null,
+    "java": null,
+    "dotnet": null,
+    "ruby": null,
+    "node": "/home/deploy/.nvm/versions/node/v24.21.0/bin/node",
+    "lua": null,
+    "cc": null,
+    "make": null,
+    "curl": "/usr/bin/curl"
+  },
+  "images": [
+    {
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "--format",
+        "{{.Id}}",
+        "jsonsuite-core:local"
+      ],
+      "exit_code": 0,
+      "stdout": "sha256:0ff80db507b4ec3e51468f2a481f3fa6db172986bb3386fe3272458dd7cd782e",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "--format",
+        "{{.Id}}",
+        "jsonsuite-chromium:local"
+      ],
+      "exit_code": 0,
+      "stdout": "sha256:8181136cabea913734b757fd328cc030087fec17dce81eebb8c7f8eed7725313",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "--format",
+        "{{.Id}}",
+        "jsonsuite-firefox:local"
+      ],
+      "exit_code": 0,
+      "stdout": "sha256:25250eb69f60d0b85394b7cf37c8b48ef6b5ddcee54b83e48b90144c2098b342",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "--format",
+        "{{.Id}}",
+        "jsonsuite-jsc:local"
+      ],
+      "exit_code": 0,
+      "stdout": "sha256:4ea80d498330449adfd50c49e72064fa9363930549b31d84f2653ac896ca3cdc",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "--format",
+        "{{.Id}}",
+        "jsonsuite-v8:local"
+      ],
+      "exit_code": 0,
+      "stdout": "sha256:3f693d93598f3762887deb291350fbf9e048e9f192fd44aba49abf9942cc1340",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "--format",
+        "{{.Id}}",
+        "jsonsuite-folly:local"
+      ],
+      "exit_code": 0,
+      "stdout": "sha256:433ca09463288dfc5c9b96d538fad8027e8d902c972ceb1dfaa9dfdcc212c2df",
+      "stderr": ""
+    }
+  ],
+  "core_python": {
+    "command": [
+      "docker",
+      "run",
+      "--rm",
+      "--network",
+      "none",
+      "--pull",
+      "never",
+      "jsonsuite-core:local",
+      "python3",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "Python 3.11.2",
+    "stderr": ""
+  },
+  "isolated_tools": {
+    "cc": "/tmp/jsonsuite-c-adapter-tools/bin/cc",
+    "make": "/tmp/jsonsuite-c-adapter-tools/bin/make",
+    "java": "/tmp/jsonsuite-parser-tools/runtime/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+    "dotnet": "/tmp/jsonsuite-parser-tools/runtime/usr/lib/dotnet/dotnet",
+    "ghdl": "/tmp/jsonsuite-ghdl-tools/root/usr/bin/ghdl"
+  },
+  "baseline_tests": {
+    "command": [
+      "/usr/bin/python3",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "setUpClass (test_ccan_adapter.CCANAdapterTests) ... skipped 'A C99 compiler is required for CCAN wrapper tests'\ntest_browser_marker_controls_rejection (test_chromium_adapter.ChromiumAdapterTests.test_browser_marker_controls_rejection) ... ok\ntest_missing_image_is_explicit (test_chromium_adapter.ChromiumAdapterTests.test_missing_image_is_explicit) ... ok\ntest_missing_marker_is_adapter_error (test_chromium_adapter.ChromiumAdapterTests.test_missing_marker_is_adapter_error) ... ok\ntest_registry_adapter_maps_rejection_to_one (test_chromium_adapter.ChromiumAdapterTests.test_registry_adapter_maps_rejection_to_one) ... ok\ntest_archive_contains_only_committed_corpus_bytes (test_distribution.CorpusDistributionTests.test_archive_contains_only_committed_corpus_bytes) ... skipped 'make is required for the archive target'\ntest_fixtures_are_not_executable (test_distribution.CorpusDistributionTests.test_fixtures_are_not_executable) ... ok\ntest_exit_codes_and_timeout (test_firefox_adapter.FirefoxAdapterTests.test_exit_codes_and_timeout) ... ok\ntest_missing_file_is_adapter_error (test_firefox_adapter.FirefoxAdapterTests.test_missing_file_is_adapter_error) ... ok\ntest_request_has_bounded_startup_budget (test_firefox_probe.FirefoxProbeTests.test_request_has_bounded_startup_budget) ... ok\ntest_startup_timeout_is_error_and_driver_is_closed (test_firefox_probe.FirefoxProbeTests.test_startup_timeout_is_error_and_driver_is_closed) ... ok\ntest_exit_codes_and_runtime_failures (test_folly_adapter.FollyAdapterTests.test_exit_codes_and_runtime_failures) ... ok\ntest_missing_input_does_not_invoke_parser (test_folly_adapter.FollyAdapterTests.test_missing_input_does_not_invoke_parser) ... ok\ntest_setup_resolution_is_separate_from_invocation (test_inventory_parser_tools.InventoryTests.test_setup_resolution_is_separate_from_invocation) ... ok\ntest_invalid_utf8_is_rejected_before_shell (test_jsc_adapter.JavaScriptCoreAdapterTests.test_invalid_utf8_is_rejected_before_shell) ... ok\ntest_missing_marker_is_adapter_error (test_jsc_adapter.JavaScriptCoreAdapterTests.test_missing_marker_is_adapter_error) ... ok\ntest_shell_marker_controls_rejection (test_jsc_adapter.JavaScriptCoreAdapterTests.test_shell_marker_controls_rejection) ... ok\ntest_invocation_errors_are_not_json_rejections (test_parser_adapters.ClojureDataJson1Tests.test_invocation_errors_are_not_json_rejections) ... skipped 'Prepare Clojure jars and provide java on PATH first'\ntest_parser_errors_are_distinguished (test_parser_adapters.ClojureDataJson1Tests.test_parser_errors_are_distinguished) ... skipped 'Prepare Clojure jars and provide java on PATH first'\ntest_scalars_containers_and_rejection (test_parser_adapters.ClojureDataJson1Tests.test_scalars_containers_and_rejection) ... skipped 'Prepare Clojure jars and provide java on PATH first'\ntest_invocation_errors_are_not_json_rejections (test_parser_adapters.ClojureDataJson2Tests.test_invocation_errors_are_not_json_rejections) ... skipped 'Prepare Clojure jars and provide java on PATH first'\ntest_parser_errors_are_distinguished (test_parser_adapters.ClojureDataJson2Tests.test_parser_errors_are_distinguished) ... skipped 'Prepare Clojure jars and provide java on PATH first'\ntest_scalars_containers_and_rejection (test_parser_adapters.ClojureDataJson2Tests.test_scalars_containers_and_rejection) ... skipped 'Prepare Clojure jars and provide java on PATH first'\ntest_invocation_errors_are_not_json_rejections (test_parser_adapters.Fastjson2Tests.test_invocation_errors_are_not_json_rejections) ... skipped 'Build fastjson2 and provide java on PATH first'\ntest_native_comment_mode (test_parser_adapters.Fastjson2Tests.test_native_comment_mode) ... skipped 'Build fastjson2 and provide java on PATH first'\ntest_scalars_containers_and_rejection (test_parser_adapters.Fastjson2Tests.test_scalars_containers_and_rejection) ... skipped 'Build fastjson2 and provide java on PATH first'\ntest_comment_mode (test_parser_adapters.JSONcgxCommentsOffTests.test_comment_mode) ... ok\ntest_invocation_errors_are_not_json_rejections (test_parser_adapters.JSONcgxCommentsOffTests.test_invocation_errors_are_not_json_rejections) ... ok\ntest_missing_pinned_source_is_not_json_rejection (test_parser_adapters.JSONcgxCommentsOffTests.test_missing_pinned_source_is_not_json_rejection) ... ok\ntest_scalars_containers_and_rejection (test_parser_adapters.JSONcgxCommentsOffTests.test_scalars_containers_and_rejection) ... ok\ntest_comment_mode (test_parser_adapters.JSONcgxCommentsOnTests.test_comment_mode) ... ok\ntest_invocation_errors_are_not_json_rejections (test_parser_adapters.JSONcgxCommentsOnTests.test_invocation_errors_are_not_json_rejections) ... ok\ntest_missing_pinned_source_is_not_json_rejection (test_parser_adapters.JSONcgxCommentsOnTests.test_missing_pinned_source_is_not_json_rejection) ... ok\ntest_scalars_containers_and_rejection (test_parser_adapters.JSONcgxCommentsOnTests.test_scalars_containers_and_rejection) ... ok\ntest_invocation_errors_are_not_json_rejections (test_parser_adapters.JSONppTests.test_invocation_errors_are_not_json_rejections) ... ok\ntest_scalars_containers_and_rejection (test_parser_adapters.JSONppTests.test_scalars_containers_and_rejection) ... ok\ntest_missing_file_is_an_adapter_error (test_parser_adapters.JqRawSlurpTests.test_missing_file_is_an_adapter_error) ... ok\ntest_one_complete_text_and_scalar_values (test_parser_adapters.JqRawSlurpTests.test_one_complete_text_and_scalar_values) ... ok\ntest_comment_and_malformed_utf8_are_rejected (test_parser_adapters.LibfyamlTests.test_comment_and_malformed_utf8_are_rejected) ... ok\ntest_invocation_errors_are_not_json_rejections (test_parser_adapters.LibfyamlTests.test_invocation_errors_are_not_json_rejections) ... ok\ntest_scalars_containers_and_rejection (test_parser_adapters.LibfyamlTests.test_scalars_containers_and_rejection) ... ok\ntest_invalid_utf8_is_not_replaced (test_parser_adapters.NewtonsoftTests.test_invalid_utf8_is_not_replaced) ... skipped 'Build Newtonsoft.Json and provide dotnet on PATH first'\ntest_invocation_errors_are_not_json_rejections (test_parser_adapters.NewtonsoftTests.test_invocation_errors_are_not_json_rejections) ... skipped 'Build Newtonsoft.Json and provide dotnet on PATH first'\ntest_scalars_containers_and_rejection (test_parser_adapters.NewtonsoftTests.test_scalars_containers_and_rejection) ... skipped 'Build Newtonsoft.Json and provide dotnet on PATH first'\ntest_invocation_errors_are_not_json_rejections (test_parser_adapters.NodeV8Tests.test_invocation_errors_are_not_json_rejections) ... ok\ntest_malformed_bytes_and_bom_are_not_changed (test_parser_adapters.NodeV8Tests.test_malformed_bytes_and_bom_are_not_changed) ... ok\ntest_scalars_containers_and_rejection (test_parser_adapters.NodeV8Tests.test_scalars_containers_and_rejection) ... ok\ntest_unsupported_runtime_is_not_a_json_rejection (test_parser_adapters.NodeV8Tests.test_unsupported_runtime_is_not_a_json_rejection) ... ok\ntest_invocation_errors_are_not_json_rejections (test_parser_adapters.OpackTests.test_invocation_errors_are_not_json_rejections) ... skipped 'Build opack and provide java on PATH first'\ntest_numeric_rejection_and_unexpected_parser_failure (test_parser_adapters.OpackTests.test_numeric_rejection_and_unexpected_parser_failure) ... skipped 'Build opack and provide java on PATH first'\ntest_scalars_containers_and_rejection (test_parser_adapters.OpackTests.test_scalars_containers_and_rejection) ... skipped 'Build opack and provide java on PATH first'\ntest_utf8_input_is_not_repaired (test_parser_adapters.OpackTests.test_utf8_input_is_not_repaired) ... skipped 'Build opack and provide java on PATH first'\ntest_missing_package_is_not_rejection_even_for_malformed_bytes (test_parser_adapters.RlJsonTests.test_missing_package_is_not_rejection_even_for_malformed_bytes) ... ok\ntest_strict_bytes_comments_and_complete_text (test_parser_adapters.RlJsonTests.test_strict_bytes_comments_and_complete_text) ... ok\ntest_constant_policy_does_not_reject_numeric_overflow (test_python_json_adapter.PythonJsonAdapterTests.test_constant_policy_does_not_reject_numeric_overflow) ... ok\ntest_file_and_argument_errors (test_python_json_adapter.PythonJsonAdapterTests.test_file_and_argument_errors) ... ok\ntest_registry_uses_this_interpreter_and_its_version (test_python_json_adapter.PythonJsonAdapterTests.test_registry_uses_this_interpreter_and_its_version) ... ok\ntest_runtime_errors_and_implementation_limits (test_python_json_adapter.PythonJsonAdapterTests.test_runtime_errors_and_implementation_limits) ... ok\ntest_scalars_and_complete_input (test_python_json_adapter.PythonJsonAdapterTests.test_scalars_and_complete_input) ... ok\ntest_accepts_scalars_and_containers (test_ruby_adapter.RubyAdapterTests.test_accepts_scalars_and_containers) ... skipped 'Ruby runtime is not installed'\ntest_implementation_dependent_cases_do_not_crash (test_ruby_adapter.RubyAdapterTests.test_implementation_dependent_cases_do_not_crash) ... skipped 'Ruby runtime is not installed'\ntest_rejects_invalid_syntax_and_trailing_input (test_ruby_adapter.RubyAdapterTests.test_rejects_invalid_syntax_and_trailing_input) ... skipped 'Ruby runtime is not installed'\ntest_ci_verdict_counts_crash_and_preserves_default_exit (test_runner.RunnerTests.test_ci_verdict_counts_crash_and_preserves_default_exit) ... ok\ntest_ci_verdict_requires_expected_and_complete_run (test_runner.RunnerTests.test_ci_verdict_requires_expected_and_complete_run) ... ok\ntest_cli_runs_one_selected_fixture_and_reports_expected_result (test_runner.RunnerTests.test_cli_runs_one_selected_fixture_and_reports_expected_result) ... ok\ntest_direct_empty_filter_is_rejected_before_creating_log (test_runner.RunnerTests.test_direct_empty_filter_is_rejected_before_creating_log) ... ok\ntest_empty_corpus_or_registry_preserves_log (test_runner.RunnerTests.test_empty_corpus_or_registry_preserves_log) ... ok\ntest_exit_codes_record_every_outcome (test_runner.RunnerTests.test_exit_codes_record_every_outcome) ... ok\ntest_external_path_with_matching_basename_preserves_log (test_runner.RunnerTests.test_external_path_with_matching_basename_preserves_log) ... ok\ntest_filtered_run_only_records_selected_pairs (test_runner.RunnerTests.test_filtered_run_only_records_selected_pairs) ... ok\ntest_first_timeout_is_logged_and_next_parser_runs (test_runner.RunnerTests.test_first_timeout_is_logged_and_next_parser_runs) ... ok\ntest_invalid_cli_selection_preserves_outputs_and_never_starts_setup (test_runner.RunnerTests.test_invalid_cli_selection_preserves_outputs_and_never_starts_setup) ... ok\ntest_invalid_job_count_preserves_existing_log (test_runner.RunnerTests.test_invalid_job_count_preserves_existing_log) ... ok\ntest_late_unavailability_preserves_execution_and_skips_remaining (test_runner.RunnerTests.test_late_unavailability_preserves_execution_and_skips_remaining) ... ok\ntest_legacy_missing_entries_are_unknown_not_success (test_runner.RunnerTests.test_legacy_missing_entries_are_unknown_not_success) ... ok\ntest_missing_executable_skips_all_selected_cases_once (test_runner.RunnerTests.test_missing_executable_skips_all_selected_cases_once) ... ok\ntest_missing_fixture_keeps_its_recorded_outcome (test_runner.RunnerTests.test_missing_fixture_keeps_its_recorded_outcome) ... ok\ntest_nested_fixtures_have_distinct_log_identifiers (test_runner.RunnerTests.test_nested_fixtures_have_distinct_log_identifiers) ... ok\ntest_parallel_parsers_overlap_and_log_in_registry_order (test_runner.RunnerTests.test_parallel_parsers_overlap_and_log_in_registry_order) ... ok\ntest_parallel_timeout_and_unavailable_have_one_record_each (test_runner.RunnerTests.test_parallel_timeout_and_unavailable_have_one_record_each) ... ok\ntest_parser_specific_timeout_is_applied (test_runner.RunnerTests.test_parser_specific_timeout_is_applied) ... ok\ntest_path_selector_targets_one_nested_fixture_but_basename_keeps_both (test_runner.RunnerTests.test_path_selector_targets_one_nested_fixture_but_basename_keeps_both) ... ok\ntest_readers_use_supplied_corpus_directory (test_runner.RunnerTests.test_readers_use_supplied_corpus_directory) ... ok\ntest_report_escapes_fixture_and_parser_text (test_runner.RunnerTests.test_report_escapes_fixture_and_parser_text) ... ok\ntest_report_ignores_other_text_files (test_runner.RunnerTests.test_report_ignores_other_text_files) ... ok\ntest_setup_failure_skips_cases_without_running_parser (test_runner.RunnerTests.test_setup_failure_skips_cases_without_running_parser) ... ok\ntest_signal_termination_is_a_crash (test_runner.RunnerTests.test_signal_termination_is_a_crash) ... ok\ntest_stdin_closed_on_every_subprocess_outcome (test_runner.RunnerTests.test_stdin_closed_on_every_subprocess_outcome) ... ok\ntest_stdin_preserves_raw_bytes (test_runner.RunnerTests.test_stdin_preserves_raw_bytes) ... ok\ntest_successful_cases_appear_in_report_and_summary (test_runner.RunnerTests.test_successful_cases_appear_in_report_and_summary) ... ok\ntest_timeout_does_not_print_previous_result (test_runner.RunnerTests.test_timeout_does_not_print_previous_result) ... ok\ntest_valid_filter_keeps_basename_selection_and_deduplicates_parsers (test_runner.RunnerTests.test_valid_filter_keeps_basename_selection_and_deduplicates_parsers) ... ok\nsetUpClass (test_source_c_adapters.SourceCAdapterTests) ... skipped 'A C99 compiler is required for native wrapper tests'\ntest_case_distinct_keys_survive_both_orders (test_transform_observer.TransformObserverTests.test_case_distinct_keys_survive_both_orders) ... ok\ntest_malformed_bytes_are_reported_as_errors (test_transform_observer.TransformObserverTests.test_malformed_bytes_are_reported_as_errors) ... ok\ntest_node_preserves_parsed_negative_zero_but_serializes_it_as_zero (test_transform_observer.TransformObserverTests.test_node_preserves_parsed_negative_zero_but_serializes_it_as_zero) ... ok\ntest_signed_zero_is_distinct_from_serialization (test_transform_observer.TransformObserverTests.test_signed_zero_is_distinct_from_serialization) ... ok\ntest_survey_reports_type_and_serialization (test_transform_observer.TransformObserverTests.test_survey_reports_type_and_serialization) ... ok\ntest_malformed_input_does_not_reach_v8 (test_v8_native_adapter.V8NativeAdapterTests.test_malformed_input_does_not_reach_v8) ... ok\ntest_missing_file_is_adapter_error (test_v8_native_adapter.V8NativeAdapterTests.test_missing_file_is_adapter_error) ... ok\ntest_parser_verdicts_are_preserved (test_v8_native_adapter.V8NativeAdapterTests.test_parser_verdicts_are_preserved) ... ok\n\n----------------------------------------------------------------------\nRan 99 tests in 10.402s\n\nOK (skipped=22)",
+    "tests_run": 99,
+    "skipped": 22
+  },
+  "appendix_discrepancies": [
+    {
+      "claim": "94 registered configurations",
+      "actual": 123,
+      "reason": "PDF interpreted the README initial-assessment count as current."
+    },
+    {
+      "claim": "Folly candidate",
+      "actual": "Folly v2025.09.29.00 already registered"
+    },
+    {
+      "claim": "opack under C/C++",
+      "actual": "Java opack 0.2.1; JSONpp is C++"
+    },
+    {
+      "claim": "Euneus addition/control",
+      "actual": "Already registered; observation support still pending"
+    },
+    {
+      "claim": "QJson candidate and Appendix A QJson",
+      "actual": "Existing Qt JSON uses QJsonDocument; independent QJson identity unresolved"
+    }
+  ]
+}

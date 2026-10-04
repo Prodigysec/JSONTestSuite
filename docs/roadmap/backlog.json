@@ -29,14 +29,20 @@
       "dependencies": [],
       "deliverables": [
         "docs/roadmap/ground-truth.md",
-        "docs/roadmap/ground-truth.json"
+        "docs/roadmap/ground-truth.json",
+        "tools/roadmap_inventory.py"
       ],
       "acceptance_commands": [
         "python3 -B tools/roadmap_inventory.py --check",
         "python3 -B -m unittest discover -s tests -v"
       ],
-      "status": "todo",
-      "parser_ids": []
+      "status": "done",
+      "parser_ids": [],
+      "verification": {
+        "ground_truth": "123 modes; 327 parsing / 26 transform fixtures; six images inspected",
+        "unit_tests": "99 tests, 22 skips, exit 0",
+        "command_output_path": "docs/roadmap/ground-truth.json: baseline_tests"
+      }
     },
     {
       "id": "P1-01",

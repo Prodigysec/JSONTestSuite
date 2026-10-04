@@ -54,7 +54,7 @@ engine evidence. Alternative controls are discovery leads rather than false cove
 
 | ID | Phase | Task | Dependencies | Status |
 | --- | ---: | --- | --- | --- |
-| P0-01 | 0 | Record registry, Appendix A reconciliation, environments, and baseline |  | todo |
+| P0-01 | 0 | Record registry, Appendix A reconciliation, environments, and baseline |  | done |
 | P1-01 | 1 | Validate split catalog, source tags, exclusions, and first Go pins | P0-01 | todo |
 | P2-01 | 2 | Specify observation protocol and neutral normalization | P1-01 | todo |
 | P2-02 | 2 | Add exact-byte convenience probes and manifest | P2-01 | todo |
@@ -1360,6 +1360,7 @@ git diff --check
 
 ## Phase summaries
 
-Phase 0–5 execution has not started. The planning baseline added no adapters,
-probes, or results. Main discrepancy: the PDF inventory predates 29 registry
-modes; native findings in its cited studies remain predictions to reproduce.
+Phase 0 completed: recorded 123 registry modes, the 327/26 fixture counts,
+six scoped image IDs, and the successful 99-test baseline (22 optional skips).
+The PDF inventory predates 29 registry modes and overlaps existing Folly and
+platform entries. No new parser coverage is claimed. Phases 1–5 are pending.
