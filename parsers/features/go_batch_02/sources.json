@@ -1,0 +1,35 @@
+{
+  "go_version": "go1.25.1",
+  "toolchain_archive": "go1.25.1.linux-amd64.tar.gz",
+  "toolchain_sha256": "7716a0d940a0f6ae8e1f3b3f4f36299dc53e31b16840dbd171254312c41ca12e",
+  "modules": [
+    {
+      "repository": "buger/jsonparser",
+      "tag": "v1.6.1",
+      "commit": "5663ba4b4f9836695ac8a47d213dd3052583abf9",
+      "archive_sha256": "fa9703e36f11ab0976e8986f8cb7ab9402542ae3dbc6e930c9c4fbe13c4a74ef",
+      "source_url": "https://github.com/buger/jsonparser",
+      "license_files": [
+        "LICENSE"
+      ],
+      "module": "github.com/buger/jsonparser",
+      "version": "v1.6.1",
+      "license_file": "parsers/features/licenses/jsonparser.LICENSE",
+      "license_sha256": "632b59709152e1b5bfd3e2794848bcd2f4c70e3e175646726dbf53439ea1dbe1"
+    },
+    {
+      "repository": "francoispqt/gojay",
+      "tag": "v1.2.13",
+      "commit": "1398296d938f9fae26750ddc2fe356b6d897f799",
+      "archive_sha256": "f6fcc1359befd64c08a504510cb2875e376a3f765ad418db259607d04580d65c",
+      "source_url": "https://github.com/francoispqt/gojay",
+      "license_files": [
+        "LICENSE"
+      ],
+      "module": "github.com/francoispqt/gojay",
+      "version": "v1.2.13",
+      "license_file": "parsers/features/licenses/gojay.LICENSE",
+      "license_sha256": "4e9fc4c749d560e8329be521d0e7c373521b368f96eaeb00d2fedfb5a31f1f2b"
+    }
+  ]
+}

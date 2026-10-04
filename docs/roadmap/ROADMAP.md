@@ -62,7 +62,7 @@ engine evidence. Alternative controls are discovery leads rather than false cove
 | P2-04 | 2 | Add Python and Node observations and record a feature baseline | P2-03 | done |
 | P3-01 | 3 | Integrate goccy/go-json, bytedance/sonic, json-iterator/go | P2-04 | done |
 | P3-02 | 3 | Review batch 02 native API and source-version barriers | P3-01 | done |
-| P3-02-ADAPTERS | 3 | Integrate buger/jsonparser, francoispqt/gojay, json-smart | P3-02 | todo |
+| P3-02-ADAPTERS | 3 | Integrate buger/jsonparser, francoispqt/gojay, json-smart | P3-02 | done |
 | P3-03 | 3 | Integrate Fastjson 1.x, Genson, jsoniter Java | P3-02-ADAPTERS | todo |
 | P3-04 | 3 | Integrate Groovy JsonSlurper, Utf8Json, Jayrock.Json | P3-03 | todo |
 | P3-05 | 3 | Integrate Manatee.Json, Ruby pure JSON, simdjson_ruby | P3-04 | todo |
@@ -1445,3 +1445,16 @@ delegates to stdlib, jsonparser now exposes strict/lenient presets, and the
 json-smart v2.6.0 tag has a SNAPSHOT POM plus trailing-data flags. Split the
 source/API review from integration, immediately followed by P3-02-ADAPTERS;
 retain all candidates and priority. Source verification never means coverage.
+
+2026-10-04, P3-02-ADAPTERS: numeric jsonparser getter tokens require its own
+ParseFloat validation; mode labels record that conversion and range limits.
+json-smart's 0x1a EOI can conceal remaining input even in strictest mode.
+Require consumed byte position in addition to disabling native tail acceptance.
+Pinned read-only cursor/position reflection enforces full framing for gojay and
+json-smart; layout failure is an adapter crash. No input bytes are changed.
+
+Batch 02 integration complete: three libraries, eleven native modes, 3597 standard
+and 1375 feature observations. The 580 standard discrepancies remain findings;
+no crashes, timeouts or skips occurred. Two completed integration batches now
+cover six libraries in 23 modes. Phase 3 continues with P3-03. See
+[batch 02 review](../review-batch-feature-02.md) and its tracked evidence.

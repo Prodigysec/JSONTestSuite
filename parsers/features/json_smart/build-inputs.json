@@ -1,0 +1,17 @@
+{
+  "json_smart_source_revision": "ebf7cf8cf0dccef246cd1ed0d052074d787a2de4",
+  "json_smart_source_archive_sha256": "d6d9907ca2134b99360f24fda2bb5ffa702c60e1a9a4a97258f4323f399f1b24",
+  "pom_version": "2.6.0-SNAPSHOT",
+  "bytecode_release": 17,
+  "tested_compiler": "javac 21.0.12.1",
+  "asm": {
+    "version": "9.7.1",
+    "url": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar",
+    "sha256": "8cadd43ac5eb6d09de05faecca38b917a040bb9139c7edeb4cc81c740b713281",
+    "source_jar_url": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1-sources.jar",
+    "source_jar_sha256": "22e9507b0c494daaedb33b8148c30cd618c6dacc3992be8b50eaaafeb6a8ba8d",
+    "license": "BSD-3-Clause",
+    "preserved_notice": "parsers/features/licenses/asm-9.7.1.LICENSE",
+    "notice_sha256": "34b8dd2e1b4b5f822ba633602676297fa82328d9438ba4d7336ec7393d212e06"
+  }
+}

@@ -29,3 +29,34 @@ def go_batch_01_programs(parsers_dir):
                                                    for file in ('main.go','go.mod','go.sum','sources.json')],
                          observation_build_artifacts=[binary,binary+'.build.json'])
     return modes
+
+GO_BATCH_02_MODES = [
+    ('jsonparser-default','Go buger/jsonparser v1.6.1 (DefaultConfig + native numeric conversion)'),
+    ('jsonparser-lenient','Go buger/jsonparser v1.6.1 (Lenient + native numeric conversion)'),
+    ('jsonparser-single-quotes','Go buger/jsonparser v1.6.1 (single quotes + native numeric conversion)'),
+    ('jsonparser-unknown-escapes','Go buger/jsonparser v1.6.1 (unknown escapes + native numeric conversion)'),
+    ('gojay-native','Go gojay v1.2.13 (native typed callbacks)'),
+]
+JSON_SMART_MODES = [('default','default'),('permissive','MODE_PERMISSIVE'),('incomplete','MODE_PERMISSIVE_WITH_INCOMPLETE'),
+                    ('rfc4627','MODE_RFC4627'),('json-simple','MODE_JSON_SIMPLE'),('strictest','MODE_STRICTEST')]
+
+
+def batch_02_programs(parsers_dir):
+    import sys
+    directory=Path(parsers_dir)
+    modes={}
+    binary=str(directory/'.build/feature_go_batch_02')
+    for mode,name in GO_BATCH_02_MODES:
+        library='buger/jsonparser' if mode.startswith('jsonparser') else 'francoispqt/gojay'
+        modes[name]=dict(url='https://github.com/'+library,setup=[sys.executable,'-B',str(directory.parent/'tools/build_go_feature_batch.py'),'02'],
+            commands=[binary,mode],observation_commands=[binary,'--observe',mode],
+            observation_source_files=[str(directory/'features/go_batch_02'/file) for file in ('main.go','go.mod','go.sum','sources.json')],
+            observation_build_artifacts=[binary,binary+'.build.json'])
+    wrapper=str(directory/'features/json_smart/run.py')
+    for mode,preset in JSON_SMART_MODES:
+        name='Java json-smart source v2.6.0 (POM SNAPSHOT, %s, whole input)'%preset
+        modes[name]=dict(url='https://github.com/netplex/json-smart-v2',setup=[sys.executable,'-B',str(directory.parent/'tools/build_json_smart_features.py')],
+            commands=[sys.executable,'-B',wrapper,mode],observation_commands=[sys.executable,'-B',wrapper,'--observe',mode],
+            observation_source_files=[str(directory/'features/json_smart/ObserveJsonSmart.java')],
+            observation_build_artifacts=[str(directory/'.build/json_smart/build.json'),str(directory/'.build/json_smart/asm-9.7.1.jar')])
+    return modes

@@ -697,8 +697,9 @@ programs = {
        }
 }
 
-from parsers.features.registry import go_batch_01_programs
+from parsers.features.registry import go_batch_01_programs, batch_02_programs
 programs.update(go_batch_01_programs(PARSERS_DIR))
+programs.update(batch_02_programs(PARSERS_DIR))
 
 STATUS_LABELS = {
     "EXPECTED_RESULT": "expected result",

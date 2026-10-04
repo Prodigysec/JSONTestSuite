@@ -252,20 +252,36 @@
         "docs/review-batch-feature-02.md",
         "pinned adapter builds, registry modes, and observers",
         "per-mode standard corpus and feature audit",
-        "parsers/features/build_batch_02.sh"
+        "parsers/features/build_batch_02.sh",
+        "docs/roadmap/feature-batch-02.json",
+        "parsers/features/go_batch_02/main.go",
+        "parsers/features/go_batch_02/go.mod",
+        "parsers/features/go_batch_02/go.sum",
+        "parsers/features/go_batch_02/sources.json",
+        "parsers/features/json_smart/ObserveJsonSmart.java",
+        "parsers/features/json_smart/run.py",
+        "parsers/features/json_smart/build-inputs.json",
+        "tools/build_json_smart_features.py",
+        "tests/test_feature_batch_02.py"
       ],
       "acceptance_commands": [
         "sh parsers/features/build_batch_02.sh",
-        "python3 -B tools/validate_feature_batch.py P3-02-ADAPTERS --output /tmp/jsonsuite-P3-02-audit",
+        "python3 -B tools/validate_feature_batch.py P3-02-ADAPTERS --output /tmp/jsonsuite-P3-02-audit --jobs 3",
         "python3 -B tools/check_roadmap.py --task P3-02-ADAPTERS",
         "python3 -B -m unittest discover -s tests -v"
       ],
-      "status": "todo",
+      "status": "done",
       "parser_ids": [
         "parser-004",
         "parser-005",
         "parser-006"
-      ]
+      ],
+      "verification": {
+        "build": "Go 1.25.1; OpenJDK 21.0.12.1, --release 17; pinned sources, licenses and ASM verified",
+        "audit": "3597/3597 standard pairs; 1375/1375 feature pairs; 580 standard discrepancies retained; no runtime failures/skips",
+        "unit_tests": "139 tests, 22 optional skips, exit 0",
+        "evidence": "docs/roadmap/feature-batch-02.json"
+      }
     },
     {
       "id": "P3-03",
@@ -2771,13 +2787,13 @@
       "version_to_pin": "v1.6.1",
       "license": "MIT",
       "build_steps": [
-        "Inspect the pinned native APIs and enforce complete-text framing without decoding via another library.",
-        "Build an isolated source adapter and capture standard/feature audits in P3-02-ADAPTERS."
+        "sh parsers/features/build_batch_02.sh",
+        "Native API/framing and dependency details: docs/review-batch-feature-02.md"
       ],
       "priority": 4,
-      "status": "todo",
+      "status": "done",
       "prediction_status": "untested",
-      "coverage": "candidate",
+      "coverage": "integrated-and-tested",
       "modes_to_verify": [
         "default",
         "all documented strict modes",
@@ -2791,9 +2807,27 @@
       },
       "verification": {
         "source_review": "docs/roadmap/feature-batch-02-sources.json",
-        "native_adapter_tested": false,
-        "coverage_claim": false
-      }
+        "native_adapter_tested": true,
+        "coverage_claim": true,
+        "evidence": "docs/roadmap/feature-batch-02.json",
+        "modes": [
+          "Go buger/jsonparser v1.6.1 (DefaultConfig + native numeric conversion)",
+          "Go buger/jsonparser v1.6.1 (Lenient + native numeric conversion)",
+          "Go buger/jsonparser v1.6.1 (single quotes + native numeric conversion)",
+          "Go buger/jsonparser v1.6.1 (unknown escapes + native numeric conversion)"
+        ],
+        "standard_pairs": 1308,
+        "feature_pairs": 500
+      },
+      "registry_names": [
+        "Go buger/jsonparser v1.6.1 (DefaultConfig + native numeric conversion)",
+        "Go buger/jsonparser v1.6.1 (Lenient + native numeric conversion)",
+        "Go buger/jsonparser v1.6.1 (single quotes + native numeric conversion)",
+        "Go buger/jsonparser v1.6.1 (unknown escapes + native numeric conversion)"
+      ],
+      "platforms": [
+        "Linux x86_64 (tested)"
+      ]
     },
     {
       "id": "parser-005",
@@ -2809,13 +2843,13 @@
       "version_to_pin": "v1.2.13",
       "license": "MIT",
       "build_steps": [
-        "Inspect the pinned native APIs and enforce complete-text framing without decoding via another library.",
-        "Build an isolated source adapter and capture standard/feature audits in P3-02-ADAPTERS."
+        "sh parsers/features/build_batch_02.sh",
+        "Native API/framing and dependency details: docs/review-batch-feature-02.md"
       ],
       "priority": 5,
-      "status": "todo",
+      "status": "done",
       "prediction_status": "untested",
-      "coverage": "candidate",
+      "coverage": "integrated-and-tested",
       "modes_to_verify": [
         "default",
         "all documented strict modes",
@@ -2829,9 +2863,21 @@
       },
       "verification": {
         "source_review": "docs/roadmap/feature-batch-02-sources.json",
-        "native_adapter_tested": false,
-        "coverage_claim": false
-      }
+        "native_adapter_tested": true,
+        "coverage_claim": true,
+        "evidence": "docs/roadmap/feature-batch-02.json",
+        "modes": [
+          "Go gojay v1.2.13 (native typed callbacks)"
+        ],
+        "standard_pairs": 327,
+        "feature_pairs": 125
+      },
+      "registry_names": [
+        "Go gojay v1.2.13 (native typed callbacks)"
+      ],
+      "platforms": [
+        "Linux x86_64 (tested)"
+      ]
     },
     {
       "id": "parser-006",
@@ -2847,13 +2893,13 @@
       "version_to_pin": "v2.6.0 source revision (POM 2.6.0-SNAPSHOT)",
       "license": "Apache-2.0",
       "build_steps": [
-        "Inspect the pinned native APIs and enforce complete-text framing without decoding via another library.",
-        "Build an isolated source adapter and capture standard/feature audits in P3-02-ADAPTERS."
+        "sh parsers/features/build_batch_02.sh",
+        "Native API/framing and dependency details: docs/review-batch-feature-02.md"
       ],
       "priority": 6,
-      "status": "todo",
+      "status": "done",
       "prediction_status": "untested",
-      "coverage": "candidate",
+      "coverage": "integrated-and-tested",
       "modes_to_verify": [
         "default",
         "all documented strict modes",
@@ -2867,9 +2913,31 @@
       },
       "verification": {
         "source_review": "docs/roadmap/feature-batch-02-sources.json",
-        "native_adapter_tested": false,
-        "coverage_claim": false
-      }
+        "native_adapter_tested": true,
+        "coverage_claim": true,
+        "evidence": "docs/roadmap/feature-batch-02.json",
+        "modes": [
+          "Java json-smart source v2.6.0 (POM SNAPSHOT, default, whole input)",
+          "Java json-smart source v2.6.0 (POM SNAPSHOT, MODE_PERMISSIVE, whole input)",
+          "Java json-smart source v2.6.0 (POM SNAPSHOT, MODE_PERMISSIVE_WITH_INCOMPLETE, whole input)",
+          "Java json-smart source v2.6.0 (POM SNAPSHOT, MODE_RFC4627, whole input)",
+          "Java json-smart source v2.6.0 (POM SNAPSHOT, MODE_JSON_SIMPLE, whole input)",
+          "Java json-smart source v2.6.0 (POM SNAPSHOT, MODE_STRICTEST, whole input)"
+        ],
+        "standard_pairs": 1962,
+        "feature_pairs": 750
+      },
+      "registry_names": [
+        "Java json-smart source v2.6.0 (POM SNAPSHOT, default, whole input)",
+        "Java json-smart source v2.6.0 (POM SNAPSHOT, MODE_PERMISSIVE, whole input)",
+        "Java json-smart source v2.6.0 (POM SNAPSHOT, MODE_PERMISSIVE_WITH_INCOMPLETE, whole input)",
+        "Java json-smart source v2.6.0 (POM SNAPSHOT, MODE_RFC4627, whole input)",
+        "Java json-smart source v2.6.0 (POM SNAPSHOT, MODE_JSON_SIMPLE, whole input)",
+        "Java json-smart source v2.6.0 (POM SNAPSHOT, MODE_STRICTEST, whole input)"
+      ],
+      "platforms": [
+        "Linux x86_64 (tested)"
+      ]
     },
     {
       "id": "parser-007",
@@ -14103,6 +14171,12 @@
       "task_id": "P3-02",
       "reason": "Source review disproved the implicit generic-adapter assumption: gojay DecodeInterface delegates to stdlib; new jsonparser modes and json-smart tag/POM and trailing-data flags need explicit handling.",
       "change": "Split P3-02 into a verified source/API review followed immediately by P3-02-ADAPTERS integration. Preserve priority and all three candidates; source review is not coverage. Native gojay integration must avoid generic stdlib delegation."
+    },
+    {
+      "date": "2026-10-04",
+      "task_id": "P3-02-ADAPTERS",
+      "reason": "Native smoke checks found jsonparser numeric getter tokens include trailing garbage and json-smart internal 0x1a EOI ignores remaining bytes even in strictest mode. gojay has no public consumed-offset getter.",
+      "change": "Use native jsonparser ParseFloat validation with explicit mode labels/range limits; disable json-smart trailing-data flag and check pinned native byte position; use gojay native typed callbacks plus pinned read-only cursor reflection. Preserve raw inputs and native extension values; reflection failures surface as adapter crashes."
     }
   ]
 }

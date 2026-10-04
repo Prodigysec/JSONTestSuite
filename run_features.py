@@ -123,9 +123,13 @@ def validate_tree(tree, depth=0):
         import re
         if isinstance(tree.get('decimal'), str) and re.fullmatch(r'-?(0|[1-9][0-9]*)', tree['decimal']):
             return
-    if kind == 'float' and tree.get('format') == 'binary64':
+    if kind == 'float' and tree.get('format') in {'binary32', 'binary64'}:
         import re
-        if isinstance(tree.get('bits'), str) and re.fullmatch('[0-9a-f]{16}', tree['bits']):
+        if isinstance(tree.get('bits'), str) and re.fullmatch('[0-9a-f]{%d}' % (8 if tree['format'] == 'binary32' else 16), tree['bits']):
+            return
+    if kind == 'decimal' and isinstance(tree.get('text'), str):
+        import re
+        if re.fullmatch(r'-?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?', tree['text']):
             return
     if kind == 'number-lexeme' and isinstance(tree.get('text'), str):
         return

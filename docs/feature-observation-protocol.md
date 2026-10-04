@@ -179,3 +179,23 @@ The runner validates the flag against the hex bytes and retains both fields.
 Sonic ConfigDefault was directly observed serializing stored 0xff as `22ff22`.
 Comparisons must use the raw bytes in this case, preserving the distinction
 from a serializer that outputs U+FFFD or an escaped replacement character.
+
+Batch 02 native types: IEEE binary32 uses `type: float`, `format: binary32`,
+and eight big-endian hex digits. Native BigDecimal uses `type: decimal` and
+exact native `text`, preserving coefficient/scale and exponent without binary
+conversion. Number tokens remain lexemes. jsonparser's getter modes use its
+native ParseFloat to validate token contents; this conversion's range limits
+can reject otherwise valid large numbers and are explicitly part of the mode.
+Native callback adapters retain duplicate entries. gojay has no arbitrary-value
+getter, so lookup observations are unavailable rather than an invented map
+policy. Native gojay callbacks serialize those observed entries, including
+duplicates. jsonparser has no general native value serializer; its serialization
+capability is false.
+
+Batch 02 framing reads pinned gojay's private cursor and json-smart's native
+byte-parser position without modifying either state. They expose no public
+consumed-offset API. Reflection/layout failure is an adapter crash, never JSON
+rejection. json-smart disables its native trailing-data flag and verifies full
+byte consumption to distinguish internal 0x1a EOI from actual input exhaustion.
+Permissive bare strings may consume apparent multiple literals as one string;
+the observer records that native value, not a fabricated framing rejection.

@@ -6,7 +6,6 @@ import json
 import os
 from pathlib import Path
 import platform
-import shutil
 import subprocess
 import sys
 import tarfile
@@ -71,7 +70,7 @@ def build(batch):
 
 def main(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('batch',choices=['01'])
+    parser.add_argument('batch',choices=['01','02'])
     args=parser.parse_args(argv)
     try:build(args.batch)
     except (OSError,ValueError,subprocess.SubprocessError) as error:
